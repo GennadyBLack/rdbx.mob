@@ -44,7 +44,6 @@ const mainStyles = {
     paddingHorizontal: 32,
     // borderRadius: 4,
     elevation: 3,
-    // backgroundColor: "#66bfbf",
     borderRadius: 20,
   },
   buttonText: {

@@ -27,10 +27,7 @@ const LeftMenu = () => {
   const [menu] = useStore("menu");
   const [auth] = useStore("auth");
   const navigation = useNavigation();
-  const routeState = navigation?.getRootState();
-  useEffect(() => {
-    console.log(navigation?.getRootState(), "navigation");
-  }, []);
+
   const active = useSharedValue(false);
 
   const rStyle = useAnimatedStyle(() => {
@@ -89,7 +86,7 @@ const LeftMenu = () => {
       )}
 
       <TouchableHighlight
-        style={{ backgroundColor: "black", flex: 1, opacity: 0.1 }}
+        style={{ backgroundColor: "white", flex: 1, opacity: 0.1 }}
         onPress={() => {
           toggleMenu();
         }}

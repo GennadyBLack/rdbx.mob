@@ -5,9 +5,8 @@ import { Linking, View } from "react-native";
 import { observer } from "mobx-react-lite";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { linking } from "../../helpers/menuHelper";
-import ModalWrapper from "./ModalWrapper";
 import constants from "../../helpers/styleHelper";
 
 
@@ -15,6 +14,7 @@ import useStore from "../../hooks/useStore";
 import { Text, StyleSheet } from "react-native";
 import filterMenuLinks from "../../helpers/menuHelper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Layout from "./Layout";
 
 const {Screen, Navigator} = createNativeStackNavigator();
 const PERSISTENCE_KEY = "NAVIGATION_STATE_V1";
@@ -29,7 +29,6 @@ function Routes() {
 
   const [routes, setRoutes] = useState([]);
 
-
   let [menu] = useStore('menu')
   let [auth] = useStore('auth')
   useEffect(() => {
@@ -40,6 +39,8 @@ function Routes() {
             component={item?.component}
             options={item?.options}
             key={inx}
+         
+           
           />
       }
     );
@@ -79,8 +80,12 @@ function Routes() {
     );
   }
 
+//   const router = useRoute()
+//   console.log(router,'IIIIIII-----')
+
   return (
     <NavigationContainer
+
       linking={linking}
       fallback={<Text>Loading...</Text>}
       style={styles.wrap}
@@ -90,8 +95,7 @@ function Routes() {
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
-      <ModalWrapper style={styles.wrap}>
-    
+        <Layout>
           <Navigator
             initialRouteName="Main"
             activeColor="#fff"
@@ -99,8 +103,7 @@ function Routes() {
           >
             {routes}
           </Navigator>
-    
-      </ModalWrapper>
+      </Layout>
     </NavigationContainer>
   );
 }

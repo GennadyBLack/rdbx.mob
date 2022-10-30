@@ -19,11 +19,10 @@ const ModalWrapper = ({ children, props }) => {
   return (
     <GestureHandlerRootView style={{ flex: 1, justifyContent: "flex-end" }}>
       <StatusBar />
-      <Animated.View style={[styles.containerModal, mainWrappStyle]}>
+      <Animated.View style={[styles.containerModal, mainWrappStyle]} nativeID='modelV'>
         {children}
       </Animated.View>
       <LeftMenu />
-      {/* <BottomSheet></BottomSheet> */}
     </GestureHandlerRootView>
   );
 };
@@ -31,7 +30,7 @@ const ModalWrapper = ({ children, props }) => {
 const styles = StyleSheet.create({
   containerModal: {
     flex: 1,
-    backgroundColor: "#111",
+    // backgroundColor: "#111",
     justifyContent: "center",
     color: "white",
 

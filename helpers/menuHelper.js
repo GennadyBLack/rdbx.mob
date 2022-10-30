@@ -11,7 +11,7 @@ export const availableLinks  = [
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),   layout:'auth',
     },
     leftMenu: true,
     layout:'auth',

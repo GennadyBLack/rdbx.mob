@@ -4,6 +4,7 @@ import apis from "../api/api";
 import Modal from "./modal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Menu from "./menu";
+import Layout from './layout'
 
 
 export default class store {
@@ -54,5 +55,6 @@ export default class store {
     this.auth = new Auth(this);
     this.tools = new Tools(this);
     this.menu = new Menu(this);
+    this.layout = new Layout(this)
   }
 }
