@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import storeContext from "../contexts";
+import storeContext from "../context";
 
 export default function useStore(...list) {
   try {

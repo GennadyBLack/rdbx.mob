@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import useStore from "../../hooks/useStore";
 import { useNavigation } from "@react-navigation/native";
-import ProfileHeader from "../profile/ProfileHeader";
+// import ProfileHeader from "../profile/ProfileHeader";
 
 import Animated, {
   useAnimatedStyle,
@@ -99,7 +99,7 @@ const LeftMenu = () => {
 
       <Animated.View style={[styles.left_menu_wrapper, rStyle]}>
         <View style={{ flex: 1, justifyContent: "space-between" }}>
-          <ProfileHeader />
+          {/* <ProfileHeader /> */}
           <View>
             {menu?.leftRoutes.map((item, idx) => {
               return (

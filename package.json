@@ -46,7 +46,9 @@
     "react-native-svg": "^12.3.0",
     "react-native-web": "~0.18.7",
     "socket.io-client": "^4.5.2",
-    "webpack-dev-server": "~3.11.0"
+    "webpack-dev-server": "~3.11.0",
+    "react-native-paper": "^4.12.1",
+    "react-native-paper-grid": "^0.1.12"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

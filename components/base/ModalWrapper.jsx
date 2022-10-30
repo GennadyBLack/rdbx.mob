@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { View, StyleSheet, Text, StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import BottomSheet from "./BottomSheet";
-import useStore from "../../hooks/useStore";
+// import BottomSheet from "./BottomSheet";
+// import useStore from "../../hooks/useStore";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
