@@ -9,7 +9,7 @@ export default class Layout {
   }
 
   setLayout = (val) => {
-    this.data = val;
+    this.layout = val;
   };
 
 

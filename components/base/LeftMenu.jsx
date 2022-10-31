@@ -60,8 +60,7 @@ const LeftMenu = () => {
   }, []);
 
   return (
-    <Animated.View style={[styles.back, bStyle]}>
-      {menu?.leftRoutes?.length ? (
+    <Animated.View style={[styles.back, bStyle]} >
         <View
           style={{
             position: "absolute",
@@ -74,16 +73,15 @@ const LeftMenu = () => {
               toggleMenu();
             }}
           >
-            <Animated.View>
+            <Animated.View >
+        
               {!active.value && (
                 <Entypo name="dots-three-vertical" size={24} color="black" />
               )}
             </Animated.View>
           </TouchableHighlight>
         </View>
-      ) : (
-        <Text></Text>
-      )}
+   
 
       <TouchableHighlight
         style={{ backgroundColor: "white", flex: 1, opacity: 0.1 }}

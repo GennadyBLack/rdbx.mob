@@ -39,12 +39,9 @@ function Routes() {
             component={item?.component}
             options={item?.options}
             key={inx}
-         
-           
           />
       }
     );
-    
     setRoutes(mappedLinks);
   }, [auth.isAuth]);
 
@@ -80,12 +77,8 @@ function Routes() {
     );
   }
 
-//   const router = useRoute()
-//   console.log(router,'IIIIIII-----')
-
   return (
     <NavigationContainer
-
       linking={linking}
       fallback={<Text>Loading...</Text>}
       style={styles.wrap}

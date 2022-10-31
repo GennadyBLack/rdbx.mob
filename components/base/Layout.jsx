@@ -1,29 +1,35 @@
 import React from 'react'
-import Auth from '../../layouts/Auth'
-import Public from '../../layouts/Auth'
-import Default from '../../layouts/Auth'
+
 import useStore from '../../hooks/useStore'
-import { View } from 'react-native'
+import { View,Text } from 'react-native'
 import { observer } from "mobx-react-lite";
+import ModalWrapper from './ModalWrapper'
+import { useEffect } from 'react';
+
 
 const Layout = ({children})=>{
+
 const [layout] =  useStore('layout')
 
 const l = layout.getLayout
 
-if(l ==='Login'){
-    return <Auth>
+// useEffect(()=>{
+// console.log(l)
+// },[l,children])
+
+    if( l === 'auth'){
+    return   <View>{children}</View>
+    } else if(l === 'public'){
+    return <View>
+        <ModalWrapper>
             {children}
-    </Auth>
-} else if(l === 'Public'){
-    return <Public>
-            {children}
-        </Public>
-} else {
-    return <Default>
+          </ModalWrapper>
+        </View>
+    } else {
+    return <View>
          {children}
-        </Default>
-}
+        </View>
+    }
 }
 
 export default observer(Layout)

@@ -1,5 +1,5 @@
 import Login from './../screens/auth/Login'
-import Register from './../screens/auth/Login'
+import Register from './../screens/auth/Register'
 import Auth from './../screens/auth/Auth'
 import {getIcon} from '../helpers/iconHelper'
 
@@ -11,11 +11,20 @@ export const availableLinks  = [
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),   layout:'auth',
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size), 
     },
     leftMenu: true,
-    layout:'auth',
-
+  },
+  {
+    name: "Register",
+    component: Register,
+    auth: true,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),   
+    },
+    leftMenu: true,
   },
 
 ]
@@ -190,7 +199,7 @@ export const linking = {
     /* configuration for matching screens with paths */
     screens: {
       Login: "login",
-      
+      Register: "register",
       // Profile: {
       //   path: "profile",
       //   screens: {
