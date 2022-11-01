@@ -16,6 +16,8 @@ import filterMenuLinks from "../../helpers/menuHelper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Layout from "./Layout";
 
+
+
 const {Screen, Navigator} = createNativeStackNavigator();
 const PERSISTENCE_KEY = "NAVIGATION_STATE_V1";
 
@@ -36,10 +38,11 @@ function Routes() {
       (item, inx) => {
          return  <Screen
             name={item?.name}
-            component={item?.component}
             options={item?.options}
             key={inx}
-          />
+          >
+             {(props) => <Layout {...item}><item.component {...props} extraData={item?.options} /></Layout>}
+          </Screen>
       }
     );
     setRoutes(mappedLinks);
@@ -88,15 +91,13 @@ function Routes() {
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
-        <Layout>
           <Navigator
-            initialRouteName="Main"
+            initialRouteName="Public"
             activeColor="#fff"
             inactiveColor={constants?.GREEN}
           >
             {routes}
           </Navigator>
-      </Layout>
     </NavigationContainer>
   );
 }

@@ -1,5 +1,6 @@
 import Login from './../screens/auth/Login'
 import Register from './../screens/auth/Register'
+import Public from '../screens/public/Public'
 import Auth from './../screens/auth/Auth'
 import {getIcon} from '../helpers/iconHelper'
 
@@ -25,6 +26,18 @@ export const availableLinks  = [
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),   
     },
     leftMenu: true,
+  },
+  {
+    name: "Public",
+    component: Public,
+    auth: true,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),   
+    },
+    leftMenu: true,
+    layout:'public'
   },
 
 ]
@@ -200,6 +213,7 @@ export const linking = {
     screens: {
       Login: "login",
       Register: "register",
+      Public:'/'
       // Profile: {
       //   path: "profile",
       //   screens: {

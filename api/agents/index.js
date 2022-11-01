@@ -14,4 +14,5 @@ const agents = {
 
   register: async (data) => api.post(`registration/agent`, data),
 };
+
 export default agents;

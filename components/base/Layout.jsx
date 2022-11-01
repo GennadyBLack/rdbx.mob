@@ -7,20 +7,17 @@ import ModalWrapper from './ModalWrapper'
 import { useEffect } from 'react';
 
 
-const Layout = ({children})=>{
+const Layout = ({children,layout='public'})=>{
 
-const [layout] =  useStore('layout')
 
-const l = layout.getLayout
 
-// useEffect(()=>{
-// console.log(l)
-// },[l,children])
 
-    if( l === 'auth'){
-    return   <View>{children}</View>
-    } else if(l === 'public'){
-    return <View>
+
+
+    if( layout === 'auth'){
+    return   <View style={{flex:1}}>{children}</View>
+    } else if(layout === 'public'){
+    return <View style={{flex:1}}>
         <ModalWrapper>
             {children}
           </ModalWrapper>

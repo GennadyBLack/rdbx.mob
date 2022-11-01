@@ -8,19 +8,24 @@ export default function useLocation() {
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("Permission to access location was denied");
-          return;
+    try {
+      (async () => {
+        if (Platform.OS !== "web") {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== "granted") {
+            setErrorMsg("Permission to access location was denied");
+            return;
+          }
         }
-      }
-      let location = (await Location.getCurrentPositionAsync({}))?.coords;
-      //пока не пашет, нужен ключ гугл апи
-      // location = await Location.reverseGeocodeAsync(location);
-      setLocation(location);
-    })();
+        let location = (await Location.getCurrentPositionAsync({}))?.coords;
+        //пока не пашет, нужен ключ гугл апи
+        // location = await Location.reverseGeocodeAsync(location);
+        setLocation(location);
+      })();
+    } catch (error) {
+      console.log(error)
+    }
+   
   }, []);
   if (errorMsg) {
     console.error(errorMsg);
