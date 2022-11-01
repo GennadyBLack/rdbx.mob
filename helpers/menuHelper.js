@@ -15,6 +15,7 @@ export const availableLinks  = [
       tabBarIcon: ({ color, size }) => getIcon("user", color, size), 
     },
     leftMenu: true,
+    layout:'auth'
   },
   {
     name: "Register",
@@ -26,6 +27,7 @@ export const availableLinks  = [
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),   
     },
     leftMenu: true,
+    layout:'auth'
   },
   {
     name: "Public",

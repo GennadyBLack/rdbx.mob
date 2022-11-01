@@ -4,11 +4,8 @@ import * as LocalAuthentication from "expo-local-authentication";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
-  StatusBar,
-  Dimensions,
-  Pressable,
+
 } from "react-native";
 export default function useFingerPrint() {
   const [supportBiometric, setSupportBiometric] = useState(false);

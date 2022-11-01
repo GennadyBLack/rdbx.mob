@@ -15,10 +15,9 @@ export default class Menu {
   }
 
  setLeftRoutes() {
-
     const auth = this.root.auth.isAuth;
     this.left_menu =  [...this.all_routes.filter((item) => {
-  if( auth && !item.auth && item.leftMenu){
+  if(!item.auth && item.leftMenu){
       return true
   }
   if(!auth && item.auth && item.leftMenu){

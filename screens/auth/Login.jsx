@@ -28,7 +28,7 @@ function Login({ navigation }) {
   let [form, setForm] = useState({
     password: "",
     email: "",
-    rememberMe: false,
+    rememberMe: true,
   });
   const [content] = useFingerPrint();
 
@@ -44,8 +44,9 @@ function Login({ navigation }) {
     setForm({ ...form, [field]: e });
   };
 
-  let login = () => {
-    auth.login(form);
+  let login = async() => {
+   await auth.login(form);
+   navigation.navigate("Public");
   };
 
   return (
@@ -68,14 +69,13 @@ function Login({ navigation }) {
           value={form?.password}
           onChangeText={(text) => setText(text, "password")}
         />
-        <Switch
+        {/* <Switch
           value={form?.rememberMe}
           onValueChange={(value) => setText(value, "rememberMe")}
         />
-        <Text>Remember Me</Text>
+        <Text>Remember Me</Text> */}
         <Pressable
           onPress={() => {
-            console.log("touched");
             login();
           }}
           style={[s.button, { marginTop: 20 }]}
