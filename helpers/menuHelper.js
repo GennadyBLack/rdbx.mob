@@ -30,7 +30,7 @@ export const availableLinks  = [
   {
     name: "Public",
     component: Public,
-    auth: true,
+    auth: false,
     options: {
       headerShown: false,
       tabBarLabel: "",

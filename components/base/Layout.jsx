@@ -8,19 +8,13 @@ import { useEffect } from 'react';
 
 
 const Layout = ({children,layout='public'})=>{
-
-
-
-
-
-
     if( layout === 'auth'){
     return   <View style={{flex:1}}>{children}</View>
     } else if(layout === 'public'){
     return <View style={{flex:1}}>
         <ModalWrapper>
             {children}
-          </ModalWrapper>
+        </ModalWrapper>
         </View>
     } else {
     return <View>

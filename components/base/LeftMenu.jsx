@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import useStore from "../../hooks/useStore";
 import { useNavigation } from "@react-navigation/native";
-// import ProfileHeader from "../profile/ProfileHeader";
 
 import Animated, {
   useAnimatedStyle,

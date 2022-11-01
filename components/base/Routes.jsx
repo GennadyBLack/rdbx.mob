@@ -25,7 +25,7 @@ const PERSISTENCE_KEY = "NAVIGATION_STATE_V1";
 
 
 function Routes() {
-  //state persistence
+
   const [isReady, setIsReady] = React.useState(__DEV__ ? false : true);
   const [initialState, setInitialState] = React.useState();
 
@@ -33,6 +33,7 @@ function Routes() {
 
   let [menu] = useStore('menu')
   let [auth] = useStore('auth')
+
   useEffect(() => {
     let mappedLinks = menu.allRoutes.map(
       (item, inx) => {
@@ -46,7 +47,10 @@ function Routes() {
       }
     );
     setRoutes(mappedLinks);
-  }, [auth.isAuth]);
+  }, []);
+
+
+  useEffect(()=>{menu.setLeftRoutes()},[auth.isAuth])
 
   useEffect(() => {
     const restoreState = async () => {

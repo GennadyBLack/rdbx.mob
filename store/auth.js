@@ -28,8 +28,6 @@ export default class Auth {
       await this?.root?.api?.me?.me({}).then((res) => {
         runInAction(async () => {
           this.user = res?.data?.data;
-          console.log(this.location)
-          console.log(this.device)
           if(this.location && this.device ) {
             let visits = await getFromStorage("visits")
             if(!visits) visits = "[]"
@@ -61,7 +59,6 @@ export default class Auth {
             await setInStorage("rememberMe", "false");
             if (data?.rememberMe) {
               await setInStorage("rememberMe", "true");
-              console.log("setting pass");
             }
             if (Platform.OS === "web") {
               await setToken(res?.data?.token);
@@ -113,7 +110,6 @@ export default class Auth {
       await this.fetchMe();
     } catch (error) {
       console.log(error, "error me updateMe");
-      // this.root.setError(error);
       this.loading = false;
     }
   };
