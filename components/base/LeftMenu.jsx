@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Entypo } from "@expo/vector-icons";
-
+import { getIcon } from "../../helpers/iconHelper";
+import menuImage from '../../assets/menu.svg'
+import LeftMenuHeader from "../menu/LeftMenuHeader";
 import {
   View,
   Text,
   Dimensions,
   StyleSheet,
   TouchableHighlight,
+  ImageBackground,
 } from "react-native";
 import useStore from "../../hooks/useStore";
 import { useNavigation } from "@react-navigation/native";
@@ -18,6 +21,10 @@ import Animated, {
   interpolate,
   Extrapolate,
 } from "react-native-reanimated";
+
+
+
+
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -58,6 +65,7 @@ const LeftMenu = () => {
     active.value = !active.value;
   }, []);
 
+  
   return (
     <Animated.View style={[styles.back, bStyle]} >
         <View
@@ -92,8 +100,11 @@ const LeftMenu = () => {
       </TouchableHighlight>
 
       <Animated.View style={[styles.left_menu_wrapper, rStyle]}>
+        {/* <ImageBackground source={menuImage} resizeMode="cover" style={{flex:1}}> */}
+
+  
         <View style={{ flex: 1, justifyContent: "space-between" }}>
-          {/* <ProfileHeader /> */}
+          <View>     <LeftMenuHeader />
           <View>
             {menu?.leftRoutes.map((item, idx) => {
               return (
@@ -109,11 +120,12 @@ const LeftMenu = () => {
                     toggleMenu();
                   }}
                 >
-                  <Text style={styles.menu_link}>{item?.name}</Text>
+                  <Text style={styles.menu_link}>{getIcon(item.icon)} {item?.name}</Text>
                 </TouchableHighlight>
               );
             })}
-          </View>
+          </View></View>
+     
           <View>
             <TouchableHighlight
               onPress={() => {
@@ -127,7 +139,9 @@ const LeftMenu = () => {
               <Text style={styles.menu_link}>Logout</Text>
             </TouchableHighlight>
           </View>
+          
         </View>
+        {/* </ImageBackground> */}
       </Animated.View>
     </Animated.View>
   );
@@ -155,7 +169,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   menu_link: {
-    fontSize: 15,
+    fontSize: 20,
+    padding:10,
+    // color:'white'
   },
 });
 

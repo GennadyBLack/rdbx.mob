@@ -17,11 +17,13 @@ const ModalWrapper = ({ children, props }) => {
   });
   return (
     <GestureHandlerRootView style={{ flex: 1, justifyContent: "flex-end" }}>
+      
       <StatusBar />
       <Animated.View style={[styles.containerModal, mainWrappStyle]} nativeID='modelV'>
         {children}
       </Animated.View>
       <LeftMenu />
+  
     </GestureHandlerRootView>
   );
 };

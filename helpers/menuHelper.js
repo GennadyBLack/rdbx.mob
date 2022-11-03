@@ -1,21 +1,22 @@
-import Login from './../screens/auth/Login'
-import Register from './../screens/auth/Register'
-import Public from '../screens/public/Public'
-import Auth from './../screens/auth/Auth'
-import {getIcon} from '../helpers/iconHelper'
+import Login from "./../screens/auth/Login";
+import Register from "./../screens/auth/Register";
+import Public from "../screens/public/Public";
+import Auth from "./../screens/auth/Auth";
+import Test from "../screens/Test";
+import { getIcon } from "../helpers/iconHelper";
 
-export const availableLinks  = [
-    {
+export const availableLinks = [
+  {
     name: "Login",
     component: Login,
     auth: true,
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size), 
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
     leftMenu: true,
-    layout:'auth'
+    layout: "auth",
   },
   {
     name: "Register",
@@ -24,10 +25,10 @@ export const availableLinks  = [
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),   
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
     leftMenu: true,
-    layout:'auth'
+    layout: "auth",
   },
   {
     name: "Public",
@@ -36,13 +37,24 @@ export const availableLinks  = [
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),   
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
     leftMenu: true,
-    layout:'public'
+    layout: "public",
   },
-
-]
+  {
+    name: "Test",
+    component: Test,
+    auth: false,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: true,
+    layout: "public",
+  },
+];
 
 // export const availableLinks = [
 //   {
@@ -200,11 +212,6 @@ export const availableLinks  = [
 //   },
 // ];
 
-
-
-
-
-
 //LINKING CONFIG
 export const linking = {
   prefixes: [
@@ -215,7 +222,7 @@ export const linking = {
     screens: {
       Login: "login",
       Register: "register",
-      Public:'/'
+      Public: "/",
       // Profile: {
       //   path: "profile",
       //   screens: {

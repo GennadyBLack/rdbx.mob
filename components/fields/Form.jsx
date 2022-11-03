@@ -6,7 +6,7 @@ import Select from "./Select";
 import Upload from "./UploadValidation";
 import { View, Button, StyleSheet, Pressable, Text } from "react-native";
 import s from "../../helpers/styleHelper";
-import constants from "../../helpers/style";
+import { constants } from "../../helpers/styleHelper";
 
 function Form({
   defaultValues,

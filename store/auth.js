@@ -48,9 +48,8 @@ export default class Auth {
     }
   };
 
-  login = async (data) => {
+  login = async (data,callback) => {
     try {
-      console.log(data, "DATA");
       console.log(data?.rememberMe, "data?.rememberMe");
       this.loading = true;
       await this.root.api.auth.login(data).then(async (res) =>
@@ -67,6 +66,7 @@ export default class Auth {
             }
             await setInStorage("last_login", `${new Date()}`);
             await this.fetchMe();
+            callback()
           }
         })
       );

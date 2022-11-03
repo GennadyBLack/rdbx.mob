@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -12,9 +12,7 @@ import useStore from "../../hooks/useStore";
 import { TextInput } from "react-native-paper";
 import Animated from "react-native-reanimated";
 
-import constants from "../../helpers/style";
-
-import s from "../../helpers/styleHelper";
+import s, { constants } from "../../helpers/styleHelper";
 
 export default observer(Register);
 
@@ -23,11 +21,10 @@ function Register({ navigation }) {
   let [auth] = useStore("auth");
   let [layout] = useStore("layout");
 
-useEffect(()=>{
-    layout.setLayout('public')
-    return  ()=>layout.setLayout('default')
-},[])
-
+  useEffect(() => {
+    layout.setLayout("public");
+    return () => layout.setLayout("default");
+  }, []);
 
   let [form, setForm] = useState({ username: "", password: "", email: "" });
 

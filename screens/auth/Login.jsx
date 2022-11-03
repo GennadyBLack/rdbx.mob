@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -11,8 +9,7 @@ import {
   Pressable,
   Switch,
 } from "react-native";
-import constants from "../../helpers/style";
-import s from "../../helpers/styleHelper";
+import s, { constants } from "../../helpers/styleHelper";
 import { observer } from "mobx-react-lite";
 import useStore from "../../hooks/useStore";
 import { TextInput } from "react-native-paper";
@@ -32,10 +29,10 @@ function Login({ navigation }) {
   });
   const [content] = useFingerPrint();
 
-  useEffect(()=>{
-    layout.setLayout('auth')
-    return  ()=>layout.setLayout('default')
-},[])
+  useEffect(() => {
+    layout.setLayout("auth");
+    return () => layout.setLayout("default");
+  }, []);
   const regisrer = () => {
     navigation.navigate("Register");
   };
@@ -44,15 +41,14 @@ function Login({ navigation }) {
     setForm({ ...form, [field]: e });
   };
 
-  let login = async() => {
-   await auth.login(form);
-   navigation.navigate("Public");
+  let login = async () => {
+    await auth.login(form, () => navigation.navigate("Public"));
+    //
   };
 
   return (
-    <Animated.View style={[styles.login_wrapper]}>
-      <StatusBar style="dark" />
-      <Text style={styles.welcome}>Здравствуйте !</Text>
+    <Animated.View style={[s.flex, s.light_bg]}>
+      <Text style={s.dark_c}>Welcome !</Text>
       <Animated.View style={[styles.login_content]}>
         <TextInput
           mode="outlined"
@@ -69,11 +65,6 @@ function Login({ navigation }) {
           value={form?.password}
           onChangeText={(text) => setText(text, "password")}
         />
-        {/* <Switch
-          value={form?.rememberMe}
-          onValueChange={(value) => setText(value, "rememberMe")}
-        />
-        <Text>Remember Me</Text> */}
         <Pressable
           onPress={() => {
             login();
@@ -112,14 +103,7 @@ function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  login_wrapper: {
-    flex: 1,
-    backgroundColor: "#66bfbf",
-  },
   login_content: {
-    // flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
     paddingTop: 40,
     paddingHorizontal: 20,
     height: height / 1.2,
@@ -127,18 +111,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
-
-  // button: {
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   paddingVertical: 12,
-  //   paddingHorizontal: 32,
-  //   borderRadius: 4,
-  //   elevation: 3,
-  //   color: "white",
-  //   backgroundColor: "#66bfbf",
-  //   borderRadius: 20,
-  // },
   welcome: {
     paddingTop: height - height / 1.2,
     fontSize: 40,

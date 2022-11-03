@@ -7,8 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { linking } from "../../helpers/menuHelper";
-import constants from "../../helpers/styleHelper";
-
+import { constants } from "../../helpers/styleHelper";
 
 import useStore from "../../hooks/useStore";
 import { Text, StyleSheet } from "react-native";
@@ -16,41 +15,36 @@ import filterMenuLinks from "../../helpers/menuHelper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Layout from "./Layout";
 
-
-
-const {Screen, Navigator} = createNativeStackNavigator();
+const { Screen, Navigator } = createNativeStackNavigator();
 const PERSISTENCE_KEY = "NAVIGATION_STATE_V1";
 
-
-
-
 function Routes() {
-
   const [isReady, setIsReady] = React.useState(__DEV__ ? false : true);
   const [initialState, setInitialState] = React.useState();
 
   const [routes, setRoutes] = useState([]);
 
-  let [menu] = useStore('menu')
-  let [auth] = useStore('auth')
+  let [menu] = useStore("menu");
+  let [auth] = useStore("auth");
 
   useEffect(() => {
-    let mappedLinks = menu.allRoutes.map(
-      (item, inx) => {
-         return  <Screen
-            name={item?.name}
-            options={item?.options}
-            key={inx}
-          >
-             {(props) => <Layout {...item}><item.component {...props} extraData={item?.options} /></Layout>}
-          </Screen>
-      }
-    );
+    let mappedLinks = menu.allRoutes.map((item, inx) => {
+      return (
+        <Screen name={item?.name} options={item?.options} key={inx}>
+          {(props) => (
+            <Layout {...item}>
+              <item.component {...props} extraData={item?.options} />
+            </Layout>
+          )}
+        </Screen>
+      );
+    });
     setRoutes(mappedLinks);
   }, []);
 
-
-  useEffect(()=>{menu.setLeftRoutes()},[auth.isAuth])
+  useEffect(() => {
+    menu.setLeftRoutes();
+  }, [auth.isAuth]);
 
   useEffect(() => {
     const restoreState = async () => {
@@ -95,13 +89,13 @@ function Routes() {
         AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
       }
     >
-          <Navigator
-            initialRouteName="Public"
-            activeColor="#fff"
-            inactiveColor={constants?.GREEN}
-          >
-            {routes}
-          </Navigator>
+      <Navigator
+        initialRouteName="Public"
+        activeColor="#fff"
+        inactiveColor={constants?.GREEN}
+      >
+        {routes}
+      </Navigator>
     </NavigationContainer>
   );
 }

@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { height, width } = Dimensions.get("window");
 
 const REM = 16,
   DANGER = "#D21100",
@@ -6,18 +7,22 @@ const REM = 16,
   GREEN = "#66bfbf",
   WARNING = "#FCAB00",
   SECONDARY = "#555860",
-  LIGHT = "#F2F2F2",
-  PRIMARY = "#3278B9",
-  // DARK = '#302528',
+  LIGHT = "#FAF3F3",
+  PRIMARY = "#E1E5EA",
+  LIGHT_PINK = "#e6ddee",
   DARK = "#2d2829",
   DARK_LIGHT = "#5B5456",
+  LIGHT_GREY = "#A7BBC7",
+  RUBY = "#DA7F8F",
   GRAY = "#918B8D",
   SPACER = 16,
   GRID_GUTTER_WIDTH = 8,
   BTN_BORDER_RADIUS = 55,
   BTN_BORDER_RADIUS_LG = 64;
 
-const constants = {
+export const constants = {
+  LIGHT_GREY,
+  RUBY,
   REM,
   DANGER,
   SUCCESS,
@@ -36,25 +41,325 @@ const constants = {
 };
 
 const mainStyles = {
+  //bgroung
+  lgrey_bg: { backgroundColor: LIGHT_GREY },
+  light_bg: { backgroundColor: LIGHT },
+  prymary_bg: { backgroundColor: PRIMARY },
+  dark_bg: { backgroundColor: DARK },
+  grey_bg: { backgroundColor: GRAY },
+  ruby_bg: { backgroundColor: RUBY },
+  lpink_bg: { backgroundColor: LIGHT_PINK },
+  //text
+
+  lpink_c: { color: LIGHT_PINK },
+  lgrey_c: { color: LIGHT_GREY },
+  light_c: { color: LIGHT },
+  prymary_c: { color: PRIMARY },
+  dark_c: { color: DARK },
+  grey_c: { color: GRAY },
+  ruby_c: { color: RUBY },
+
+  flex: { flex: 1 },
+  j_c_center: { justifyContent: "center" },
+  a_i_center: { alignItems: "center" },
+
+  row: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  "opacity-0": { opacity: 0 },
+  "opacity-25": { opacity: 0.25 },
+  "opacity-50": { opacity: 0.5 },
+  "opacity-70": { opacity: 0.7 },
+  "opacity-75": { opacity: 0.75 },
+  "opacity-100": { opacity: 1 },
+  "flex-between": {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   button: {
-    backgroundColor: constants.GREEN,
+    backgroundColor: GREEN,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
-    // borderRadius: 4,
     elevation: 3,
     borderRadius: 20,
   },
   buttonText: {
-    color: constants.LIGHT,
+    color: LIGHT,
   },
   cGreen: {
     color: "#66bfbf",
   },
   title: { fontSize: 30 },
+
+  profile_wrapper: {
+    borderRadius: 10,
+    flexDirection: "row",
+    padding: 10,
+    height: 100,
+    backgroundColor: LIGHT_GREY,
+    justifyContent: "space-between",
+  },
+
+  profile_avatar: {
+    backgroundColor: "red",
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  profile_name: {
+    fontSize: 30,
+    marginBottom: 10,
+  },
+
+  //width
+  w_0: {
+    width: 0,
+  },
+  w_1: {
+    width: `${REM * 0.25}%`,
+  },
+  w_2: {
+    width: `${REM * 0.5}%`,
+  },
+  w_3: {
+    width: `${REM}%`,
+  },
+  w_4: {
+    width: `${REM * 1.5}%`,
+  },
+  w_5: {
+    width: `${REM * 2}%`,
+  },
+  //height
+  h_0: {
+    height: 0,
+  },
+  h_1: {
+    height: `${REM * 0.25}%`,
+  },
+  h_2: {
+    height: `${REM * 0.5}%`,
+  },
+  h_3: {
+    height: `${REM}%`,
+  },
+  h_4: {
+    height: `${REM * 1.5}%`,
+  },
+  h_5: {
+    height: `${REM * 2}%`,
+  },
+
+  //MARGIN
+  m_0: {
+    margin: 0,
+  },
+  m_1: {
+    margin: REM * 0.25,
+  },
+  m_2: {
+    margin: REM * 0.5,
+  },
+  m_3: {
+    margin: REM,
+  },
+  m_4: {
+    margin: REM * 1.5,
+  },
+  m_5: {
+    margin: REM * 2,
+  },
+
+  mb_0: {
+    marginBottom: 0,
+  },
+  mb_1: {
+    marginBottom: REM * 0.25,
+  },
+  mb_2: {
+    marginBottom: REM * 0.5,
+  },
+  mb_3: {
+    marginBottom: REM,
+  },
+  mb_4: {
+    marginBottom: REM * 1.5,
+  },
+  mb_5: {
+    marginBottom: REM * 2,
+  },
+
+  mt_0: {
+    marginTop: 0,
+  },
+  mt_1: {
+    marginTop: REM * 0.25,
+  },
+  mt_2: {
+    marginTop: REM * 0.5,
+  },
+  mt_3: {
+    marginTop: REM,
+  },
+  mt_4: {
+    marginTop: REM * 1.5,
+  },
+  mt_5: {
+    marginTop: REM * 2,
+  },
+
+  ml_0: {
+    marginLeft: 0,
+  },
+  ml_1: {
+    marginLeft: REM * 0.25,
+  },
+  ml_2: {
+    marginLeft: REM * 0.5,
+  },
+  ml_3: {
+    marginLeft: REM,
+  },
+  ml_4: {
+    marginLeft: REM * 1.5,
+  },
+  ml_5: {
+    marginLeft: REM * 2,
+  },
+
+  mr_0: {
+    marginRight: 0,
+  },
+  mr_1: {
+    marginRight: REM * 0.25,
+  },
+  mr_2: {
+    marginRight: REM * 0.5,
+  },
+  mr_3: {
+    marginRight: REM,
+  },
+  mr_4: {
+    marginRight: REM * 1.5,
+  },
+  mr_5: {
+    marginRight: REM * 2,
+  },
+
+  //PADDING
+  p_0: {
+    padding: 0,
+  },
+  p_1: {
+    padding: REM * 0.25,
+  },
+  p_2: {
+    padding: REM * 0.5,
+  },
+  p_3: {
+    padding: REM,
+  },
+  p_4: {
+    padding: REM * 1.5,
+  },
+  p_5: {
+    padding: REM * 2,
+  },
+
+  pb_0: {
+    marginBottom: 0,
+  },
+  pb_1: {
+    paddingBottom: REM * 0.25,
+  },
+  pb_2: {
+    paddingBottom: REM * 0.5,
+  },
+  pb_3: {
+    paddingBottom: REM,
+  },
+  pb_4: {
+    paddingBottom: REM * 1.5,
+  },
+  pb_5: {
+    paddingBottom: REM * 2,
+  },
+
+  pt_0: {
+    paddingTop: 0,
+  },
+  pt_1: {
+    paddingTop: REM * 0.25,
+  },
+  pt_2: {
+    paddingTop: REM * 0.5,
+  },
+  pt_3: {
+    paddingTop: REM,
+  },
+  pt_4: {
+    paddingTop: REM * 1.5,
+  },
+  pt_5: {
+    paddingTop: REM * 2,
+  },
+
+  pl_0: {
+    paddingLeft: 0,
+  },
+  pl_1: {
+    paddingLeft: REM * 0.25,
+  },
+  pl_2: {
+    paddingLeft: REM * 0.5,
+  },
+  pl_3: {
+    paddingLeft: REM,
+  },
+  pl_4: {
+    paddingLeft: REM * 1.5,
+  },
+  pl_5: {
+    paddingLeft: REM * 2,
+  },
+
+  pr_0: {
+    paddingRight: 0,
+  },
+  pr_1: {
+    paddingRight: REM * 0.25,
+  },
+  pr_2: {
+    paddingRight: REM * 0.5,
+  },
+  pr_3: {
+    paddingRight: REM,
+  },
+  pr_4: {
+    paddingRight: REM * 1.5,
+  },
+  pr_5: {
+    paddingRight: REM * 2,
+  },
 };
 
 const s = StyleSheet.create(mainStyles);
 
+export const getStyle = (names = "", styles) => {
+  const slpitN = names.split(".");
+
+  let style = { ...styles };
+
+  slpitN.forEach((item) => {
+    console.log(item, "item");
+    style = { ...style, ...s[item] };
+  });
+  return { style };
+};
 export default s;
