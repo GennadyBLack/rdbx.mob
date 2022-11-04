@@ -1,12 +1,23 @@
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Fontisto } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  Fontisto,
+  Entypo,
+  AntDesign,
+  Ionicons,
+} from "@expo/vector-icons";
 
 //https://icons.expo.fyi/ all icons here
 export const getIcon = (name, color = "black", size = 24) => {
   // console.log(name);
   switch (name) {
+    case "menu":
+      return <Ionicons name="menu" size={size} color={color} />;
+    case "infocirlce":
+      return <AntDesign name="infocirlce" size={size} color={color} />;
+    case "exit":
+      return <Ionicons name="md-exit-outline" size={size} color={color} />;
+    case "login":
+      return <AntDesign name="login" size={size} color={color} />;
     case "persons":
       return <Fontisto name="persons" size={size} color={color} />;
     case "edit":

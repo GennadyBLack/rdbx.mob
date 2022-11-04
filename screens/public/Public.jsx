@@ -1,11 +1,11 @@
-import React from 'react'
-import {Text,View} from 'react-native'
+import React from "react";
+import { Text, View, SafeAreaView } from "react-native";
 
-const Public  = ()=>{
-
-return <View>
-         <Text>Public</Text>
+const Public = () => {
+  return (
+    <View>
+      <Text>Public</Text>
     </View>
-
-}
-export default Public
+  );
+};
+export default Public;

@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , Platform,} from 'react-native';
+import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Network from "expo-network";
 import * as Device from "expo-device";
-import useLocation from "./hooks/useLocation"
-import Routes from './components/base/Routes';
-
+import useLocation from "./hooks/useLocation";
+import Routes from "./components/base/Routes";
+import s from "./helpers/styleHelper";
 
 import {
   getFromStorage,
@@ -14,8 +13,6 @@ import {
   removeToken,
   setInStorage,
 } from "./helpers/storage";
-
-
 
 import store from "./store/index";
 
@@ -28,13 +25,10 @@ import * as SplashScreen from "expo-splash-screen";
 import { io } from "socket.io-client";
 import { baseURL } from "./api";
 
-
 export default function App() {
   let [isReady, setReady] = useState(false);
-  // const location = useLocation();
 
-
-useEffect(() => {
+  useEffect(() => {
     const initialApp = async () => {
       try {
         await Network.getNetworkStateAsync().then((res) => {
@@ -47,7 +41,7 @@ useEffect(() => {
           let res = rootStore.auth.fetchMe();
           resolve(res, "SuperRes");
         });
-        // console.log(await getToken());
+
         // const iniOptions = {
         //   reconnection: true,
         //   auth: {
@@ -76,30 +70,29 @@ useEffect(() => {
     };
     initialApp();
   }, []);
-  const onLayoutRootView = useCallback(async () => {
-    if (isReady) {
-    
-      await SplashScreen.hideAsync();
-    }
-  }, [isReady]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (isReady) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [isReady]);
 
   if (!isReady) {
     return null;
   }
   return (
-    <View style={styles.container}>
-      <StoreContext.Provider value={rootStore}>
-      <ErrorPopupList className="errors" />
-      <Routes/>
-      </StoreContext.Provider>
-      <StatusBar style="auto" />
-    </View>
+    <StoreContext.Provider value={rootStore}>
+      <StatusBar />
+      <SafeAreaView style={[styles.container, s.lpink_bg]}>
+        <ErrorPopupList className="errors" />
+        <Routes />
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </StoreContext.Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
 });

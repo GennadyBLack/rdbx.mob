@@ -101,21 +101,35 @@ const mainStyles = {
     borderRadius: 10,
     flexDirection: "row",
     padding: 10,
-    height: 100,
+    height: 70,
     backgroundColor: LIGHT_GREY,
-    justifyContent: "space-between",
+    // justifyContent: "center",
+    alignItems: "center",
   },
 
   profile_avatar: {
     backgroundColor: "red",
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
   profile_name: {
-    fontSize: 30,
+    fontSize: 20,
+    fontWeight: "600",
     marginBottom: 10,
+    // marginLeft: 20,
   },
+
+  //font     fontWeight\
+
+  fw_8: { fontWeight: "800" },
+  fw_7: { fontWeight: "700" },
+  fw_6: { fontWeight: "600" },
+  fw_5: { fontWeight: "500" },
+  fw_4: { fontWeight: "400" },
+  fw_3: { fontWeight: "400" },
+  fw_2: { fontWeight: "200" },
+  fw_1: { fontWeight: "100" },
 
   //width
   w_0: {

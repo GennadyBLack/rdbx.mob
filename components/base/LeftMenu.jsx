@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Entypo } from "@expo/vector-icons";
+import s, { getStyle } from "../../helpers/styleHelper";
 import { getIcon } from "../../helpers/iconHelper";
-import menuImage from '../../assets/menu.svg'
+import menuImage from "../../assets/menu.svg";
 import LeftMenuHeader from "../menu/LeftMenuHeader";
 import {
   View,
@@ -21,10 +22,6 @@ import Animated, {
   interpolate,
   Extrapolate,
 } from "react-native-reanimated";
-
-
-
-
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -65,30 +62,25 @@ const LeftMenu = () => {
     active.value = !active.value;
   }, []);
 
-  
   return (
-    <Animated.View style={[styles.back, bStyle]} >
-        <View
-          style={{
-            position: "absolute",
-            top: 10,
-            right: -50,
+    <Animated.View style={[styles.back, bStyle]}>
+      <View
+        style={{
+          position: "absolute",
+          top: 10,
+          right: -50,
+        }}
+      >
+        <TouchableHighlight
+          onPress={() => {
+            toggleMenu();
           }}
         >
-          <TouchableHighlight
-            onPress={() => {
-              toggleMenu();
-            }}
-          >
-            <Animated.View >
-        
-              {!active.value && (
-                <Entypo name="dots-three-vertical" size={24} color="black" />
-              )}
-            </Animated.View>
-          </TouchableHighlight>
-        </View>
-   
+          <Animated.View>
+            {!active.value && <Text>{getIcon("menu", "black", 40)}</Text>}
+          </Animated.View>
+        </TouchableHighlight>
+      </View>
 
       <TouchableHighlight
         style={{ backgroundColor: "white", flex: 1, opacity: 0.1 }}
@@ -102,44 +94,51 @@ const LeftMenu = () => {
       <Animated.View style={[styles.left_menu_wrapper, rStyle]}>
         {/* <ImageBackground source={menuImage} resizeMode="cover" style={{flex:1}}> */}
 
-  
-        <View style={{ flex: 1, justifyContent: "space-between" }}>
-          <View>     <LeftMenuHeader />
+        <View
+          style={[s.prymary_bg, { flex: 1, justifyContent: "space-between" }]}
+        >
           <View>
-            {menu?.leftRoutes.map((item, idx) => {
-              return (
-                <TouchableHighlight
-                  key={idx}
-                  style={{
-                    borderBottomColor: "#000",
-                    borderBottomWidth: 1,
-                    padding: 10,
-                  }}
-                  onPress={() => {
-                    navigation.navigate(item?.name);
-                    toggleMenu();
-                  }}
-                >
-                  <Text style={styles.menu_link}>{getIcon(item.icon)} {item?.name}</Text>
-                </TouchableHighlight>
-              );
-            })}
-          </View></View>
-     
-          <View>
-            <TouchableHighlight
-              onPress={() => {
-                auth.logout();
-                toggleMenu();
-              }}
-              style={{
-                padding: 10,
-              }}
-            >
-              <Text style={styles.menu_link}>Logout</Text>
-            </TouchableHighlight>
+            <LeftMenuHeader />
+            <View>
+              {menu?.leftRoutes.map((item, idx) => {
+                return (
+                  <TouchableHighlight
+                    key={idx}
+                    style={{
+                      padding: 10,
+                    }}
+                    onPress={() => {
+                      navigation.navigate(item?.name);
+                      toggleMenu();
+                    }}
+                  >
+                    <View {...getStyle("a_i_center", { flexDirection: "row" })}>
+                      <Text> {getIcon(item.icon)}</Text>
+                      <Text style={styles.menu_link}>{item?.name}</Text>
+                    </View>
+                  </TouchableHighlight>
+                );
+              })}
+            </View>
           </View>
-          
+
+          <View>
+            {auth.logged ? (
+              <TouchableHighlight
+                onPress={() => {
+                  auth.logout();
+                  toggleMenu();
+                }}
+                style={{
+                  padding: 10,
+                }}
+              >
+                <Text style={styles.menu_link}>{getIcon("exit")}</Text>
+              </TouchableHighlight>
+            ) : (
+              <Text></Text>
+            )}
+          </View>
         </View>
         {/* </ImageBackground> */}
       </Animated.View>
@@ -169,9 +168,11 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   menu_link: {
-    fontSize: 20,
-    padding:10,
-    // color:'white'
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 15,
+    padding: 10,
+    fontWeight: "600",
   },
 });
 

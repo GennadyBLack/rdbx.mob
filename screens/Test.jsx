@@ -25,7 +25,6 @@ const Test = () => {
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
         <Text>lpink_bg</Text>
       </View>
-      //
     </ScrollView>
   );
 };

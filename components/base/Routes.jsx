@@ -1,7 +1,7 @@
 // In App.js in a new project
 
 import React, { useEffect, useState } from "react";
-import { Linking, View } from "react-native";
+import { Linking, View, SafeAreaView } from "react-native";
 import { observer } from "mobx-react-lite";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -11,7 +11,6 @@ import { constants } from "../../helpers/styleHelper";
 
 import useStore from "../../hooks/useStore";
 import { Text, StyleSheet } from "react-native";
-import filterMenuLinks from "../../helpers/menuHelper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Layout from "./Layout";
 
@@ -57,9 +56,9 @@ function Routes() {
           ? JSON.parse(savedStateString)
           : undefined;
         //Расскоментить, чтобы запускать приложение с последней посещенной страницы
-        // if (state !== undefined) {
-        //   setInitialState(state);
-        // }
+        if (state !== undefined) {
+          setInitialState(state);
+        }
       } finally {
         setIsReady(true);
       }
@@ -79,24 +78,26 @@ function Routes() {
   }
 
   return (
-    <NavigationContainer
-      linking={linking}
-      fallback={<Text>Loading...</Text>}
-      style={styles.wrap}
-      initialState={initialState}
-      barStyle={{ backgroundColor: "#694fad" }}
-      onStateChange={(state) =>
-        AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-      }
-    >
-      <Navigator
-        initialRouteName="Public"
-        activeColor="#fff"
-        inactiveColor={constants?.GREEN}
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer
+        linking={linking}
+        fallback={<Text>Loading...</Text>}
+        style={styles.wrap}
+        initialState={initialState}
+        barStyle={{ backgroundColor: "#694fad" }}
+        onStateChange={(state) =>
+          AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+        }
       >
-        {routes}
-      </Navigator>
-    </NavigationContainer>
+        <Navigator
+          initialRouteName="Public"
+          activeColor="#fff"
+          inactiveColor={constants?.GREEN}
+        >
+          {routes}
+        </Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 

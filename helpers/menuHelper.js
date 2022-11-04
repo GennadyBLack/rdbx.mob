@@ -4,6 +4,7 @@ import Public from "../screens/public/Public";
 import Auth from "./../screens/auth/Auth";
 import Test from "../screens/Test";
 import { getIcon } from "../helpers/iconHelper";
+import UserProfile from "../screens/profile/UserProfile";
 
 export const availableLinks = [
   {
@@ -13,10 +14,11 @@ export const availableLinks = [
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+      tabBarIcon: ({ color, size }) => getIcon("login", color, size),
     },
     leftMenu: true,
     layout: "auth",
+    icon: "login",
   },
   {
     name: "Register",
@@ -29,6 +31,7 @@ export const availableLinks = [
     },
     leftMenu: true,
     layout: "auth",
+    icon: "login",
   },
   {
     name: "Public",
@@ -41,6 +44,7 @@ export const availableLinks = [
     },
     leftMenu: true,
     layout: "public",
+    icon: "home",
   },
   {
     name: "Test",
@@ -52,6 +56,19 @@ export const availableLinks = [
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
     leftMenu: true,
+    layout: "public",
+    icon: "infocirlce",
+  },
+  {
+    name: "Profile",
+    component: UserProfile,
+    auth: true,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
     layout: "public",
   },
 ];
