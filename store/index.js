@@ -4,11 +4,10 @@ import apis from "../api/api";
 import Modal from "./modal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Menu from "./menu";
-import Layout from './layout'
-
+import Layout from "./layout";
 
 export default class store {
-  errors = [];
+  errors = [{ message: "asdsasds" }];
   main_spiner = false;
   request_stack = [];
   internet_connection = false;
@@ -18,8 +17,11 @@ export default class store {
     this.spiner = value;
   };
 
-  addInStack = (item) => {
-    request_stack.push(item);
+  addInStack = () => {
+    main_spiner = true;
+    const id = Math.floor(Math.random()) * 100;
+    request_stack.push(id);
+    return id;
   };
 
   removeFromStack = (value) => {
@@ -36,7 +38,7 @@ export default class store {
   }
 
   get getSpiner() {
-    return { spiner: this.spiner, stack: request_stack.length };
+    return { spiner: this.main_spiner, stack: request_stack.length };
   }
 
   setError = (error, methodName) => {
@@ -44,6 +46,7 @@ export default class store {
       message: `${error?.message} from: ${methodName ?? ""}`,
     });
   };
+
   removeError = (index) => {
     this.errors = this.errors.filter((item, ind) => ind !== index);
   };
@@ -55,6 +58,6 @@ export default class store {
     this.auth = new Auth(this);
     this.tools = new Tools(this);
     this.menu = new Menu(this);
-    this.layout = new Layout(this)
+    this.layout = new Layout(this);
   }
 }

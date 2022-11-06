@@ -98,7 +98,7 @@ const LeftMenu = () => {
           style={[s.prymary_bg, { flex: 1, justifyContent: "space-between" }]}
         >
           <View>
-            <LeftMenuHeader />
+            <LeftMenuHeader toggle={toggleMenu} />
             <View>
               {menu?.leftRoutes.map((item, idx) => {
                 return (

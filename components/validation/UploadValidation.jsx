@@ -41,12 +41,11 @@ export default function UploadValidation({
     await tools.uploadImage(result);
 
     if (!result.cancelled) {
-      console.log(tools.image, tools?.image);
+      console.log(tools, tools?.image);
       if (typeof onChange === "function") {
         onChange(tools?.imageName);
       }
-
-      setImage(result.uri);
+      setImage(tools?.imageName);
     }
   };
 
@@ -60,10 +59,7 @@ export default function UploadValidation({
         <View>
           {image ? (
             <Image
-              style={[
-                { height: 100, width: 100 },
-                // styles,
-              ]}
+              style={[{ height: 500, width: "100%", borderRadius: 10 }]}
               source={{
                 uri: `${apiUrl}/files/${image || "placeholder.png"}`,
               }}

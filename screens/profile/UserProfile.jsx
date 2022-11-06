@@ -3,7 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  Image,
   StyleSheet,
   ImageBackground,
 } from "react-native";
@@ -23,6 +22,26 @@ import { apiUrl } from "../../api";
 const UserProfile = ({ navigation }) => {
   const translateY = useSharedValue(-60);
   const [auth] = useStore("auth");
+  const menuItems = [
+    {
+      title: "Редактировать Фото профиля",
+      onPress: () => {
+        navigation.navigate("EditProfileImage");
+      },
+    },
+    {
+      title: "Редактировать профиль",
+      onPress: () => {
+        navigation.navigate("EditProfile");
+      },
+    },
+    {
+      title: "Редактировать обложку",
+      onPress: () => {
+        navigation.navigate("EditProfileBackground");
+      },
+    },
+  ];
   const rStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }],
@@ -33,26 +52,7 @@ const UserProfile = ({ navigation }) => {
     <ScrollView {...getStyle("flex.p_2")}>
       <View {...getStyle("a_i_end", { position: "relative" })}>
         <MenuToggler
-          items={[
-            {
-              title: "Редактировать Фото профиля",
-              onPress: () => {
-                navigation.navigate("EditProfileImage");
-              },
-            },
-            {
-              title: "Редактировать профиль",
-              onPress: () => {
-                navigation.navigate("EditProfile");
-              },
-            },
-            {
-              title: "Редактировать обложку",
-              onPress: () => {
-                navigation.navigate("EditProfileBackground");
-              },
-            },
-          ]}
+          items={menuItems}
           anchor={<Text>{getIcon("setting")}</Text>}
         />
       </View>
@@ -69,7 +69,6 @@ const UserProfile = ({ navigation }) => {
           {...getStyle("hp_2.lpink_bg.a_i_center.br", {
             marginTop: 150,
             position: "relative",
-            // marginBottom: 10,
           })}
         >
           <Animated.View style={[styles.profile_photo, rStyle]}>
@@ -83,14 +82,35 @@ const UserProfile = ({ navigation }) => {
             <Text {...getStyle("fw_8", { fontSize: 15 })}>
               {auth?.user?.user?.username}
             </Text>
+            <Text {...getStyle("fw_6.lgrey_c")}>{auth?.user?.user?.title}</Text>
             <Text {...getStyle("fw_6.lgrey_c")}>
               {auth?.user?.user?.description}
             </Text>
+            {/* <View {...getStyle("a_i_end", { position: "relative" })}>
+              <MenuToggler
+                items={menuItems}
+                anchor={<Text>{getIcon("setting")}</Text>}
+              />
+            </View> */}
           </View>
-          {/* </View> */}
         </View>
       </ImageBackground>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5")}>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
+        <Text>lpink_bg</Text>
+      </View>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
+        <Text>lpink_bg</Text>
+      </View>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
+        <Text>lpink_bg</Text>
+      </View>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
+        <Text>lpink_bg</Text>
+      </View>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
+        <Text>lpink_bg</Text>
+      </View>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
         <Text>lpink_bg</Text>
       </View>
     </ScrollView>

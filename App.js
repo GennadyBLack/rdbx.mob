@@ -83,7 +83,7 @@ export default function App() {
     <StoreContext.Provider value={rootStore}>
       <StatusBar />
       <SafeAreaView style={[styles.container, s.lpink_bg]}>
-        <ErrorPopupList className="errors" />
+        <ErrorPopupList />
         <Routes />
         <StatusBar style="auto" />
       </SafeAreaView>

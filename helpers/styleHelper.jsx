@@ -89,13 +89,14 @@ const mainStyles = {
     justifyContent: "space-between",
   },
   button: {
+    height: 50,
     backgroundColor: GREEN,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     elevation: 3,
-    borderRadius: 20,
+    borderRadius: 10,
   },
   buttonText: {
     color: LIGHT,
@@ -111,8 +112,13 @@ const mainStyles = {
     padding: 10,
     height: 70,
     backgroundColor: LIGHT_GREY,
-    // justifyContent: "center",
+    whiteSpace: "nowrap",
     alignItems: "center",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    WebkitLineClamp: 1,
+    // WebkitBoxOrient: "vertical",
   },
 
   profile_avatar: {
@@ -415,6 +421,10 @@ const mainStyles = {
   },
   br_5: {
     borderRadius: `50%`,
+  },
+  input: {
+    // borderRadius: 30,
+    marginBottom: 20,
   },
 };
 

@@ -30,17 +30,16 @@ const MenuToggler = ({ items = [], anchor }) => {
 
   const toggleButton = () => {
     return anchor ? (
-      <Pressable
-        onPress={toggle}
+      <View
         onLayout={(event) => {
           const layout = event.nativeEvent.layout;
-          elemP.value = { x: layout.x, y: layout.y };
-          console.log("x:", layout.x);
-          console.log("y:", layout.y);
+          console.log(layout);
+          elemP.value = { x: layout.y, y: layout.top };
         }}
+        ref={ref}
       >
-        {anchor}
-      </Pressable>
+        <Pressable onPress={toggle}>{anchor}</Pressable>
+      </View>
     ) : (
       <Pressable onPress={openMenu}>
         <Text>Show menu</Text>
@@ -65,7 +64,6 @@ const MenuToggler = ({ items = [], anchor }) => {
   }
   return (
     <View
-      ref={ref}
       style={{
         zIndex: 1000000,
         position: "relative",

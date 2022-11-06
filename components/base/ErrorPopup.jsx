@@ -4,22 +4,26 @@ import { Snackbar } from "react-native-paper";
 
 const ErrorPopup = ({ text, onDelete }) => {
   const [visible, setVisible] = React.useState(true);
+
   const onDismissSnackBar = () => {
     setVisible(false), onDelete();
   };
 
   return (
-    <View style={{ height: 0, width: 350 }}>
-      {/* <Snackbar
+    <View
+      style={{ height: 0, width: 350, flex: 1, position: "absolute" }}
+      nativeID="errors"
+    >
+      <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
         action={{
           label: "Undo",
           onPress: () => {},
         }}
-      > */}
-      <Text>{text}</Text>
-      {/* </Snackbar> */}
+      >
+        <Text>{text}asds</Text>
+      </Snackbar>
     </View>
   );
 };
