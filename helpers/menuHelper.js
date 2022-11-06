@@ -5,6 +5,9 @@ import Auth from "./../screens/auth/Auth";
 import Test from "../screens/Test";
 import { getIcon } from "../helpers/iconHelper";
 import UserProfile from "../screens/profile/UserProfile";
+import EditProfileImage from "../screens/profile/EditProfileImage";
+import EditProfileBackground from "../screens/profile/EditProfileBackground";
+import EditProfile from "../screens/profile/EditProfile";
 
 export const availableLinks = [
   {
@@ -17,7 +20,7 @@ export const availableLinks = [
       tabBarIcon: ({ color, size }) => getIcon("login", color, size),
     },
     leftMenu: true,
-    layout: "auth",
+    layout: "public",
     icon: "login",
   },
   {
@@ -29,7 +32,7 @@ export const availableLinks = [
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
-    leftMenu: true,
+    leftMenu: false,
     layout: "auth",
     icon: "login",
   },
@@ -71,7 +74,45 @@ export const availableLinks = [
     leftMenu: false,
     layout: "public",
   },
-];
+  {
+    name: "EditProfileImage",
+    component: EditProfileImage,
+    auth: true,
+    options: {
+      headerShown: true,
+      title: "Редактировать фото профиля",
+
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+  }, //
+  {
+    name: "EditProfileBackground",
+    component: EditProfileBackground,
+    auth: true,
+    options: {
+      headerShown: true,
+      title: "Редактировать задний фон",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+  },
+  {
+    name: "EditProfile",
+    component: EditProfile,
+    auth: true,
+    options: {
+      headerShown: true,
+      title: "Редактировать профиль",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+  },
+  //
+]; //
 
 // export const availableLinks = [
 //   {

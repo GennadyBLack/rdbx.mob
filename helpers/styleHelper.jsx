@@ -21,6 +21,7 @@ const REM = 16,
   BTN_BORDER_RADIUS_LG = 64;
 
 export const constants = {
+  LIGHT_PINK,
   LIGHT_GREY,
   RUBY,
   REM,
@@ -61,6 +62,13 @@ const mainStyles = {
 
   flex: { flex: 1 },
   j_c_center: { justifyContent: "center" },
+  j_c_between: { justifyContent: "space-between" },
+  j_c_end: { justifyContent: "end" },
+  j_c_start: { justifyContent: "start" },
+  j_c_center: { justifyContent: "center" },
+
+  a_i_end: { alignItems: "flex-end" },
+  a_i_start: { alignItems: "flex-start" },
   a_i_center: { alignItems: "center" },
 
   row: {
@@ -136,19 +144,19 @@ const mainStyles = {
     width: 0,
   },
   w_1: {
-    width: `${REM * 0.25}%`,
+    width: `10%`,
   },
   w_2: {
-    width: `${REM * 0.5}%`,
+    width: `20%`,
   },
   w_3: {
-    width: `${REM}%`,
+    width: `30%`,
   },
   w_4: {
-    width: `${REM * 1.5}%`,
+    width: `40%`,
   },
   w_5: {
-    width: `${REM * 2}%`,
+    width: `50%`,
   },
   //height
   h_0: {
@@ -168,6 +176,32 @@ const mainStyles = {
   },
   h_5: {
     height: `${REM * 2}%`,
+  },
+
+  hp_0: {
+    height: 0,
+  },
+  hp_1: {
+    height: 100,
+  },
+  hp_2: {
+    height: 200,
+  },
+  hp_3: {
+    height: 300,
+  },
+  hp_4: {
+    height: 400,
+  },
+  hp_5: {
+    height: 500,
+  },
+  hp_6: {
+    height: 600,
+  },
+
+  hp_7: {
+    height: 700,
   },
 
   //MARGIN
@@ -361,6 +395,27 @@ const mainStyles = {
   pr_5: {
     paddingRight: REM * 2,
   },
+
+  //border radius
+
+  br: {
+    borderRadius: REM,
+  },
+  br_1: {
+    borderRadius: `10%`,
+  },
+  br_2: {
+    borderRadius: `20%`,
+  },
+  br_3: {
+    borderRadius: `30%`,
+  },
+  br_4: {
+    borderRadius: `40%`,
+  },
+  br_5: {
+    borderRadius: `50%`,
+  },
 };
 
 const s = StyleSheet.create(mainStyles);
@@ -371,7 +426,6 @@ export const getStyle = (names = "", styles) => {
   let style = { ...styles };
 
   slpitN.forEach((item) => {
-    console.log(item, "item");
     style = { ...style, ...s[item] };
   });
   return { style };

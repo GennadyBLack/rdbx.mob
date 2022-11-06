@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import s, { getStyle } from "../helpers/styleHelper";
+// import Cam from "../components/base/Cam";
 const Test = () => {
   return (
     <ScrollView style={[s.flex]}>
+      {/* <Cam /> */}
       <View {...getStyle("light_bg.j_c_center.a_i_center.h_5")}>
         <Text>light_bg</Text>
       </View>
