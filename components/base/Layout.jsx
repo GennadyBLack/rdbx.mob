@@ -1,26 +1,26 @@
-import React from 'react'
-
-import useStore from '../../hooks/useStore'
-import { View,Text } from 'react-native'
+import React from "react";
+import { View } from "react-native";
 import { observer } from "mobx-react-lite";
-import ModalWrapper from './ModalWrapper'
-import { useEffect } from 'react';
+import ModalWrapper from "./ModalWrapper";
 
-
-const Layout = ({children,layout='public'})=>{
-    if( layout === 'auth'){
-    return   <View style={{flex:1}}>{children}</View>
-    } else if(layout === 'public'){
-    return <View style={{flex:1}}>
-        <ModalWrapper>
-            {children}
-        </ModalWrapper>
+const Layout = ({ children, layout = "public" }) => {
+  switch (layout) {
+    case "auth":
+      return <View style={{ flex: 1 }}>{children}</View>;
+      breack;
+    case "public":
+      return (
+        <View style={{ flex: 1 }}>
+          <ModalWrapper>{children}</ModalWrapper>
         </View>
-    } else {
-    return <View>
-         {children}
-        </View>
-    }
-}
+      );
+      break;
+    case "empty":
+      return <View style={{ flex: 1 }}>{children}</View>;
+      breack;
+    default:
+      return <View style={{ flex: 1 }}>{children}</View>;
+  }
+};
 
-export default observer(Layout)
+export default observer(Layout);

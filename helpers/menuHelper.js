@@ -8,6 +8,7 @@ import UserProfile from "../screens/profile/UserProfile";
 import EditProfileImage from "../screens/profile/EditProfileImage";
 import EditProfileBackground from "../screens/profile/EditProfileBackground";
 import EditProfile from "../screens/profile/EditProfile";
+import UserSearch from "../screens/search/UserSearch";
 
 export const availableLinks = [
   {
@@ -109,6 +110,18 @@ export const availableLinks = [
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
     leftMenu: false,
+    layout: "public",
+  },
+  {
+    name: "UserSearch",
+    component: UserSearch,
+    auth: false,
+    options: {
+      title: "Поиск по пользователям",
+      headerShown: true,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: true,
     layout: "public",
   },
   //

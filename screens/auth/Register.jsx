@@ -19,12 +19,6 @@ export default observer(Register);
 const { height } = Dimensions.get("window");
 function Register({ navigation }) {
   let [auth] = useStore("auth");
-  let [layout] = useStore("layout");
-
-  useEffect(() => {
-    layout.setLayout("public");
-    return () => layout.setLayout("default");
-  }, []);
 
   let [form, setForm] = useState({ username: "", password: "", email: "" });
 

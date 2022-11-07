@@ -21,7 +21,6 @@ export default observer(Login);
 
 function Login({ navigation }) {
   let [auth] = useStore("auth");
-  let [layout] = useStore("layout");
   let [form, setForm] = useState({
     password: "",
     email: "",
@@ -29,10 +28,6 @@ function Login({ navigation }) {
   });
   const [content] = useFingerPrint();
 
-  useEffect(() => {
-    layout.setLayout("auth");
-    return () => layout.setLayout("default");
-  }, []);
   const regisrer = () => {
     navigation.navigate("Register");
   };
