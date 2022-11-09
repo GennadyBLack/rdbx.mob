@@ -4,7 +4,8 @@ import {
   getToken,
   removeToken,
   setInStorage,
-  removeFromStorage, getFromStorage,
+  removeFromStorage,
+  getFromStorage,
 } from "../helpers/storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from "expo-secure-store";
@@ -28,12 +29,16 @@ export default class Auth {
       await this?.root?.api?.me?.me({}).then((res) => {
         runInAction(async () => {
           this.user = res?.data?.data;
-          if(this.location && this.device ) {
-            let visits = await getFromStorage("visits")
-            if(!visits) visits = "[]"
-            visits = JSON.parse(visits)
-            if(visits.length > 5) visits.shift();
-            visits.push({time: new Date(), location: this.location, device: this.device})
+          if (this.location && this.device) {
+            let visits = await getFromStorage("visits");
+            if (!visits) visits = "[]";
+            visits = JSON.parse(visits);
+            if (visits.length > 5) visits.shift();
+            visits.push({
+              time: new Date(),
+              location: this.location,
+              device: this.device,
+            });
             await setInStorage("visits", JSON.stringify(visits));
           }
 
@@ -48,7 +53,7 @@ export default class Auth {
     }
   };
 
-  login = async (data,callback) => {
+  login = async (data, callback) => {
     try {
       console.log(data?.rememberMe, "data?.rememberMe");
       this.loading = true;
@@ -66,7 +71,7 @@ export default class Auth {
             }
             await setInStorage("last_login", `${new Date()}`);
             await this.fetchMe();
-            callback()
+            callback();
           }
         })
       );
@@ -87,6 +92,7 @@ export default class Auth {
         await setToken(res?.data?.token);
         await this.fetchMe();
       }
+
       this.loading = false;
     } catch (error) {
       this.root.setError(error);
@@ -112,6 +118,14 @@ export default class Auth {
       console.log(error, "error me updateMe");
       this.loading = false;
     }
+  };
+
+  createFriends = async (data) => {
+    await this.root.api.me.createFriends(data);
+  };
+
+  createFriends = async (data) => {
+    await this.root.api.me.createFriends(data);
   };
 
   get isAuth() {

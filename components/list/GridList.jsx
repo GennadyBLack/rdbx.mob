@@ -25,7 +25,7 @@ const GridList = ({
 
   return (
     <ScrollView style={[styles.container, wrap_style]}>
-      <View style={{ justifyContent: "center", paddingHorizontal: 40 }}>
+      <View style={{ justifyContent: "center", paddingHorizontal: 10 }}>
         <TextInput
           onChangeText={(e) => setSearch(e)}
           value={search}
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    paddingTop: 20,
+    paddingTop: 5,
   },
 });
 export default GridList;

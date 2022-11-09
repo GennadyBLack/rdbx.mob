@@ -19,7 +19,8 @@ import { getIcon } from "../../helpers/iconHelper";
 import MenuToggler from "../../components/menu/MenuToggler";
 
 import { apiUrl } from "../../api";
-const UserProfile = ({ navigation }) => {
+
+const OtherUserProfile = ({ navigation }) => {
   const translateY = useSharedValue(-60);
   const [auth] = useStore("auth");
 
@@ -127,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(UserProfile);
+export default observer(UserOtherUserProfileProfile);

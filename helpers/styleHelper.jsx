@@ -426,6 +426,14 @@ const mainStyles = {
     // borderRadius: 30,
     marginBottom: 20,
   },
+  snack: {
+    backgroundColor: PRIMARY,
+    padding: 10,
+    borderRadius: 4,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 };
 
 const s = StyleSheet.create(mainStyles);

@@ -114,7 +114,7 @@ const LeftMenu = () => {
                   >
                     <View {...getStyle("a_i_center", { flexDirection: "row" })}>
                       <Text> {getIcon(item.icon)}</Text>
-                      <Text style={styles.menu_link}>{item?.name}</Text>
+                      <Text style={styles.menu_link}>{item?.title}</Text>
                     </View>
                   </TouchableHighlight>
                 );

@@ -1,7 +1,6 @@
 import Login from "./../screens/auth/Login";
 import Register from "./../screens/auth/Register";
 import Public from "../screens/public/Public";
-import Auth from "./../screens/auth/Auth";
 import Test from "../screens/Test";
 import { getIcon } from "../helpers/iconHelper";
 import UserProfile from "../screens/profile/UserProfile";
@@ -9,6 +8,9 @@ import EditProfileImage from "../screens/profile/EditProfileImage";
 import EditProfileBackground from "../screens/profile/EditProfileBackground";
 import EditProfile from "../screens/profile/EditProfile";
 import UserSearch from "../screens/search/UserSearch";
+import FriendList from "../screens/profile/FriendList";
+import MyFriendRequests from "../screens/profile/MyFriendRequests";
+import FriendRequests from "../screens/profile/FriendRequests";
 
 export const availableLinks = [
   {
@@ -23,6 +25,7 @@ export const availableLinks = [
     leftMenu: true,
     layout: "public",
     icon: "login",
+    title: "Логин",
   },
   {
     name: "Register",
@@ -36,6 +39,7 @@ export const availableLinks = [
     leftMenu: false,
     layout: "auth",
     icon: "login",
+    title: "Регистрация",
   },
   {
     name: "Public",
@@ -49,6 +53,7 @@ export const availableLinks = [
     leftMenu: true,
     layout: "public",
     icon: "home",
+    title: "Главная страница",
   },
   {
     name: "Test",
@@ -62,6 +67,7 @@ export const availableLinks = [
     leftMenu: true,
     layout: "public",
     icon: "infocirlce",
+    title: "Тестовый стенд",
   },
   {
     name: "Profile",
@@ -74,6 +80,7 @@ export const availableLinks = [
     },
     leftMenu: false,
     layout: "public",
+    title: "Профиль",
   },
   {
     name: "EditProfileImage",
@@ -87,6 +94,7 @@ export const availableLinks = [
     },
     leftMenu: false,
     layout: "public",
+    title: "Редактировать профиль",
   }, //
   {
     name: "EditProfileBackground",
@@ -123,8 +131,48 @@ export const availableLinks = [
     },
     leftMenu: true,
     layout: "public",
+    title: "Поиск",
   },
-  //
+  {
+    name: "FriendList",
+    component: FriendList,
+    auth: false,
+    options: {
+      title: "Поиск по друзьям",
+      headerShown: true,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: true,
+    layout: "public",
+    title: "Друзья",
+  },
+  {
+    name: "FriendRequests",
+    component: FriendRequests,
+    auth: true,
+    options: {
+      title: "Запросы дружбы",
+      headerShown: true,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+    title: "Запросы дружбы",
+  },
+  {
+    name: "MyFriendRequests",
+    component: MyFriendRequests,
+    auth: true,
+    options: {
+      title: "Мои запросы дружбы",
+      headerShown: true,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+    title: "Мои запросы дружбы",
+  },
+  //FriendList
 ]; //
 
 // export const availableLinks = [
