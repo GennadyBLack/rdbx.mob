@@ -6,24 +6,26 @@ import useLocation from "./hooks/useLocation";
 import Routes from "./components/base/Routes";
 import s from "./helpers/styleHelper";
 
-import {
-  getFromStorage,
-  getToken,
-  removeFromStorage,
-  removeToken,
-  setInStorage,
-} from "./helpers/storage";
+// import {
+//   getFromStorage,
+//   getToken,
+//   removeFromStorage,
+//   removeToken,
+//   setInStorage,
+// } from "./helpers/storage";
 
 import store from "./store/index";
 
 import StoreContext from "./context";
 
 const rootStore = new store();
+
 import ErrorPopupList from "./components/base/ErrorPopupList";
 import "react-native-gesture-handler";
-import * as SplashScreen from "expo-splash-screen";
-import { io } from "socket.io-client";
-import { baseURL } from "./api";
+// import * as SplashScreen from "expo-splash-screen";
+// import { io } from "socket.io-client";
+// import { baseURL } from "./api";
+// import Spiner from "./components/base/Spiner";
 
 export default function App() {
   let [isReady, setReady] = useState(false);

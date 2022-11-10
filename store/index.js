@@ -18,15 +18,16 @@ export default class store {
   };
 
   addInStack = () => {
-    main_spiner = true;
     const id = Math.floor(Math.random()) * 100;
-    request_stack.push(id);
+    this.request_stack.push(id);
+    this.main_spiner = true;
+    console.log("addInStack", this.getSpiner);
     return id;
   };
 
   removeFromStack = (value) => {
     this.request_stack = this.request_stack.filter((item) => item !== value);
-    this.main_spiner = this.request_stack.length === 0;
+    this.main_spiner = this.request_stack.length > 0;
   };
 
   setInternetConnection = (value) => {
@@ -38,7 +39,7 @@ export default class store {
   }
 
   get getSpiner() {
-    return { spiner: this.main_spiner, stack: request_stack.length };
+    return { spiner: this.main_spiner, stack: this.request_stack.length };
   }
 
   setError = (error, methodName) => {

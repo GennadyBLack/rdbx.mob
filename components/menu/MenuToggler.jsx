@@ -15,7 +15,7 @@ import Animated, {
 
 const { height, width } = Dimensions.get("window");
 
-const MenuToggler = ({ items = [], anchor }) => {
+const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
   const [visible, setVisible] = useState(false);
 
   const elemP = useSharedValue({ x: 0, y: 0 });
@@ -31,6 +31,7 @@ const MenuToggler = ({ items = [], anchor }) => {
   const toggleButton = () => {
     return anchor ? (
       <View
+        style={[customClass]}
         onLayout={(event) => {
           const layout = event.nativeEvent.layout;
           console.log(layout);

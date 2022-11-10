@@ -8,8 +8,9 @@ export default class User {
   error = null;
   pagination = null;
 
-  getAll = async (filters = {}) => {
+  getAll = async (filters = {}, loader) => {
     try {
+      const load = loader ? this?.root?.addInStack() : null;
       this.loading = true;
       await this?.root?.api?.users.getAll(filters).then((res) => {
         runInAction(() => {
@@ -18,6 +19,7 @@ export default class User {
           this.loading = false;
         });
       });
+      this.root.removeFromStack(load);
     } catch (error) {
       console.log(error, "error me getAll");
       this.root.setError(error);

@@ -51,12 +51,6 @@ const UserProfile = ({ navigation }) => {
 
   return (
     <ScrollView {...getStyle("flex.p_2")}>
-      <View {...getStyle("a_i_end", { position: "relative" })}>
-        <MenuToggler
-          items={menuItems}
-          anchor={<Text>{getIcon("setting")}</Text>}
-        />
-      </View>
       <ImageBackground
         source={{
           uri: `${apiUrl}/files/${
@@ -66,6 +60,17 @@ const UserProfile = ({ navigation }) => {
         resizeMode="cover"
         style={[s.br, { overflow: "hidden" }]}
       >
+        <View
+          {...getStyle("a_i_end.m_2", {
+            position: "relative",
+          })}
+        >
+          <MenuToggler
+            customClass={s.profile_anchor}
+            items={menuItems}
+            anchor={<Text>{getIcon("setting")}</Text>}
+          />
+        </View>
         <View
           {...getStyle("hp_2.lpink_bg.a_i_center.br", {
             marginTop: 150,

@@ -11,6 +11,7 @@ import UserSearch from "../screens/search/UserSearch";
 import FriendList from "../screens/profile/FriendList";
 import MyFriendRequests from "../screens/profile/MyFriendRequests";
 import FriendRequests from "../screens/profile/FriendRequests";
+import OtherUserProfile from "../screens/profile/OtherUserProfile";
 
 export const availableLinks = [
   {
@@ -172,6 +173,19 @@ export const availableLinks = [
     layout: "public",
     title: "Мои запросы дружбы",
   },
+  {
+    name: "OtherUserProfile",
+    component: OtherUserProfile,
+    auth: true,
+    options: {
+      title: "Мои запросы дружбы",
+      headerShown: false,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+  },
+
   //FriendList
 ]; //
 

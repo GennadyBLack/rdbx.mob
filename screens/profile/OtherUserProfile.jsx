@@ -24,26 +24,6 @@ const OtherUserProfile = ({ navigation }) => {
   const translateY = useSharedValue(-60);
   const [auth] = useStore("auth");
 
-  const menuItems = [
-    {
-      title: "Редактировать Фото профиля",
-      onPress: () => {
-        navigation.navigate("EditProfileImage");
-      },
-    },
-    {
-      title: "Редактировать профиль",
-      onPress: () => {
-        navigation.navigate("EditProfile");
-      },
-    },
-    {
-      title: "Редактировать обложку",
-      onPress: () => {
-        navigation.navigate("EditProfileBackground");
-      },
-    },
-  ];
   const rStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }],
@@ -52,12 +32,6 @@ const OtherUserProfile = ({ navigation }) => {
 
   return (
     <ScrollView {...getStyle("flex.p_2")}>
-      <View {...getStyle("a_i_end", { position: "relative" })}>
-        <MenuToggler
-          items={menuItems}
-          anchor={<Text>{getIcon("setting")}</Text>}
-        />
-      </View>
       <ImageBackground
         source={{
           uri: `${apiUrl}/files/${
@@ -91,12 +65,6 @@ const OtherUserProfile = ({ navigation }) => {
             <Text {...getStyle("fw_6.lgrey_c")}>
               Friends:{auth?.user?.user?.friends?.length}
             </Text>
-            {/* <View {...getStyle("a_i_end", { position: "relative" })}>
-              <MenuToggler
-                items={menuItems}
-                anchor={<Text>{getIcon("setting")}</Text>}
-              />
-            </View> */}
           </View>
         </View>
       </ImageBackground>
@@ -128,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(UserOtherUserProfileProfile);
+export default observer(OtherUserProfile);

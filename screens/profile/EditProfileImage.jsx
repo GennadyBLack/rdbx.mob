@@ -17,7 +17,9 @@ const EditProfileImage = () => {
   };
 
   return (
-    <View>
+    <View
+      style={{ width: "70%", justifyContent: "center", ilignItems: "center" }}
+    >
       <Form onSubmit={submit} defaultValues={user} resetForm={false}>
         <Form.File name="avatar" title="Загрузить фото профиля" />
       </Form>

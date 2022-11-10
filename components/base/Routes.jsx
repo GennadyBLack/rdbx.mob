@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Linking, View, SafeAreaView } from "react-native";
 import { observer } from "mobx-react-lite";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import Spiner from "./Spiner";
 import { NavigationContainer, useRoute } from "@react-navigation/native";
 import { linking } from "../../helpers/menuHelper";
 import { constants } from "../../helpers/styleHelper";
@@ -97,6 +97,7 @@ function Routes() {
           {routes}
         </Navigator>
       </NavigationContainer>
+      <Spiner />
     </SafeAreaView>
   );
 }

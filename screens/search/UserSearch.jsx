@@ -11,15 +11,17 @@ import { TextInput } from "react-native-paper";
 const UserSearch = ({ navigation }) => {
   const [users] = useStore("users");
   const [auth] = useStore("auth");
+
+  const friendsIds = auth.user.user.friends.map((item) => {
+    return item.id;
+  });
+
   const getAllUsers = async (search) => {
     const params = search
       ? { params: { filter: { username: { iLike: `%${search}%` } } } }
       : {};
-    await users.getAll(params);
+    await users.getAll(params, true);
   };
-  useEffect(() => {
-    getAllUsers();
-  }, []);
 
   const [visible, setVisible] = useState(false);
   const [userId, setUserId] = useState(false);
@@ -46,15 +48,17 @@ const UserSearch = ({ navigation }) => {
         </View>
         <View>
           <Text>{item?.username}</Text>
-          <Pressable
-            style={s.snack}
-            onPress={() => {
-              setVisible(true);
-              setUserId(item?.id);
-            }}
-          >
-            <Text>Добавить</Text>
-          </Pressable>
+          {item.id !== auth.user.user.id && !friendsIds.includes(item.id) && (
+            <Pressable
+              style={s.snack}
+              onPress={() => {
+                setVisible(true);
+                setUserId(item?.id);
+              }}
+            >
+              <Text>Добавить</Text>
+            </Pressable>
+          )}
         </View>
       </View>
     );

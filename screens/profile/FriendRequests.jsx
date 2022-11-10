@@ -9,39 +9,43 @@ import apis from "../../api/api";
 const FriendRequests = ({ navigation }) => {
   const [auth] = useStore("auth");
   const renderItem = (item) => (
-    <View
-      style={[
-        s.mb_1,
-        {
-          backgroundColor: "white",
-          height: 80,
-          borderRadius: 10,
-          flexDirection: "row",
-          alignItems: "center",
-          padding: 10,
-        },
-      ]}
+    <Pressable
+      onPress={navigation.navigate("OtherUserProfile", { id: item.id })}
     >
-      <View style={{ marginRight: 10 }}>
-        <ProfileImg path={item?.avatar} width={50} />
-      </View>
-      <View>
-        <Text>{item?.username}</Text>
-        <View style={{ flexDirection: "row" }}>
-          <Pressable
-            style={[s.snack, s.m_1]}
-            onPress={() => {
-              apis.me.createFriends({ user_id: item.id });
-            }}
-          >
-            <Text>Принять</Text>
-          </Pressable>
-          <Pressable style={[s.snack, s.m_1]} onPress={() => {}}>
-            <Text>Отклонить</Text>
-          </Pressable>
+      <View
+        style={[
+          s.mb_1,
+          {
+            backgroundColor: "white",
+            height: 80,
+            borderRadius: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 10,
+          },
+        ]}
+      >
+        <View style={{ marginRight: 10 }}>
+          <ProfileImg path={item?.avatar} width={50} />
+        </View>
+        <View>
+          <Text>{item?.username}</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={[s.snack, s.m_1]}
+              onPress={() => {
+                apis.me.createFriends({ user_id: item.id });
+              }}
+            >
+              <Text>Принять</Text>
+            </Pressable>
+            <Pressable style={[s.snack, s.m_1]} onPress={() => {}}>
+              <Text>Отклонить</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 
   const wrap_style = { paddingHorizontal: 10 };

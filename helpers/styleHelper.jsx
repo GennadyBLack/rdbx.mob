@@ -434,6 +434,12 @@ const mainStyles = {
     justifyContent: "center",
     alignItems: "center",
   },
+  profile_anchor: {
+    backgroundColor: "white",
+    borderRadius: 15,
+    borderColor: "#000",
+    borderWidth: 1,
+  },
 };
 
 const s = StyleSheet.create(mainStyles);

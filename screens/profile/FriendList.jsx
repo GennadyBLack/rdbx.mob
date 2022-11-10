@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Pressable } from "react-native";
 import useStore from "../../hooks/useStore";
 import { observer } from "mobx-react-lite";
 import ProfileImg from "../../components/profile/ProfileImg";
 import GridList from "../../components/list/GridList";
-import s from "../../helpers/styleHelper";
+import s, { getStyle } from "../../helpers/styleHelper";
 import apis from "../../api/api";
+import { getIcon } from "../../helpers/iconHelper";
+import MenuToggler from "../../components/menu/MenuToggler";
+
 const FriendList = ({ navigation }) => {
-  const [users] = useStore("users");
+  const [friends, setFriends] = useState([]);
   const [auth] = useStore("auth");
 
   const getAllUsers = async (search) => {
@@ -20,35 +23,54 @@ const FriendList = ({ navigation }) => {
           },
         }
       : {};
-    await apis.me.getFriends(params);
+
+    const data = await apis.me.getFriends(params);
+    setFriends(data.data);
   };
 
-  useEffect(() => {
-    getAllUsers();
-  }, []);
+  const menuItems = [
+    {
+      title: `Запросы дружбы ${auth?.user?.user?.friendsRequest?.length}`,
+      onPress: () => {
+        navigation.navigate("FriendRequests");
+      },
+    },
+    {
+      title: "Мои запросы",
+      onPress: () => {
+        navigation.navigate("MyFriendRequests");
+      },
+    },
+  ];
 
-  const renderItem = (item) => (
-    <View
-      style={[
-        s.mb_1,
-        {
-          backgroundColor: "white",
-          height: 80,
-          borderRadius: 10,
-          flexDirection: "row",
-          alignItems: "center",
-          padding: 10,
-        },
-      ]}
-    >
-      <View style={{ marginRight: 10 }}>
-        <ProfileImg path={item?.avatar} width={50} />
-      </View>
-      <View>
-        <Text>{item?.username}</Text>
-      </View>
-    </View>
-  );
+  const renderItem = (item) => {
+    return (
+      <Pressable
+        onPress={navigation.navigate("OtherUserProfile", { id: item.id })}
+      >
+        <View
+          style={[
+            s.mb_1,
+            {
+              backgroundColor: "white",
+              height: 80,
+              borderRadius: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              padding: 10,
+            },
+          ]}
+        >
+          <View style={{ marginRight: 10 }}>
+            <ProfileImg path={item?.avatar} width={50} />
+          </View>
+          <View>
+            <Text>{item?.username}</Text>
+          </View>
+        </View>
+      </Pressable>
+    );
+  };
   const inputProps = {
     mode: "outlined",
     style: { height: 40, marginBottom: 20, borderRadius: 20 },
@@ -58,36 +80,16 @@ const FriendList = ({ navigation }) => {
     <View>
       <GridList
         wrap_style={wrap_style}
-        data={users?.users}
+        data={friends}
         template={renderItem}
         onChange={getAllUsers}
         inputProps={inputProps}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-around",
-            marginBottom: 10,
-          }}
-        >
-          <Pressable
-            onPress={() => {
-              navigation.navigate("FriendRequests");
-            }}
-            style={s.snack}
-          >
-            <Text>
-              Запросы дружбы {auth?.user?.user?.friendsRequest?.length}
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              navigation.navigate("MyFriendRequests");
-            }}
-            style={s.snack}
-          >
-            <Text>Мои запросы</Text>
-          </Pressable>
+        <View {...getStyle("a_i_end", { position: "relative" })}>
+          <MenuToggler
+            items={menuItems}
+            anchor={<Text>{getIcon("setting")}</Text>}
+          />
         </View>
       </GridList>
     </View>
