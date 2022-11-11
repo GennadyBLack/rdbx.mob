@@ -4,12 +4,20 @@ import {
   Entypo,
   AntDesign,
   Ionicons,
+  MaterialIcons,
+  Feather,
 } from "@expo/vector-icons";
 
 //https://icons.expo.fyi/ all icons here
 export const getIcon = (name, color = "black", size = 24) => {
-  // console.log(name);
   switch (name) {
+    case "image":
+      return <Feather name="image" size={size} color={color} />;
+
+    case "camerao":
+      return <AntDesign name="camerao" size={size} color={color} />;
+    case "add-to-photos":
+      return <MaterialIcons name="add-to-photos" size={size} color={color} />;
     case "menu":
       return <Ionicons name="menu" size={size} color={color} />;
     case "infocirlce":

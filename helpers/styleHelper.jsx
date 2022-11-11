@@ -408,19 +408,19 @@ const mainStyles = {
     borderRadius: REM,
   },
   br_1: {
-    borderRadius: `10%`,
+    borderRadius: 10,
   },
   br_2: {
-    borderRadius: `20%`,
+    borderRadius: 20,
   },
   br_3: {
-    borderRadius: `30%`,
+    borderRadius: 30,
   },
   br_4: {
-    borderRadius: `40%`,
+    borderRadius: 40,
   },
   br_5: {
-    borderRadius: `50%`,
+    borderRadius: 50,
   },
   input: {
     // borderRadius: 30,

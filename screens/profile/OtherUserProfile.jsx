@@ -19,23 +19,30 @@ import { getIcon } from "../../helpers/iconHelper";
 import MenuToggler from "../../components/menu/MenuToggler";
 
 import { apiUrl } from "../../api";
+import { useRoute } from "@react-navigation/native";
 
 const OtherUserProfile = ({ navigation }) => {
   const translateY = useSharedValue(-60);
   const [auth] = useStore("auth");
-
+  const [users] = useStore("users");
+  const route = useRoute();
   const rStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }],
     };
   });
 
+  useEffect(() => {
+    users.get(route.params.id, { params: { include: "friends" } });
+  }, [route?.params.id]);
+  console.log(users.currentUser, "c user");
+
   return (
     <ScrollView {...getStyle("flex.p_2")}>
       <ImageBackground
         source={{
           uri: `${apiUrl}/files/${
-            auth?.user?.user?.avatarBackground || "placeholder.png"
+            users?.currentUser?.avatarBackground || "placeholder.png"
           }`,
         }}
         resizeMode="cover"
@@ -50,20 +57,22 @@ const OtherUserProfile = ({ navigation }) => {
           <Animated.View style={[styles.profile_photo, rStyle]}>
             <ProfileImg
               width={120}
-              path={auth?.user?.user?.avatar}
+              path={users?.currentUser?.avatar}
               styles={[{ borderWidth: 5, borderColor: constants.LIGHT_PINK }]}
             />
           </Animated.View>
           <View style={{ marginTop: 80 }}>
             <Text {...getStyle("fw_8", { fontSize: 15 })}>
-              {auth?.user?.user?.username}
-            </Text>
-            <Text {...getStyle("fw_6.lgrey_c")}>{auth?.user?.user?.title}</Text>
-            <Text {...getStyle("fw_6.lgrey_c")}>
-              {auth?.user?.user?.description}
+              {users?.currentUser?.username}
             </Text>
             <Text {...getStyle("fw_6.lgrey_c")}>
-              Friends:{auth?.user?.user?.friends?.length}
+              {users?.currentUser?.title}
+            </Text>
+            <Text {...getStyle("fw_6.lgrey_c")}>
+              {users?.currentUser?.description}
+            </Text>
+            <Text {...getStyle("fw_6.lgrey_c")}>
+              Friends:{users?.currentUser?.friends?.length}
             </Text>
           </View>
         </View>

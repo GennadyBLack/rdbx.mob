@@ -5,6 +5,7 @@ import Modal from "./modal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Menu from "./menu";
 import User from "./users";
+import Feed from "./feed";
 
 export default class store {
   errors = [{ message: "asdsasds" }];
@@ -17,7 +18,10 @@ export default class store {
     this.spiner = value;
   };
 
-  addInStack = () => {
+  addInStack = ([requests]) => {
+    // requests.forEach(element => {
+    //   this[element.name][element.method]()
+    // });
     const id = Math.floor(Math.random()) * 100;
     this.request_stack.push(id);
     this.main_spiner = true;
@@ -54,6 +58,7 @@ export default class store {
 
   constructor() {
     this.api = apis;
+    this.feed = new Feed(this);
     this.modal = new Modal(this);
     this.storage = AsyncStorage;
     this.auth = new Auth(this);

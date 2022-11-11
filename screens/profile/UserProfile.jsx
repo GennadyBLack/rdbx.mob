@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   ImageBackground,
+  Pressable,
 } from "react-native";
 import s, { getStyle } from "../../helpers/styleHelper";
 import useStore from "../../hooks/useStore";
@@ -17,12 +18,18 @@ import Animated, {
 } from "react-native-reanimated";
 import { getIcon } from "../../helpers/iconHelper";
 import MenuToggler from "../../components/menu/MenuToggler";
+import ModalSheet from "../../components/base/ModalSheet";
+import Form from "../../components/validation/Form";
+import FeedCreateForm from "./FeedCreateForm";
 
 import { apiUrl } from "../../api";
 const UserProfile = ({ navigation }) => {
   const translateY = useSharedValue(-60);
   const [auth] = useStore("auth");
-
+  const [active, toggle] = ModalSheet.useModal();
+  const submit = (s) => {
+    console.log(s);
+  };
   const menuItems = [
     {
       title: "Редактировать Фото профиля",
@@ -104,23 +111,28 @@ const UserProfile = ({ navigation }) => {
           </View>
         </View>
       </ImageBackground>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
-        <Text>lpink_bg</Text>
-      </View>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
-        <Text>lpink_bg</Text>
-      </View>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
-        <Text>lpink_bg</Text>
-      </View>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
-        <Text>lpink_bg</Text>
-      </View>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
-        <Text>lpink_bg</Text>
-      </View>
-      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_5.br.p_2.mt_2")}>
-        <Text>lpink_bg</Text>
+      <View
+        {...getStyle("prymary_bg.a_i_center.br.p_2.mt_2", {
+          flexDirection: "row",
+          justifyContent: "center",
+        })}
+      >
+        <Pressable
+          onPress={() => {
+            toggle();
+          }}
+        >
+          <Text>Добавить запись {getIcon("add-to-photos")}</Text>
+        </Pressable>
+
+        <ModalSheet
+          visible={active}
+          toggle={() => {
+            toggle();
+          }}
+        >
+          <FeedCreateForm />
+        </ModalSheet>
       </View>
     </ScrollView>
   );
