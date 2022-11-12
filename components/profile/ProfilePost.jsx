@@ -1,5 +1,6 @@
 import React from "react";
 import s, { getStyle } from "../../helpers/styleHelper";
+import moment from "moment";
 import {
   View,
   Text,
@@ -24,7 +25,10 @@ const ProfilePost = ({ item }) => {
         ></ImageBackground>
       </View>
       <View>
+        <Text>{moment(item?.createdAt).startOf("minutes").fromNow()}</Text>
         <Text>{item?.title}</Text>
+        <Text>Все комментарии</Text>
+        <Text>Добавить комментарий</Text>
       </View>
 
       <View></View>

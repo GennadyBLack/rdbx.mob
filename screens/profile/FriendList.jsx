@@ -47,7 +47,7 @@ const FriendList = ({ navigation }) => {
     return (
       // <Pressable
       //   key={item.id}
-      //   onLongPress={navigation.navigate("OtherUserProfile", { id: item.id })}
+      //   onLongPress={navigation.navigate("UserProfile", { id: item.id })}
       // >
       <View
         key={item?.id}

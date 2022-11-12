@@ -10,7 +10,7 @@ import UserSearch from "../screens/search/UserSearch";
 import FriendList from "../screens/profile/FriendList";
 import MyFriendRequests from "../screens/profile/MyFriendRequests";
 import FriendRequests from "../screens/profile/FriendRequests";
-import OtherUserProfile from "../screens/profile/OtherUserProfile";
+import UserProfile from "../screens/profile/UserProfile";
 
 export const availableLinks = [
   {
@@ -161,8 +161,8 @@ export const availableLinks = [
     title: "Мои запросы дружбы",
   },
   {
-    name: "OtherUserProfile",
-    component: OtherUserProfile,
+    name: "UserProfile",
+    component: UserProfile,
     auth: true,
     options: {
       title: "Мои запросы дружбы",

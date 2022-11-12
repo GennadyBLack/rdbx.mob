@@ -32,7 +32,7 @@ const UserSearch = ({ navigation }) => {
     return (
       <Pressable
         onLongPress={() => {
-          navigation.navigate("OtherUserProfile", { id: item?.id });
+          navigation.navigate("UserProfile", { id: item?.id });
         }}
       >
         <View

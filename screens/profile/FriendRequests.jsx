@@ -9,9 +9,7 @@ import apis from "../../api/api";
 const FriendRequests = ({ navigation }) => {
   const [auth] = useStore("auth");
   const renderItem = (item) => (
-    <Pressable
-      onPress={navigation.navigate("OtherUserProfile", { id: item.id })}
-    >
+    <Pressable onPress={navigation.navigate("UserProfile", { id: item.id })}>
       <View
         style={[
           s.mb_1,

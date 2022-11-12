@@ -26,7 +26,7 @@ import { apiUrl } from "../../api";
 import { useRoute } from "@react-navigation/native";
 import GridList from "../../components/list/GridList";
 
-const OtherUserProfile = ({ navigation }) => {
+const UserProfile = ({ navigation }) => {
   const translateY = useSharedValue(-60);
   const [auth] = useStore("auth");
   const [users] = useStore("users");
@@ -187,4 +187,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(OtherUserProfile);
+export default observer(UserProfile);
