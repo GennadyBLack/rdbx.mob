@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getIcon } from "../helpers/iconHelper";
 import * as LocalAuthentication from "expo-local-authentication";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-
-} from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 export default function useFingerPrint() {
   const [supportBiometric, setSupportBiometric] = useState(false);
   const [fingerprint, setFingerprint] = useState(false);
@@ -30,7 +25,7 @@ export default function useFingerPrint() {
         cancelLabel: "Cancel",
       });
       if (biometricAuth.success) {
-        navigation.replace("Home");
+        navigation.replace("Public");
       }
     } catch (error) {
       console.log(error);

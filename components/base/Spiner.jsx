@@ -1,19 +1,10 @@
 import React, { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View, Modal } from "react-native";
-import useStore from "../../hooks/useStore";
-import { observer } from "mobx-react-lite";
 
-const Spiner = () => {
-  const root = useStore();
-
-  useEffect(() => {
-    console.log(root.getSpiner.spiner, "rootrootroot");
-  }, [root]);
-
+const Spiner = ({ loading = false }) => {
   return (
-    <Modal visible={root.getSpiner.spiner}>
-      <View style={[styles.container, styles.horizontal]}>
-        <Text>{root.getSpiner.spiner ? "true" : "false"}</Text>
+    <Modal visible={loading}>
+      <View style={[styles.container, styles.horizontal]} transparent>
         <ActivityIndicator size="large" />
       </View>
     </Modal>
@@ -24,6 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    backgroundColor: "transparent",
   },
   horizontal: {
     flexDirection: "row",
@@ -32,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(Spiner);
+export default Spiner;

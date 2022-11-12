@@ -8,12 +8,13 @@ import s from "../../helpers/styleHelper";
 import apis from "../../api/api";
 import ModalSheet from "../../components/base/ModalSheet";
 import { TextInput } from "react-native-paper";
+import Spiner from "../../components/base/Spiner";
 const UserSearch = ({ navigation }) => {
   const [users] = useStore("users");
   const [auth] = useStore("auth");
 
-  const friendsIds = auth.user.user.friends.map((item) => {
-    return item.id;
+  const friendsIds = auth?.user?.user?.friends?.map((item) => {
+    return item?.id;
   });
 
   const getAllUsers = async (search) => {
@@ -30,7 +31,7 @@ const UserSearch = ({ navigation }) => {
   const renderItem = (item) => {
     return (
       <Pressable
-        onPress={() => {
+        onLongPress={() => {
           navigation.navigate("OtherUserProfile", { id: item?.id });
         }}
       >
@@ -53,17 +54,18 @@ const UserSearch = ({ navigation }) => {
           </View>
           <View>
             <Text>{item?.username}</Text>
-            {item.id !== auth.user.user.id && !friendsIds.includes(item.id) && (
-              <Pressable
-                style={s.snack}
-                onPress={() => {
-                  setVisible(true);
-                  setUserId(item?.id);
-                }}
-              >
-                <Text>Добавить</Text>
-              </Pressable>
-            )}
+            {item?.id !== auth?.user?.user?.id &&
+              !friendsIds?.includes(item?.id) && (
+                <Pressable
+                  style={s.snack}
+                  onPress={() => {
+                    setVisible(true);
+                    setUserId(item?.id);
+                  }}
+                >
+                  <Text>Добавить</Text>
+                </Pressable>
+              )}
           </View>
         </View>
       </Pressable>
@@ -77,6 +79,7 @@ const UserSearch = ({ navigation }) => {
   const wrap_style = { paddingHorizontal: 10 };
   return (
     <GridList
+      searchable
       wrap_style={wrap_style}
       data={users?.users}
       template={renderItem}
@@ -109,6 +112,8 @@ const UserSearch = ({ navigation }) => {
           </Pressable>
         </View>
       </ModalSheet>
+
+      <Spiner loading={users.loading} />
     </GridList>
   );
 };

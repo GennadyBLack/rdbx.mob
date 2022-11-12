@@ -25,7 +25,6 @@ import "react-native-gesture-handler";
 // import * as SplashScreen from "expo-splash-screen";
 // import { io } from "socket.io-client";
 // import { baseURL } from "./api";
-// import Spiner from "./components/base/Spiner";
 
 export default function App() {
   let [isReady, setReady] = useState(false);

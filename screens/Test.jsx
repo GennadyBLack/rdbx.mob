@@ -6,7 +6,6 @@ import { getIcon } from "../helpers/iconHelper";
 const Test = () => {
   return (
     <ScrollView style={[s.flex]}>
-      {/* <Cam /> */}
       <View {...getStyle("light_bg.j_c_center.a_i_center.h_5")}>
         <Text>light_bg</Text>
       </View>
@@ -63,7 +62,7 @@ const Test = () => {
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
         <Text>send{getIcon("send")}</Text>
-      </View>{" "}
+      </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
         <Text>rightcircle{getIcon("rightcircle")}</Text>
       </View>
@@ -84,7 +83,7 @@ const Test = () => {
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
         <Text>leftcircleo{getIcon("leftcircleo")}</Text>
-      </View>{" "}
+      </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
         <Text>downcircleo{getIcon("downcircleo")}</Text>
       </View>

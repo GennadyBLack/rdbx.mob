@@ -30,7 +30,7 @@ export default function FeedCreate({ navigation }) {
     }
     await feed.create(form);
     // feed.getAll();
-    navigation.replace("feed");
+    // navigation.replace("feed");
   };
 
   const onPhotoChosen = (img) => {
@@ -70,11 +70,12 @@ export default function FeedCreate({ navigation }) {
       )}
       <View
         style={[
-          { flexDirection: "row", height: 40, justifyContent: "right" },
+          { flexDirection: "row", height: 50, justifyContent: "right" },
           s.prymary_bg,
           s.a_i_center,
           s.m_1,
           s.br_1,
+          s.p_2,
         ]}
       >
         <GalleryPicker

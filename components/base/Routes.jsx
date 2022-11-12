@@ -97,7 +97,6 @@ function Routes() {
           {routes}
         </Navigator>
       </NavigationContainer>
-      <Spiner />
     </SafeAreaView>
   );
 }

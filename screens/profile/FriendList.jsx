@@ -45,30 +45,32 @@ const FriendList = ({ navigation }) => {
 
   const renderItem = (item) => {
     return (
-      <Pressable
-        onPress={navigation.navigate("OtherUserProfile", { id: item.id })}
+      // <Pressable
+      //   key={item.id}
+      //   onLongPress={navigation.navigate("OtherUserProfile", { id: item.id })}
+      // >
+      <View
+        key={item?.id}
+        style={[
+          s.mb_1,
+          {
+            backgroundColor: "white",
+            height: 80,
+            borderRadius: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 10,
+          },
+        ]}
       >
-        <View
-          style={[
-            s.mb_1,
-            {
-              backgroundColor: "white",
-              height: 80,
-              borderRadius: 10,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 10,
-            },
-          ]}
-        >
-          <View style={{ marginRight: 10 }}>
-            <ProfileImg path={item?.avatar} width={50} />
-          </View>
-          <View>
-            <Text>{item?.username}</Text>
-          </View>
+        <View style={{ marginRight: 10 }}>
+          <ProfileImg path={item?.avatar} width={50} />
         </View>
-      </Pressable>
+        <View>
+          <Text>{item?.username}</Text>
+        </View>
+      </View>
+      // </Pressable>
     );
   };
   const inputProps = {
@@ -79,6 +81,7 @@ const FriendList = ({ navigation }) => {
   return (
     <View>
       <GridList
+        searchable
         wrap_style={wrap_style}
         data={friends}
         template={renderItem}

@@ -10,9 +10,11 @@ import {
 import { TextInput } from "react-native-paper";
 
 const GridList = ({
+  searchable,
   data,
   onChange,
   template,
+  Component,
   inputProps,
   children,
   wrap_style = {},
@@ -25,18 +27,28 @@ const GridList = ({
 
   return (
     <ScrollView style={[styles.container, wrap_style]}>
-      <View style={{ justifyContent: "center", paddingHorizontal: 10 }}>
-        <TextInput
-          onChangeText={(e) => setSearch(e)}
-          value={search}
-          {...inputProps}
-          placeholder="Search"
-        />
-      </View>
-      {children}
+      {searchable ? (
+        <View style={{ justifyContent: "center", paddingHorizontal: 10 }}>
+          <TextInput
+            onChangeText={(e) => setSearch(e)}
+            value={search}
+            {...inputProps}
+            placeholder="Search"
+          />
+        </View>
+      ) : (
+        <Text></Text>
+      )}
+      <View>{children}</View>
       {data?.length &&
-        data.map((item) => {
+        template &&
+        data.map((item, ind) => {
           return template(item);
+        })}
+      {data?.length &&
+        Component &&
+        data.map((item, ind) => {
+          return <Component item={item} key={ind} />;
         })}
     </ScrollView>
   );

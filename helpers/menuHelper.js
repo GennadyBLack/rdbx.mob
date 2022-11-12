@@ -3,7 +3,6 @@ import Register from "./../screens/auth/Register";
 import Public from "../screens/public/Public";
 import Test from "../screens/Test";
 import { getIcon } from "../helpers/iconHelper";
-import UserProfile from "../screens/profile/UserProfile";
 import EditProfileImage from "../screens/profile/EditProfileImage";
 import EditProfileBackground from "../screens/profile/EditProfileBackground";
 import EditProfile from "../screens/profile/EditProfile";
@@ -70,19 +69,7 @@ export const availableLinks = [
     icon: "infocirlce",
     title: "Тестовый стенд",
   },
-  {
-    name: "Profile",
-    component: UserProfile,
-    auth: true,
-    options: {
-      headerShown: false,
-      tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
-    },
-    leftMenu: false,
-    layout: "public",
-    title: "Профиль",
-  },
+
   {
     name: "EditProfileImage",
     component: EditProfileImage,
