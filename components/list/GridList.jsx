@@ -40,16 +40,20 @@ const GridList = ({
         <Text></Text>
       )}
       <View>{children}</View>
-      {data?.length &&
-        template &&
+      {data?.length && template ? (
         data.map((item, ind) => {
           return template(item);
-        })}
-      {data?.length &&
-        Component &&
+        })
+      ) : (
+        <Text></Text>
+      )}
+      {data?.length && Component ? (
         data.map((item, ind) => {
           return <Component item={item} key={ind} />;
-        })}
+        })
+      ) : (
+        <Text></Text>
+      )}
     </ScrollView>
   );
 };

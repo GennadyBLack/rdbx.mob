@@ -39,7 +39,9 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
         }}
         ref={ref}
       >
-        <Pressable onPress={toggle}>{anchor}</Pressable>
+        <Pressable onPress={toggle}>
+          <Text>{anchor}</Text>
+        </Pressable>
       </View>
     ) : (
       <Pressable onPress={openMenu}>
@@ -61,7 +63,7 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
   });
 
   if (!items.length) {
-    return <div>no</div>;
+    return <Text>no</Text>;
   }
   return (
     <View
@@ -99,7 +101,7 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
                 {items.map((item, idx) => {
                   return (
                     <View style={{ zIndex: 10000 }} key={idx}>
-                      {item?.icon ?? <Text></Text>}
+                      {item?.icon ? <Text>{item?.icon}</Text> : <Text></Text>}
                       <Pressable
                         key={idx}
                         onPress={async () => {

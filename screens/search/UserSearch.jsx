@@ -31,6 +31,7 @@ const UserSearch = ({ navigation }) => {
   const renderItem = (item) => {
     return (
       <Pressable
+        key={item?.id}
         onLongPress={() => {
           navigation.navigate("UserProfile", { id: item?.id });
         }}

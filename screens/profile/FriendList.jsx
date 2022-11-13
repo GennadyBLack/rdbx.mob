@@ -89,10 +89,10 @@ const FriendList = ({ navigation }) => {
         inputProps={inputProps}
       >
         <View {...getStyle("a_i_end", { position: "relative" })}>
-          <MenuToggler
+          {/* <MenuToggler
             items={menuItems}
             anchor={<Text>{getIcon("setting")}</Text>}
-          />
+          /> */}
         </View>
       </GridList>
     </View>

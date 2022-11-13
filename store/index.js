@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Menu from "./menu";
 import User from "./users";
 import Feed from "./feed";
+import InfinityScroll from "./infinityScroll";
 
 export default class store {
   errors = [{ message: "asdsasds" }];
@@ -65,5 +66,6 @@ export default class store {
     this.tools = new Tools(this);
     this.menu = new Menu(this);
     this.users = new User(this);
+    this.infinityScroll = new InfinityScroll(this);
   }
 }

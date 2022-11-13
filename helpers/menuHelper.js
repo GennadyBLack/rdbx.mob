@@ -11,11 +11,12 @@ import FriendList from "../screens/profile/FriendList";
 import MyFriendRequests from "../screens/profile/MyFriendRequests";
 import FriendRequests from "../screens/profile/FriendRequests";
 import UserProfile from "../screens/profile/UserProfile";
+import PostComments from "../screens/post/PostComments";
 
 export const availableLinks = [
   {
     name: "Login",
-    component: Login,
+    component: Login, // import("./../screens/auth/Login"),
     auth: true,
     options: {
       headerShown: false,
@@ -166,6 +167,18 @@ export const availableLinks = [
     auth: true,
     options: {
       title: "Мои запросы дружбы",
+      headerShown: false,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+  },
+  {
+    name: "PostComments",
+    component: PostComments,
+    auth: true,
+    options: {
+      title: "комментарии",
       headerShown: false,
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
