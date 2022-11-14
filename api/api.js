@@ -1,25 +1,23 @@
 import me from "./me";
 import auth from "./auth";
-import feed from "./feed";
-import tools from "./tools";
-import quiz from "./quiz";
-import question from "./question";
-import answer from "./answer";
-import result from "./result";
-import chat from "./chat";
-import users from "./users";
+import admin from "./admin";
+import cabinet from "./cabinet";
+import document from "./document";
+import entity from "./entity";
+import media from "./media";
+import methodts from "./media";
+import publics from "./public";
 
 const apis = {
   me,
   auth,
-  feed,
-  tools,
-  quiz,
-  question,
-  answer,
-  result,
-  chat,
-  users,
+  admin,
+  cabinet,
+  document,
+  entity,
+  media,
+  methodts,
+  publics,
 };
 
 export default apis;
