@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import apis from "../../api/api";
 
 const ScrollList = ({
+  inverted = false,
   method = "",
-  keys,
+  keys = (item) => item.id,
   Component,
   loadMore,
   ListHeaderComponent,
@@ -36,17 +37,19 @@ const ScrollList = ({
   const loadData = async () => {
     try {
       // 0 + 20  //18
-      if (offset + limit >= count && !firstRequest) return;
+      console.log(offset, limit, count);
+      if (offset >= count && !firstRequest) return;
 
       setLoading(true);
       const config = getConfig();
       const res = (await apis[methodApi[0]][methodApi[1]]({ params: config }))
         .data;
       await setData([...data, ...res?.data]);
-      setCount(res?.meta.count);
-      setLimit(res?.meta.limit);
-      setOffset(offset + limit);
-      setLoading(false);
+      await setCount(res?.meta.count);
+      await setLimit(res?.meta.limit);
+      await setOffset(offset + limit);
+      await setLoading(false);
+      console.log(offset, limit, count);
     } catch (error) {
       console.error(error);
     }
@@ -65,6 +68,7 @@ const ScrollList = ({
 
   return (
     <FlatList
+      inverted={inverted}
       //   getItem={getItem}
       //   getItemCount={() => data?.length}
       ListHeaderComponent={ListHeaderComponent}

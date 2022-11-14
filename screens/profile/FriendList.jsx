@@ -31,14 +31,14 @@ const FriendList = ({ navigation }) => {
   const menuItems = [
     {
       title: `Запросы дружбы ${auth?.user?.user?.friendsRequest?.length}`,
-      onPress: () => {
-        navigation.navigate("FriendRequests");
+      onPress: async () => {
+        await navigation.navigate("FriendRequests");
       },
     },
     {
       title: "Мои запросы",
-      onPress: () => {
-        navigation.navigate("MyFriendRequests");
+      onPress: async () => {
+        await navigation.navigate("MyFriendRequests");
       },
     },
   ];
@@ -80,6 +80,12 @@ const FriendList = ({ navigation }) => {
   const wrap_style = { paddingHorizontal: 10 };
   return (
     <View>
+      <View {...getStyle("a_i_end", { position: "relative" })}>
+        <MenuToggler
+          items={menuItems}
+          anchor={<Text>{getIcon("setting")}</Text>}
+        />
+      </View>
       <GridList
         searchable
         wrap_style={wrap_style}
@@ -87,14 +93,7 @@ const FriendList = ({ navigation }) => {
         template={renderItem}
         onChange={getAllUsers}
         inputProps={inputProps}
-      >
-        <View {...getStyle("a_i_end", { position: "relative" })}>
-          {/* <MenuToggler
-            items={menuItems}
-            anchor={<Text>{getIcon("setting")}</Text>}
-          /> */}
-        </View>
-      </GridList>
+      ></GridList>
     </View>
   );
 };

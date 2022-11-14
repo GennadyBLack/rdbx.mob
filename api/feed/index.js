@@ -10,6 +10,7 @@ const feed = {
   createComment: async (id, data) => api.post(`feeds/comments/${id}`, data),
   getCommentsByFeed: async (id, config) =>
     api.get(`feeds/comments/${id}`, config),
-  getComments: async (config) => api.get("feeds/comments", config),
+  getComments: async (config) => await api.get("feed/comments", config),
+  getSubsribePosts: async (config) => await api.get("feed/subscribe", config),
 };
 export default feed;

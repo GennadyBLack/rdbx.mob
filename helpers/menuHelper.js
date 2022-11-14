@@ -12,6 +12,7 @@ import MyFriendRequests from "../screens/profile/MyFriendRequests";
 import FriendRequests from "../screens/profile/FriendRequests";
 import UserProfile from "../screens/profile/UserProfile";
 import PostComments from "../screens/post/PostComments";
+import ProfileNews from "../screens/profile/ProfileNews";
 
 export const availableLinks = [
   {
@@ -138,26 +139,26 @@ export const availableLinks = [
   {
     name: "FriendRequests",
     component: FriendRequests,
-    auth: true,
+    auth: false,
     options: {
       title: "Запросы дружбы",
       headerShown: true,
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
-    leftMenu: false,
+    leftMenu: true,
     layout: "public",
     title: "Запросы дружбы",
   },
   {
     name: "MyFriendRequests",
     component: MyFriendRequests,
-    auth: true,
+    auth: false,
     options: {
       title: "Мои запросы дружбы",
       headerShown: true,
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
-    leftMenu: false,
+    leftMenu: true,
     layout: "public",
     title: "Мои запросы дружбы",
   },
@@ -185,165 +186,20 @@ export const availableLinks = [
     leftMenu: false,
     layout: "public",
   },
-
-  //FriendList
-]; //
-
-// export const availableLinks = [
-//   {
-//     name: "ProfileMain",
-//     component: ProfileMain,
-//     auth: true,
-//     options: {
-//       headerShown: false,
-//       tabBarLabel: "",
-//       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
-//     },
-//     required: true,
-//     leftMenu: true,
-//     icon: "user",
-//   },
-//   // {
-//   //   name: "Test",
-//   //   component: Test,
-//   //   auth: true,
-//   //   options: {
-//   //     headerShown: true,
-//   //     tabBarLabel: "",
-//   //     tabBarIcon: ({ color, size }) => getIcon("list", color, size),
-//   //   },
-//   //   required: true,
-//   //   leftMenu: true,
-//   //   icon: "list",
-//   // },
-
-//   {
-//     name: "Chat",
-//     component: Chat,
-//     auth: true,
-//     options: {
-//       headerShown: true,
-//       tabBarLabel: "",
-//       tabBarIcon: ({ color, size }) => getIcon("message1", color, size),
-//     },
-//     required: true,
-//     leftMenu: true,
-//     icon: "list",
-//   },
-
-//   {
-//     name: "Feed",
-//     component: Feed,
-//     auth: true,
-//     options: {
-//       headerShown: false,
-//       tabBarLabel: "",
-//       tabBarIcon: ({ color, size }) => getIcon("home", color, size),
-//     },
-//     required: true,
-//     leftMenu: true,
-//     icon: "home",
-//   },
-//   {
-//     name: "FeedEdit",
-//     component: FeedEdit,
-//     auth: true,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-//   {
-//     name: "FeedMain",
-//     component: FeedMain,
-//     auth: true,
-//     options: { headerShown: false },
-//     required: false,
-//     leftMenu: true,
-//   },
-//   {
-//     name: "FeedCreate",
-//     component: FeedCreate,
-//     auth: true,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-//   {
-//     name: "FeedCurrent",
-//     component: FeedCurrent,
-//     auth: true,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-//   {
-//     name: "Comments",
-//     component: Comments,
-//     auth: true,
-//     options: { headerShown: true },
-//     required: false,
-//   },
-//   // {
-//   //   name: "FeedEdit",
-//   //   component: FeedEdit,
-//   //   auth: true,
-//   //   options: { headerShown: false },
-//   //   required: false,
-//   // },
-//   {
-//     name: "Upload",
-//     component: Upload,
-//     auth: true,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-
-//   {
-//     name: "Cam",
-//     component: Cam,
-//     auth: true,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-
-//   {
-//     name: "Quiz",
-//     component: Quiz,
-//     auth: true,
-//     options: {
-//       headerShown: false,
-//       tabBarLabel: "",
-//       tabBarIcon: ({ color, size }) => getIcon("question", color, size),
-//     },
-//     required: false,
-//     leftMenu: true,
-//     icon: "question",
-//   },
-//   {
-//     name: "Login",
-//     component: Login,
-//     auth: false,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-//   {
-//     name: "Register",
-//     component: Register,
-//     auth: false,
-//     options: { headerShown: false },
-//     required: false,
-//   },
-//   {
-//     name: "Users",
-//     component: Users,
-//     auth: true,
-//     options: {
-//       headerShown: false,
-//       tabBarLabel: "",
-//       tabBarIcon: ({ color, size }) => getIcon("persons", color, size),
-//     },
-//     required: true,
-//     leftMenu: true,
-//     icon: "persons",
-//   },
-// ];
+  {
+    name: "ProfileNews",
+    component: ProfileNews,
+    auth: false,
+    options: {
+      title: "Моя лента",
+      headerShown: false,
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: true,
+    layout: "public",
+    title: "Моя лента",
+  },
+];
 
 //LINKING CONFIG
 export const linking = {
@@ -356,6 +212,9 @@ export const linking = {
       Login: "login",
       Register: "register",
       Public: "/",
+      PostComments: "post_comments",
+      MyFriendRequests: "my_friend_requests",
+      FriendRequests: "friend_requests",
       // Profile: {
       //   path: "profile",
       //   screens: {

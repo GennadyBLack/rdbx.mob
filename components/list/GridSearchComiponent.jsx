@@ -41,7 +41,6 @@ export default function GridSearchComponent({
     });
   };
 
-  console.log(state, "state");
   return (
     <View>
       <Form>{_renderFields()}</Form>

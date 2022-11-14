@@ -12,8 +12,10 @@ import {
 } from "react-native";
 import { apiUrl } from "../../api";
 const { height, width } = Dimensions.get("window");
+import { useNavigation } from "@react-navigation/native";
 const SIZE = width;
 const ProfilePost = ({ item }) => {
+  const navigation = useNavigation();
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -52,7 +54,11 @@ const ProfilePost = ({ item }) => {
           {moment(item?.createdAt).startOf("minutes").fromNow()}
         </Text>
         <Text>{item?.title}</Text>
-        <Pressable>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("PostComments", { id: item?.id });
+          }}
+        >
           <Text>Все комментарии</Text>
         </Pressable>
       </View>
