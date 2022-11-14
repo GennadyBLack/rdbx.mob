@@ -1,7 +1,7 @@
 import api from "../index";
 
 const cabinet = {
-  get_profile: async () => api.get("cabinet/get_profile"),
+  profile: async () => api.get("cabinet/get_profile"),
   get_multiple_ticket_by_filter: async () =>
     api.get("cabinet/get_multiple_ticket_by_filter"),
   get_multiple_notification_by_filter: async () =>

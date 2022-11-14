@@ -1,10 +1,8 @@
 import Axios from "axios";
 import { getToken } from "../helpers/storage";
 
-const prod = false;
-
-const baseURL = prod ? "http://62.217.178.124:8081" : "http://localhost:8081";
-const apiUrl = `${baseURL}/api`;
+const baseURL = "https://api.stage.zelfi.ru/api";
+const apiUrl = `${baseURL}`;
 
 let token = null;
 getToken().then((res) => (token = res));
@@ -34,7 +32,7 @@ axiosInstance.interceptors.request.use(async (config) => {
 
 const api = (axios) => {
   return {
-    get: (url, config) => axios.get(url, config, config),
+    get: (url, config) => axios.get(url, config),
     post: (url, body, config) => axios.post(url, body, config),
     patch: (url, body, config) => axios.patch(url, body, config),
     delete: (url, config) => axios.delete(url, config),

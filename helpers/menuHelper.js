@@ -3,6 +3,7 @@ import Register from "./../screens/auth/Register";
 import Public from "../screens/public/Public";
 import Test from "../screens/Test";
 import { getIcon } from "../helpers/iconHelper";
+import RegisterSetPassword from "../screens/auth/RegisterSetPassword";
 
 export const availableLinks = [
   {
@@ -17,6 +18,21 @@ export const availableLinks = [
     layout: "public",
     icon: "login",
     title: "Логин",
+  },
+
+  {
+    name: "RegisterSetPassword",
+    component: RegisterSetPassword,
+    auth: true,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "auth",
+    icon: "login",
+    title: "Регистрация",
   },
   {
     name: "Register",

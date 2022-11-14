@@ -18,6 +18,8 @@ export default class Auth {
   error = null;
   location = null;
   device = null;
+  register_token = null;
+  auth_data = null;
 
   fetchMe = async () => {
     try {
@@ -26,22 +28,12 @@ export default class Auth {
         return;
       }
       this.loading = true;
-      await this?.root?.api?.me?.me({}).then((res) => {
+      await this?.root?.api?.cabinet?.profile({}).then((res) => {
         runInAction(async () => {
-          this.user = res?.data?.data;
-          if (this.location && this.device) {
-            let visits = await getFromStorage("visits");
-            if (!visits) visits = "[]";
-            visits = JSON.parse(visits);
-            if (visits.length > 5) visits.shift();
-            visits.push({
-              time: new Date(),
-              location: this.location,
-              device: this.device,
-            });
-            await setInStorage("visits", JSON.stringify(visits));
-          }
-
+          this.user = {
+            ...res?.data?.data?.attributes,
+            id: res?.data?.data?.id,
+          };
           this.logged = true;
           this.loading = false;
         });
@@ -55,27 +47,22 @@ export default class Auth {
 
   login = async (data, callback) => {
     try {
-      console.log(data?.rememberMe, "data?.rememberMe");
       this.loading = true;
       await this.root.api.auth.login(data).then(async (res) =>
         runInAction(async () => {
-          if (res?.data?.token) {
-            await setInStorage("rememberMe", "false");
-            if (data?.rememberMe) {
-              await setInStorage("rememberMe", "true");
-            }
+          const token = res?.data?.data?.attributes?.access_token;
+          if (token) {
+            console.log(token, "tokentoken");
             if (Platform.OS === "web") {
-              await setToken(res?.data?.token);
+              await setToken(token);
             } else {
-              await SecureStore?.setItemAsync("token", res?.data?.token);
+              await SecureStore?.setItemAsync("token", token);
             }
-            await setInStorage("last_login", `${new Date()}`);
             await this.fetchMe();
             callback();
           }
         })
       );
-
       this.loading = false;
     } catch (error) {
       this.root.setError(error);
@@ -88,9 +75,16 @@ export default class Auth {
     try {
       this.loading = true;
       let res = await this.root.api.auth.register(data);
-      if (res?.data?.token) {
-        await setToken(res?.data?.token);
-        await this.fetchMe();
+      if (res?.data) {
+        this.register_token = res?.data;
+        if (Platform.OS === "web") {
+          await setToken(res?.data?.data?.attributes?.access_token);
+        } else {
+          await SecureStore?.setItemAsync(
+            "token",
+            res?.data?.data?.attributes?.access_token
+          );
+        }
       }
 
       this.loading = false;
@@ -99,6 +93,22 @@ export default class Auth {
       this.loading = false;
     }
   };
+
+  registerSetPassword = async (data) => {
+    try {
+      this.loading = true;
+      let res = await this.root.api.auth.activate_one_user_by_token(data);
+      if (res?.data) {
+        this.auth_data = res?.data;
+      }
+
+      this.loading = false;
+    } catch (error) {
+      this.root.setError(error);
+      this.loading = false;
+    }
+  };
+
   updateMe = async (data) => {
     try {
       let token = getToken();

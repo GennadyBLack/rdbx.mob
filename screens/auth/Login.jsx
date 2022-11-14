@@ -4,10 +4,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  StatusBar,
   Dimensions,
   Pressable,
-  Switch,
 } from "react-native";
 import s, { constants } from "../../helpers/styleHelper";
 import { observer } from "mobx-react-lite";
@@ -24,7 +22,7 @@ function Login({ navigation }) {
   let [form, setForm] = useState({
     password: "",
     email: "",
-    rememberMe: true,
+    remember: true,
   });
   const [content] = useFingerPrint();
 

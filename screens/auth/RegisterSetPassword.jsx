@@ -14,27 +14,25 @@ import Animated from "react-native-reanimated";
 import apis from "../../api/api";
 import s, { constants } from "../../helpers/styleHelper";
 
-export default observer(Register);
+export default observer(RegisterSetPassword);
 
 const { height } = Dimensions.get("window");
-function Register({ navigation }) {
+
+function RegisterSetPassword({ navigation }) {
   let [auth] = useStore("auth");
 
   let [form, setForm] = useState({
-    name: "",
-    email: "",
-    last_name: "",
-    accept_confidence_license: true,
-    accept_personal_license: true,
+    token: auth?.register_token?.data?.meta?.debug_access_token,
+    password_confirmation: "",
+    password: "",
   });
 
   let setText = (e, field) => {
     setForm({ ...form, [field]: e });
   };
 
-  let register = async () => {
-    await auth.register(form);
-    navigation.navigate("RegisterSetPassword");
+  let register = () => {
+    auth.registerSetPassword(form);
   };
 
   return (
@@ -44,23 +42,17 @@ function Register({ navigation }) {
         <TextInput
           mode="outlined"
           style={{ marginBottom: 20 }}
-          label="Имя"
-          value={form?.name}
-          onChangeText={(text) => setText(text, "name")}
+          label="Пароль"
+          value={form?.password}
+          onChangeText={(text) => setText(text, "password")}
         />
+
         <TextInput
           mode="outlined"
           style={{ marginBottom: 20 }}
-          label="Email"
-          value={form?.email}
-          onChangeText={(text) => setText(text, "email")}
-        />
-        <TextInput
-          mode="outlined"
-          style={{ marginBottom: 20 }}
-          label="Фамилия"
-          value={form?.last_name}
-          onChangeText={(text) => setText(text, "last_name")}
+          label="Пароль еще раз"
+          value={form?.password_confirmation}
+          onChangeText={(text) => setText(text, "password_confirmation")}
         />
         <Pressable
           style={[s.button, { marginTop: 20 }]}
@@ -68,14 +60,6 @@ function Register({ navigation }) {
           color="#841584"
         >
           <Text style={[{ color: "white", fontSize: 15 }]}>Регистрация</Text>
-        </Pressable>
-
-        <Pressable
-          style={[{ marginTop: 20 }]}
-          onPress={() => navigation.navigate("Login")}
-          color="#841584"
-        >
-          <Text style={{ color: constants.GREEN }}>Eже есть аккаунт ?</Text>
         </Pressable>
       </Animated.View>
     </Animated.View>

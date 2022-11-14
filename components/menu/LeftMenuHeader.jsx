@@ -6,17 +6,16 @@ import s, { getStyle, constants } from "../../helpers/styleHelper";
 import ProfileImg from "../profile/ProfileImg";
 import { getIcon } from "../../helpers/iconHelper";
 import { useNavigation } from "@react-navigation/native";
+
 const LeftMenuHeader = ({ toggle }) => {
   const [auth] = useStore("auth");
-  const user = auth?.user?.user;
-
+  const user = auth?.user;
   const navigation = useNavigation();
-
   return (
     auth.logged && (
       <Pressable
         onPress={() => {
-          navigation.navigate("UserProfile", { id: user.id });
+          // navigation.navigate("UserProfile", { id: user.id });
           toggle();
         }}
       >
@@ -29,7 +28,7 @@ const LeftMenuHeader = ({ toggle }) => {
                 numberOfLines={1}
                 ellipsizeMode="tail"
               >
-                {user?.username}
+                {`${user?.name} ${user?.last_name}`}
               </Text>
               <Text style={[{ color: constants.LIGHT }]}>
                 Перейти в профиль
