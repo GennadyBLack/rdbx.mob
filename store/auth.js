@@ -20,6 +20,7 @@ export default class Auth {
   device = null;
   register_token = null;
   auth_data = null;
+  settings = null;
 
   fetchMe = async () => {
     try {
@@ -38,6 +39,17 @@ export default class Auth {
           this.loading = false;
         });
       });
+      //get settings
+      await this?.root?.api?.cabinet?.get_all_setting({}).then((res) => {
+        runInAction(async () => {
+          this.settings = {
+            ...res?.data?.data,
+          };
+          console.log(res?.data?.data, "settings");
+          this.logged = true;
+          this.loading = false;
+        });
+      });
     } catch (error) {
       await removeToken();
       this.root.setError(error, "auth fetch me");
@@ -52,7 +64,6 @@ export default class Auth {
         runInAction(async () => {
           const token = res?.data?.data?.attributes?.access_token;
           if (token) {
-            console.log(token, "tokentoken");
             if (Platform.OS === "web") {
               await setToken(token);
             } else {

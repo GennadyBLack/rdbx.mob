@@ -4,6 +4,8 @@ import Public from "../screens/public/Public";
 import Test from "../screens/Test";
 import { getIcon } from "../helpers/iconHelper";
 import RegisterSetPassword from "../screens/auth/RegisterSetPassword";
+import UserProfile from "../screens/profile/UserProfile";
+import ProfileSettings from "../screens/profile/ProfileSettings";
 
 export const availableLinks = [
   {
@@ -14,6 +16,7 @@ export const availableLinks = [
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("login", color, size),
     },
+    auth: true,
     leftMenu: true,
     layout: "public",
     icon: "login",
@@ -48,6 +51,36 @@ export const availableLinks = [
     icon: "login",
     title: "Регистрация",
   },
+  {
+    name: "UserProfile",
+    component: UserProfile,
+    auth: false,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+    icon: "login",
+    title: "Профиль",
+  },
+
+  {
+    name: "ProfileSettings",
+    component: ProfileSettings,
+    auth: false,
+    options: {
+      headerShown: true,
+      tabBarLabel: "Настройки",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: false,
+    layout: "public",
+    icon: "login",
+    title: "Настройки",
+  },
+
   {
     name: "Public",
     component: Public,

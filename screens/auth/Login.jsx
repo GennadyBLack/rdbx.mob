@@ -22,8 +22,8 @@ function Login({ navigation }) {
   let [form, setForm] = useState({
     password: "",
     email: "",
-    remember: true,
   });
+
   const [content] = useFingerPrint();
 
   const regisrer = () => {
@@ -36,7 +36,6 @@ function Login({ navigation }) {
 
   let login = async () => {
     await auth.login(form, () => navigation.navigate("Public"));
-    //
   };
 
   return (

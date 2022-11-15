@@ -15,7 +15,7 @@ const LeftMenuHeader = ({ toggle }) => {
     auth.logged && (
       <Pressable
         onPress={() => {
-          // navigation.navigate("UserProfile", { id: user.id });
+          navigation.navigate("UserProfile");
           toggle();
         }}
       >
