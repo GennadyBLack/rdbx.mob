@@ -34,7 +34,6 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
         style={[customClass]}
         onLayout={(event) => {
           const layout = event.nativeEvent.layout;
-          console.log(layout);
           elemP.value = { x: layout.y, y: layout.top };
         }}
         ref={ref}
@@ -57,8 +56,8 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
 
   const modalStyle = useAnimatedStyle(() => {
     return {
-      right: elemP.value.x + 30,
-      top: elemP.value.y + 30,
+      right: elemP?.value?.x ?? 0 + 30,
+      top: elemP?.value?.y ?? 0 + 30,
     };
   });
 

@@ -40,6 +40,37 @@ export const removeFromStorage = async (key) => {
   }
 };
 
+const getStorageData = async (key) => {
+  try {
+    let value;
+    if (Platform.OS === "web") {
+      value = await AsyncStorage.getItem(key);
+    } else {
+      const pre = await SecureStore?.getItemAsync(key);
+      console.log(pre, key);
+      value = JSON.parse(pre);
+    }
+    if (value !== null || value !== "null") {
+      return value;
+    }
+    return null;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const setStorageData = async (key, value) => {
+  try {
+    if (Platform.OS === "web") {
+      await AsyncStorage.setItem(key, value);
+    } else {
+      await SecureStore.setItemAsync(key, JSON.stringify(value));
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const getToken = async () => {
   try {
     let value;
@@ -68,3 +99,5 @@ export const removeToken = async () => {
     console.log(e, "token");
   }
 };
+
+export default { set: setStorageData, get: getStorageData };

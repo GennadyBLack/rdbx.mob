@@ -1,13 +1,74 @@
-import React from "react";
-import { Text, ScrollView } from "react-native";
-import { observer } from "mobx-react-lite";
-import useStore from "../../hooks/useStore";
+import React, { useState, useEffect } from "react";
+import { Text, ScrollView, View } from "react-native";
+import storage from "../../helpers/storage";
+import { Switch } from "react-native-paper";
+import s from "../../helpers/styleHelper";
+
 const ProfileSettings = () => {
+  const initialvalue = {
+    touch: false,
+    light: false,
+    single: false,
+    vibration: false,
+  };
+
+  const [all, setAll] = useState(initialvalue);
+
+  const getData = async () => {
+    const data = await storage.get("settings");
+    const pre = { ...initialvalue, ...data };
+    setAll(pre);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const setData = (key, value) => {
+    const pre = { ...all, [key]: value };
+    setAll(pre);
+    storage.set("settings", pre);
+  };
   return (
-    <ScrollView style={{ flex: 1 }}>
-      <Text>Hi in settings page</Text>
+    <ScrollView style={{ flex: 1, padding: 20 }}>
+      <View style={s.settings_switch}>
+        <Text>Отпечаток</Text>
+        <Switch
+          value={all.touch}
+          onValueChange={(val) => {
+            setData("touch", val);
+          }}
+        />
+      </View>
+      <View style={s.settings_switch}>
+        <Text>Свет</Text>
+        <Switch
+          value={all.light}
+          onValueChange={(val) => {
+            setData("light", val);
+          }}
+        />
+      </View>
+      <View style={s.settings_switch}>
+        <Text>Вибрация</Text>
+        <Switch
+          value={all.vibration}
+          onValueChange={(val) => {
+            setData("vibration", val);
+          }}
+        />
+      </View>
+      <View style={s.settings_switch}>
+        <Text>Звук</Text>
+        <Switch
+          value={all.single}
+          onValueChange={(val) => {
+            setData("single", val);
+          }}
+        />
+      </View>
     </ScrollView>
   );
 };
 
-export default observer(ProfileSettings);
+export default ProfileSettings;

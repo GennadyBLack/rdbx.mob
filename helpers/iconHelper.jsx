@@ -6,11 +6,16 @@ import {
   Ionicons,
   MaterialIcons,
   Feather,
+  FontAwesome5,
 } from "@expo/vector-icons";
 
 //https://icons.expo.fyi/ all icons here
 export const getIcon = (name, color = "black", size = 24) => {
   switch (name) {
+    case "hand":
+      return <FontAwesome5 name="hand-sparkles" size={size} color={color} />;
+    case "qr":
+      return <MaterialIcons name="qr-code-scanner" size={size} color={color} />;
     case "image":
       return <Feather name="image" size={size} color={color} />;
 

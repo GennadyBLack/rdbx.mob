@@ -440,6 +440,12 @@ const mainStyles = {
     borderColor: "#000",
     borderWidth: 1,
   },
+  settings_switch: {
+    backgroundColor: PRIMARY,
+    margin: 10,
+    padding: 10,
+    borderRadius: 5,
+  },
 };
 
 const s = StyleSheet.create(mainStyles);

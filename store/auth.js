@@ -45,7 +45,6 @@ export default class Auth {
           this.settings = {
             ...res?.data?.data,
           };
-          console.log(res?.data?.data, "settings");
           this.logged = true;
           this.loading = false;
         });

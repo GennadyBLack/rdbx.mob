@@ -71,6 +71,7 @@ export const availableLinks = [
     component: ProfileSettings,
     auth: false,
     options: {
+      title: "Настройки",
       headerShown: true,
       tabBarLabel: "Настройки",
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
