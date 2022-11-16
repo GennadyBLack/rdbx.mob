@@ -11,33 +11,27 @@ const LeftMenuHeader = ({ toggle }) => {
   const [auth] = useStore("auth");
   const user = auth?.user;
   const navigation = useNavigation();
-  return (
-    auth.logged && (
-      <Pressable
-        onPress={() => {
-          navigation.navigate("UserProfile");
-          toggle();
-        }}
-      >
-        <View style={s.p_3}>
-          <View style={s.profile_wrapper}>
-            <ProfileImg width={45} path={user?.avatar} />
-            <View style={s.ml_4}>
-              <Text
-                style={s.profile_name}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                {`${user?.name} ${user?.last_name}`}
-              </Text>
-              <Text style={[{ color: constants.LIGHT }]}>
-                Перейти в профиль
-              </Text>
-            </View>
+  return auth.logged ? (
+    <Pressable
+      onPress={() => {
+        navigation.navigate("UserProfile");
+        toggle();
+      }}
+    >
+      <View style={s.p_3}>
+        <View style={s.profile_wrapper}>
+          <ProfileImg width={45} path={user?.avatar} />
+          <View style={s.ml_4}>
+            <Text style={s.profile_name} numberOfLines={1} ellipsizeMode="tail">
+              {`${user?.name} ${user?.last_name}`}
+            </Text>
+            <Text style={[{ color: constants.LIGHT }]}>Перейти в профиль</Text>
           </View>
         </View>
-      </Pressable>
-    )
+      </View>
+    </Pressable>
+  ) : (
+    <Text></Text>
   );
 };
 

@@ -105,7 +105,6 @@ const mainStyles = {
     color: "#66bfbf",
   },
   title: { fontSize: 30 },
-
   profile_wrapper: {
     borderRadius: 10,
     flexDirection: "row",
@@ -116,9 +115,8 @@ const mainStyles = {
     alignItems: "center",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    display: "-webkit-box",
+    // display: "-webkit-box",
     WebkitLineClamp: 1,
-    // WebkitBoxOrient: "vertical",
   },
 
   profile_avatar: {
