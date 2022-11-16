@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rdbx.mob",
-    "slug": "rdbx.mob",
+    "name": "rdbx",
+    "slug": "rdbx",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,16 +18,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "io.expo.client"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "io.expo.client"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "27fa1b31-80ce-4099-aedf-61589573e8ad"
+      }
     }
   }
 }

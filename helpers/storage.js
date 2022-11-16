@@ -44,10 +44,11 @@ const getStorageData = async (key) => {
   try {
     let value;
     if (Platform.OS === "web") {
-      value = await AsyncStorage.getItem(key);
+      const pre = await AsyncStorage.getItem(key);
+      value = JSON.parse(pre);
     } else {
       const pre = await SecureStore?.getItemAsync(key);
-      console.log(pre, key);
+
       value = JSON.parse(pre);
     }
     if (value !== null || value !== "null") {
@@ -62,7 +63,7 @@ const getStorageData = async (key) => {
 const setStorageData = async (key, value) => {
   try {
     if (Platform.OS === "web") {
-      await AsyncStorage.setItem(key, value);
+      await AsyncStorage.setItem(key, JSON.stringify(value));
     } else {
       await SecureStore.setItemAsync(key, JSON.stringify(value));
     }

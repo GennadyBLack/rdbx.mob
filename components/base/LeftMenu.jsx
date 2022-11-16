@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Entypo } from "@expo/vector-icons";
+
 import s, { getStyle } from "../../helpers/styleHelper";
 import { getIcon } from "../../helpers/iconHelper";
 import menuImage from "../../assets/menu.svg";
 import LeftMenuHeader from "../menu/LeftMenuHeader";
 import {
   View,
+  StatusBar,
   Text,
   Dimensions,
   StyleSheet,
@@ -64,6 +65,7 @@ const LeftMenu = () => {
 
   return (
     <Animated.View style={[styles.back, bStyle]}>
+      <StatusBar />
       <View
         style={{
           position: "absolute",
@@ -101,6 +103,7 @@ const LeftMenu = () => {
             style={[s.prymary_bg, { flex: 1, justifyContent: "space-between" }]}
           >
             <View>
+              <StatusBar />
               <LeftMenuHeader toggle={toggleMenu} />
               <View>
                 {menu?.leftRoutes.map((item, idx) => {
