@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Text, ScrollView, View } from "react-native";
+import { Text, ScrollView, View, Pressable } from "react-native";
 import storage from "../../helpers/storage";
 import { Switch } from "react-native-paper";
 import s from "../../helpers/styleHelper";
+import ModalSheet from "../../components/base/ModalSheet";
+import PasswordChange from "../../components/profile/PasswordChange";
 
 const ProfileSettings = () => {
   const initialvalue = {
@@ -11,6 +13,8 @@ const ProfileSettings = () => {
     single: false,
     vibration: false,
   };
+
+  const [passwordModal, setPasswordModal] = useState(false);
 
   const [all, setAll] = useState(initialvalue);
 
@@ -67,6 +71,18 @@ const ProfileSettings = () => {
           }}
         />
       </View>
+      <Pressable
+        onPress={() => setPasswordModal(!passwordModal)}
+        style={[s.settings_switch, { height: 56 }]}
+      >
+        <Text>Сменить пароль</Text>
+      </Pressable>
+      <ModalSheet
+        visible={passwordModal}
+        toggle={() => setPasswordModal(!passwordModal)}
+      >
+        <PasswordChange />
+      </ModalSheet>
     </ScrollView>
   );
 };

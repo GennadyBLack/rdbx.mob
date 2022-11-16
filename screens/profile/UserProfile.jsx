@@ -55,10 +55,11 @@ const UserProfile = ({ navigation }) => {
         <Form onSubmit={sendCode}>
           <Form.Input
             name="code"
-            placeholder="Код"
-            label="Код"
+            placeholder="Номер билета"
+            label="Номер билета"
             mode="outlined"
             style={s.mb_3}
+            keyboardType="numeric"
           />
         </Form>
       </ModalSheet>

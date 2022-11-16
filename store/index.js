@@ -9,7 +9,7 @@ import Feed from "./feed";
 import InfinityScroll from "./infinityScroll";
 
 export default class store {
-  errors = [{ message: "asdsasds" }];
+  errors = [];
   main_spiner = false;
   request_stack = [];
   internet_connection = false;

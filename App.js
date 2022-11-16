@@ -34,8 +34,14 @@ export default function App() {
       try {
         await Network.getNetworkStateAsync().then((res) => {
           rootStore.setInternetConnection(res.isInternetReachable);
+
+          !res.isInternetReachable
+            ? rootStore.setError({
+                message: `Отсутствует подключение к интернету${res.isInternetReachable}`,
+              })
+            : null;
           rootStore.setError({
-            message: "Отсутствует подключение к интернету дружочек",
+            message: `Отсутствует подключение к интернету${res.isInternetReachable}`,
           });
         });
         await new Promise((resolve) => {

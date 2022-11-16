@@ -2,24 +2,43 @@ import React from "react";
 import { View } from "react-native";
 import { observer } from "mobx-react-lite";
 import ModalWrapper from "./ModalWrapper";
+import ErrorPopupList from "./ErrorPopupList";
 
 const Layout = ({ children, layout = "public" }) => {
   switch (layout) {
     case "auth":
-      return <View style={{ flex: 1 }}>{children}</View>;
+      return (
+        <View style={{ flex: 1 }}>
+          {children}
+          <ErrorPopupList />
+        </View>
+      );
       breack;
     case "public":
       return (
         <View style={{ flex: 1 }}>
-          <ModalWrapper>{children}</ModalWrapper>
+          <ModalWrapper>
+            {children}
+            <ErrorPopupList />
+          </ModalWrapper>
         </View>
       );
       break;
     case "empty":
-      return <View style={{ flex: 1 }}>{children}</View>;
+      return (
+        <View style={{ flex: 1 }}>
+          {children}
+          <ErrorPopupList />
+        </View>
+      );
       breack;
     default:
-      return <View style={{ flex: 1 }}>{children}</View>;
+      return (
+        <View style={{ flex: 1 }}>
+          {children}
+          <ErrorPopupList />
+        </View>
+      );
   }
 };
 

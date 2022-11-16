@@ -30,16 +30,13 @@ const ScrollList = ({
   const getConfig = () => {
     return {
       ...query,
-      limit: limit,
-      offset: offset,
+      "paginator[limit]": limit,
+      "paginator[page]": 1,
     };
   };
   const loadData = async () => {
     try {
-      // 0 + 20  //18
-      console.log(offset, limit, count);
       if (offset >= count && !firstRequest) return;
-
       setLoading(true);
       const config = getConfig();
       const res = (await apis[methodApi[0]][methodApi[1]]({ params: config }))
@@ -60,17 +57,9 @@ const ScrollList = ({
     setFirstRequest(false);
   }, []);
 
-  const getItem = (data, index) => ({
-    ...data,
-    id: Math.random().toString(12).substring(0),
-    title: `Item ${index + 1}`,
-  });
-
   return (
     <FlatList
       inverted={inverted}
-      //   getItem={getItem}
-      //   getItemCount={() => data?.length}
       ListHeaderComponent={ListHeaderComponent}
       style={{ flex: 1 }}
       onEndReachedThreshold={0.7}

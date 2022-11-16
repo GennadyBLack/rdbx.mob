@@ -6,6 +6,7 @@ import { getIcon } from "../helpers/iconHelper";
 import RegisterSetPassword from "../screens/auth/RegisterSetPassword";
 import UserProfile from "../screens/profile/UserProfile";
 import ProfileSettings from "../screens/profile/ProfileSettings";
+import Recomendations from "../screens/search/Recomendations";
 
 export const availableLinks = [
   {
@@ -110,6 +111,20 @@ export const availableLinks = [
     icon: "infocirlce",
     title: "Тестовый стенд",
   },
+  {
+    name: "Recomendations",
+    component: Recomendations,
+    auth: false,
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: true,
+    layout: "public",
+    icon: "infocirlce",
+    title: "Для вас",
+  },
 ];
 
 //LINKING CONFIG
@@ -124,6 +139,7 @@ export const linking = {
       Register: "register",
       Public: "/",
       Test: "test",
+      Recomendations: "recomendations",
 
       // Profile: {
       //   path: "profile",
