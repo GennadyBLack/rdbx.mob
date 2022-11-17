@@ -7,22 +7,37 @@ import Menu from "./menu";
 import User from "./users";
 import Feed from "./feed";
 import InfinityScroll from "./infinityScroll";
+import storage from "../helpers/storage";
 
+const initialvalue = {
+  touch: false,
+  light: false,
+  single: false,
+  vibration: false,
+};
 export default class store {
   errors = [];
   main_spiner = false;
   request_stack = [];
   internet_connection = false;
+  settings = null;
 
   //stack of ids like ['quiz','questions'] you to add in request_stack and show main spiner if error - delete from stack
   setSpinerValue = (value) => {
     this.spiner = value;
   };
 
+  get getSettings() {
+    return this.settings;
+  }
+
+  setSettings = async () => {
+    const data = await storage.get("settings");
+    const pre = { ...initialvalue, ...data };
+    this.settings = pre;
+  };
+
   addInStack = ([requests]) => {
-    // requests.forEach(element => {
-    //   this[element.name][element.method]()
-    // });
     const id = Math.floor(Math.random()) * 100;
     this.request_stack.push(id);
     this.main_spiner = true;

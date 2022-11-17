@@ -32,9 +32,9 @@ export default function App() {
   useEffect(() => {
     const initialApp = async () => {
       try {
+        await rootStore.setSettings();
         await Network.getNetworkStateAsync().then((res) => {
           rootStore.setInternetConnection(res.isInternetReachable);
-
           !res.isInternetReachable
             ? rootStore.setError({
                 message: `Отсутствует подключение к интернету${res.isInternetReachable}`,

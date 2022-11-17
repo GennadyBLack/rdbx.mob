@@ -9,20 +9,9 @@ import { Audio } from "expo-av";
 
 export default observer(ErrorPopupList);
 function ErrorPopupList() {
-  const initialvalue = {
-    touch: false,
-    light: false,
-    single: false,
-    vibration: false,
-  };
+  const root = useStore();
   const [sound, setSound] = useState();
-  const [all, setAll] = useState(initialvalue);
-
-  const getData = async () => {
-    const data = await storage.get("settings");
-    const pre = { ...initialvalue, ...data };
-    setAll(pre);
-  };
+  const all = root.settings;
 
   const playSignal = async () => {
     const { sound } = await Audio.Sound.createAsync(
@@ -31,20 +20,13 @@ function ErrorPopupList() {
     await sound.playAsync();
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const vibration = () => {
     all.vibration ? Vibration.vibrate() : null;
   };
+
   all.light ? useKeepAwake() : null;
 
-  const root = useStore();
-
   const errors = root?.errors;
-
-  useEffect(() => {}, [errors]);
 
   let remove = (index) => {
     root.removeError(index);
@@ -52,17 +34,21 @@ function ErrorPopupList() {
 
   const mappedErrors = errors.length ? (
     <View style={styles.error_container} nativeID="error-id">
-      {errors.map((item, index) => {
-        vibration();
-        playSignal();
-        return (
-          <ErrorPopup
-            key={index}
-            text={item.message}
-            onDelete={() => remove(index)}
-          />
-        );
-      })}
+      {errors?.length > 0 ? (
+        errors.map((item, index) => {
+          vibration();
+          playSignal();
+          return (
+            <ErrorPopup
+              key={index}
+              text={item.message}
+              onDelete={() => remove(index)}
+            />
+          );
+        })
+      ) : (
+        <Text></Text>
+      )}
     </View>
   ) : (
     <Text></Text>

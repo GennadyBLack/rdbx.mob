@@ -2,16 +2,16 @@ import api from "../index";
 
 const cabinet = {
   profile: async () => api.get("cabinet/get_profile"),
-  get_multiple_ticket_by_filter: async () =>
-    api.get("cabinet/get_multiple_ticket_by_filter"),
-  get_multiple_notification_by_filter: async () =>
-    api.get("cabinet/get_multiple_notification_by_filter"),
-  get_multiple_cancel_request_by_filter: async () =>
-    api.get("cabinet/get_multiple_cancel_request_by_filter"),
+  get_multiple_ticket_by_filter: async (config) =>
+    api.get("cabinet/get_multiple_ticket_by_filter", config),
+  get_multiple_notification_by_filter: async (config) =>
+    api.get("cabinet/get_multiple_notification_by_filter", config),
+  get_multiple_cancel_request_by_filter: async (config) =>
+    api.get("cabinet/get_multiple_cancel_request_by_filter", config),
   get_multiple_organizer_by_filter: async (config) =>
     api.get("cabinet/get_multiple_organizer_by_filter", config),
-  get_multiple_cancel_request_by_filter: async () =>
-    api.get("cabinet/get_multiple_cancel_request_by_filter"),
+  get_multiple_cancel_request_by_filter: async (config) =>
+    api.get("cabinet/get_multiple_cancel_request_by_filter", config),
 
   get_multiple_participant_by_filter: async (config) =>
     api.get("cabinet/get_multiple_participant_by_filter", config),

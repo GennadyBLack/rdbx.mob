@@ -7,6 +7,8 @@ import useStore from "../../hooks/useStore";
 import { observer } from "mobx-react-lite";
 import ModalSheet from "../../components/base/ModalSheet";
 import Form from "../../components/validation/Form";
+import PostItemList from "../../components/post/PostItemList";
+import ScrollList from "../../components/list/ScrollList";
 
 import Spiner from "../../components/base/Spiner";
 import ProfilePageHeader from "../../components/profile/ProfilePageHeader";
@@ -21,34 +23,44 @@ const UserProfile = ({ navigation }) => {
     console.log(val, "sendCode");
   };
   return (
-    <ScrollView {...getStyle("flex.p_2.primary_bg", { padding: 20 })}>
-      <ProfilePageHeader />
-      <View
-        style={[
-          s.prymary_bg,
-          s.a_i_center,
-          {
-            height: 50,
-            borderRadius: 10,
-            flexDirection: "row",
-            justifyContent: "space-around",
-          },
-        ]}
-      >
-        <Pressable
-          onPress={() => {
-            toggle();
-          }}
-        >
-          <Text>{getIcon("hand")}</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            toggleQr();
-          }}
-        >
-          <Text>{getIcon("qr")}</Text>
-        </Pressable>
+    <View {...getStyle("flex.p_2.primary_bg", { padding: 20 })}>
+      <View style={{ flex: 1 }}>
+        <ScrollList
+          ListHeaderComponent={
+            <View>
+              <ProfilePageHeader />
+              <View
+                style={[
+                  s.prymary_bg,
+                  s.a_i_center,
+                  {
+                    height: 50,
+                    borderRadius: 10,
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  },
+                ]}
+              >
+                <Pressable
+                  onPress={() => {
+                    toggle();
+                  }}
+                >
+                  <Text>{getIcon("hand")}</Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    toggleQr();
+                  }}
+                >
+                  <Text>{getIcon("qr")}</Text>
+                </Pressable>
+              </View>
+            </View>
+          }
+          Component={PostItemList}
+          method="cabinet.get_multiple_ticket_by_filter"
+        ></ScrollList>
       </View>
       <Spiner loading={auth.loading} />
       <ModalSheet visible={active} toggle={toggle}>
@@ -66,7 +78,7 @@ const UserProfile = ({ navigation }) => {
       <ModalSheet visible={activeQr} toggle={toggleQr}>
         <ScanerQr />
       </ModalSheet>
-    </ScrollView>
+    </View>
   );
 };
 
