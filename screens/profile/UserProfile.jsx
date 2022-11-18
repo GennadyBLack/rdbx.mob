@@ -22,6 +22,12 @@ const UserProfile = ({ navigation }) => {
   const sendCode = (val) => {
     console.log(val, "sendCode");
   };
+  const getQrCode = (data) => {
+    const pre = data.split("/").pop();
+    toggleQr(!activeQr);
+    sendCode(pre);
+  };
+
   return (
     <View {...getStyle("flex.p_2.primary_bg", { padding: 20 })}>
       <View style={{ flex: 1 }}>
@@ -76,7 +82,7 @@ const UserProfile = ({ navigation }) => {
         </Form>
       </ModalSheet>
       <ModalSheet visible={activeQr} toggle={toggleQr}>
-        <ScanerQr />
+        <ScanerQr setData={getQrCode} />
       </ModalSheet>
     </View>
   );

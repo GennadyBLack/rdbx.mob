@@ -35,7 +35,6 @@ const ModalSheet = ({ visible, children, toggle, startAt }) => {
   const scrollTo = useCallback((destination) => {
     "worklet";
     translateY.value = withSpring(destination, { damping: 50 });
-    console.log(translateY.value, "end");
     modalHeight.value = -destination;
   }, []);
 
@@ -75,7 +74,6 @@ const ModalSheet = ({ visible, children, toggle, startAt }) => {
           attached.value = false;
           scrollTo(-SCREEN_HEIGHT);
         }
-        // console.log(modalHeight.value, "modalHeight");
       } catch (error) {
         console.log(error);
       }
@@ -83,7 +81,10 @@ const ModalSheet = ({ visible, children, toggle, startAt }) => {
 
   const ExampleWithHoc = gestureHandlerRootHOC(({ children }) => (
     <View style={{ flex: 1 }}>
-      <TouchableWithoutFeedback onPress={runOnJS(toggle)} nativeID={"touchable-HATACHOUBLE"}>
+      <TouchableWithoutFeedback
+        onPress={runOnJS(toggle)}
+        nativeID={"touchable-HATACHOUBLE"}
+      >
         <View style={styles.backdrop}></View>
       </TouchableWithoutFeedback>
       <GestureDetector gesture={gesture}>

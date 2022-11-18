@@ -76,8 +76,8 @@ function Login({ navigation }) {
             onPress={() => {
               setForm({
                 ...form,
-                password: "tester",
-                email: "tester@mail.ru",
+                password: "i@rdbx.ru",
+                email: "ea1c2o1m",
               });
               setTimeout(() => login(), 200);
             }}
@@ -88,7 +88,7 @@ function Login({ navigation }) {
             <Text style={{ color: constants.GREEN }}>Еще нет аккаунта ?</Text>
           </TouchableOpacity>
         </View>
-        {content}
+        {/* {content} */}
       </Animated.View>
     </Animated.View>
   );
