@@ -76,8 +76,8 @@ function Login({ navigation }) {
             onPress={() => {
               setForm({
                 ...form,
-                password: "i@rdbx.ru",
-                email: "ea1c2o1m",
+                password: "ea1c2o1m",
+                email: "i@rdbx.ru",
               });
               setTimeout(() => login(), 200);
             }}

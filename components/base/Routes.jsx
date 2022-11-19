@@ -27,7 +27,9 @@ function Routes() {
   let [auth] = useStore("auth");
 
   useEffect(() => {
-    let mappedLinks = menu.allRoutes.map((item, inx) => {
+    menu.setLeftRoutes();
+    menu.setAvailableRoutes();
+    let mappedLinks = menu.availableRoutes.map((item, inx) => {
       return (
         <Screen name={item?.name} options={item?.options} key={inx}>
           {(props) => (
@@ -39,10 +41,6 @@ function Routes() {
       );
     });
     setRoutes(mappedLinks);
-  }, []);
-
-  useEffect(() => {
-    menu.setLeftRoutes();
   }, [auth.isAuth]);
 
   useEffect(() => {
@@ -82,7 +80,6 @@ function Routes() {
       <NavigationContainer
         linking={linking}
         fallback={<Text>Loading...</Text>}
-        style={styles.wrap}
         initialState={initialState}
         barStyle={{ backgroundColor: "#694fad" }}
         onStateChange={(state) =>
@@ -101,7 +98,4 @@ function Routes() {
   );
 }
 
-const styles = StyleSheet.create({
-  wrap: {},
-});
 export default observer(Routes);

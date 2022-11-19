@@ -17,7 +17,7 @@ export const availableLinks = [
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("login", color, size),
     },
-    auth: true,
+    type: "auth",
     leftMenu: true,
     layout: "public",
     icon: "login",
@@ -27,7 +27,7 @@ export const availableLinks = [
   {
     name: "RegisterSetPassword",
     component: RegisterSetPassword,
-    auth: true,
+    type: "auth",
     options: {
       headerShown: false,
       tabBarLabel: "",
@@ -41,7 +41,7 @@ export const availableLinks = [
   {
     name: "Register",
     component: Register,
-    auth: true,
+    type: "auth",
     options: {
       headerShown: false,
       tabBarLabel: "",
@@ -55,7 +55,7 @@ export const availableLinks = [
   {
     name: "UserProfile",
     component: UserProfile,
-    auth: false,
+    type: "private",
     options: {
       headerShown: false,
       tabBarLabel: "",
@@ -70,7 +70,7 @@ export const availableLinks = [
   {
     name: "ProfileSettings",
     component: ProfileSettings,
-    auth: false,
+    type: "private",
     options: {
       title: "Настройки",
       headerShown: true,
@@ -86,7 +86,7 @@ export const availableLinks = [
   {
     name: "Public",
     component: Public,
-    auth: false,
+    type: "public",
     options: {
       headerShown: false,
       tabBarLabel: "",
@@ -100,13 +100,13 @@ export const availableLinks = [
   {
     name: "Test",
     component: Test,
-    auth: false,
+    leftMenu: true,
+    type: "public",
     options: {
       headerShown: false,
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
-    leftMenu: true,
     layout: "public",
     icon: "infocirlce",
     title: "Тестовый стенд",
@@ -114,13 +114,12 @@ export const availableLinks = [
   {
     name: "Recomendations",
     component: Recomendations,
-    auth: false,
+    type: "private",
     options: {
       headerShown: false,
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
-    leftMenu: true,
     layout: "public",
     icon: "infocirlce",
     title: "Для вас",

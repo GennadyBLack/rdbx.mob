@@ -1,6 +1,9 @@
 import api from "../index";
 
 const publics = {
+  actual_activities: async (config) =>
+    api.get(`public/actual-activities`, config),
+
   get_debug_info_api: async (config) =>
     api.get(`public/get_debug_info_api`, config),
   get_multiple_user_by_filter: async (config) =>

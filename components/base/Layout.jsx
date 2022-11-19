@@ -13,7 +13,7 @@ const Layout = ({ children, layout = "public" }) => {
           <ErrorPopupList />
         </View>
       );
-      breack;
+      break;
     case "public":
       return (
         <View style={{ flex: 1 }}>
@@ -31,7 +31,7 @@ const Layout = ({ children, layout = "public" }) => {
           <ErrorPopupList />
         </View>
       );
-      breack;
+      break;
     default:
       return (
         <View style={{ flex: 1 }}>
