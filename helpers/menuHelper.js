@@ -7,6 +7,7 @@ import RegisterSetPassword from "../screens/auth/RegisterSetPassword";
 import UserProfile from "../screens/profile/UserProfile";
 import ProfileSettings from "../screens/profile/ProfileSettings";
 import Recomendations from "../screens/search/Recomendations";
+import NotificationList from "../screens/NotificationList";
 
 export const availableLinks = [
   {
@@ -119,11 +120,26 @@ export const availableLinks = [
     options: {
       headerShown: false,
       tabBarLabel: "",
-      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+      tabBarIcon: ({ color, size }) => getIcon("hearto", color, size),
     },
     layout: "public",
-    icon: "infocirlce",
+    icon: "hearto",
     title: "Для вас",
+  },
+
+  {
+    name: "NotificationList",
+    component: NotificationList,
+    type: "private",
+    leftMenu: true,
+    options: {
+      headerShown: true,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("notification", color, size),
+    },
+    layout: "empty",
+    icon: "notification",
+    title: "Уведомления",
   },
 ];
 

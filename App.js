@@ -33,6 +33,7 @@ export default function App() {
     const initialApp = async () => {
       try {
         await rootStore.setSettings();
+        await rootStore.fetchNotify();
         await Network.getNetworkStateAsync().then((res) => {
           rootStore.setInternetConnection(res.isInternetReachable);
           !res.isInternetReachable
@@ -40,13 +41,15 @@ export default function App() {
                 message: `Отсутствует подключение к интернету${res.isInternetReachable}`,
               })
             : null;
-          rootStore.setError({
-            message: `Отсутствует подключение к интернету${res.isInternetReachable}`,
-          });
+          // rootStore.setError({
+          //   message: `Отсутствует подключение к интернету${res.isInternetReachable}`,
+          // });
         });
+
         await new Promise((resolve) => {
-          let res = rootStore.auth.fetchMe();
-          resolve(res, "SuperRes");
+          // let res = rootStore.auth.fetchMe();
+          // resolve(res, "SuperRes");
+          resolve({}, "SuperRes");
         });
 
         // const iniOptions = {

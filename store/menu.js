@@ -25,7 +25,11 @@ export default class Menu {
         }
         if (!auth && item.type === "auth" && item.leftMenu) {
           return true;
-        } else if (auth && item.type === "private" && item.leftMenu) {
+        } else if (
+          auth &&
+          ["empty", "private"].includes(item.type) &&
+          item.leftMenu
+        ) {
           return true;
         } else {
           return false;
@@ -45,7 +49,7 @@ export default class Menu {
         }
         if (!auth && item.type === "auth") {
           return true;
-        } else if (auth && item.type === "private") {
+        } else if (auth && ["empty", "private"].includes(item.type)) {
           return true;
         }
       }),

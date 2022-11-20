@@ -28,6 +28,9 @@ const Test = () => {
         <Text>lpink_bg</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
+        <Text>
+          <Text>lpink_bg</Text>
+        </Text>
         <Text>add-to-photos{getIcon("add-to-photos")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>

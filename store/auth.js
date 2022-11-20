@@ -3,11 +3,8 @@ import {
   setToken,
   getToken,
   removeToken,
-  setInStorage,
   removeFromStorage,
-  getFromStorage,
 } from "../helpers/storage";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 

@@ -14,18 +14,23 @@ import { TextInput } from "react-native-paper";
 import Animated from "react-native-reanimated";
 const { height, width } = Dimensions.get("window");
 import useFingerPrint from "../../hooks/useFingerPring";
-
+import { getToken } from "../../helpers/storage";
+import { useNavigation } from "@react-navigation/native";
 export default observer(Login);
 
-function Login({ navigation }) {
+function Login() {
+  const navigation = useNavigation();
   let [auth] = useStore("auth");
+  // let [root] = useStore();
   let [form, setForm] = useState({
     password: "",
     email: "",
   });
 
-  const [content] = useFingerPrint();
-
+  const [content, handle] = useFingerPrint(async () => {
+    await auth.fetchMe();
+    await navigation.navigate("Public");
+  });
   const regisrer = () => {
     navigation.navigate("Register");
   };
@@ -37,6 +42,17 @@ function Login({ navigation }) {
   let login = async () => {
     await auth.login(form, () => navigation.navigate("Public"));
   };
+
+  const loginLogic = async () => {
+    const token = await getToken();
+    if (token && auth.root.settings.touch) {
+      handle();
+    }
+  };
+
+  useEffect(() => {
+    loginLogic();
+  }, []);
 
   return (
     <Animated.View style={[s.flex, s.light_bg]}>
@@ -79,7 +95,6 @@ function Login({ navigation }) {
                 password: "ea1c2o1m",
                 email: "i@rdbx.ru",
               });
-              setTimeout(() => login(), 200);
             }}
           >
             <Text style={{ color: constants.GREEN }}>Заполнить</Text>
@@ -88,7 +103,7 @@ function Login({ navigation }) {
             <Text style={{ color: constants.GREEN }}>Еще нет аккаунта ?</Text>
           </TouchableOpacity>
         </View>
-        {/* {content} */}
+        {auth.root.settings.touch && content}
       </Animated.View>
     </Animated.View>
   );

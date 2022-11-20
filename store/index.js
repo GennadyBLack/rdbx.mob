@@ -22,10 +22,14 @@ export default class store {
   request_stack = [];
   internet_connection = false;
   settings = null;
+  notify = null;
 
   //stack of ids like ['quiz','questions'] you to add in request_stack and show main spiner if error - delete from stack
   setSpinerValue = (value) => {
     this.spiner = value;
+  };
+  fetchNotify = async () => {
+    this.notify = await apis.cabinet.get_multiple_notification_by_filter();
   };
 
   get getSettings() {

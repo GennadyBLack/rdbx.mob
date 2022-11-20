@@ -18,14 +18,14 @@ const ErrorPopupList = (props) => {
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/mp3/oh-hi-mark.mp3")
     );
-    all.signal ? await sound.playAsync() : null;
+    all?.signal ? await sound.playAsync() : null;
   };
 
   const vibration = () => {
-    all.vibration ? Vibration.vibrate() : null;
+    all?.vibration ? Vibration.vibrate() : null;
   };
 
-  all.light ? useKeepAwake() : null;
+  all?.light ? useKeepAwake() : null;
 
   const errors = root?.getErrors;
 
