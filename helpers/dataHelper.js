@@ -12,7 +12,6 @@ const dataHelper = (included, relations) => {
         }
       });
     }
-    console.log(preData, "preData");
     return relations ? concatData(relations, preData) : preData;
   } catch (error) {
     console.error(error, "dataHelper");
@@ -29,7 +28,9 @@ export const concatData = (data, include) => {
       data.forEach((item) => {
         const preItem = { ...item };
         for (const key in item.relationships) {
-          preItem[key] = include[key][item?.relationships[key]?.id];
+          if (include[key][item?.relationships[key]?.id]) {
+            preItem[key] = include[key][item?.relationships[key]?.id];
+          }
         }
         pre.push({ ...preItem, include: include });
       });

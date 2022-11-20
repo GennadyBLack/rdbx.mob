@@ -5,7 +5,7 @@ import cabinet from "./cabinet";
 import document from "./document";
 import entity from "./entity";
 import media from "./media";
-import methodts from "./media";
+import methodts from "./methodts";
 import publics from "./public";
 
 const apis = {

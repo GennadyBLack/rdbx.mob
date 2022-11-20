@@ -18,11 +18,11 @@ const ErrorPopup = ({ text, onDelete }) => {
         visible={visible}
         onDismiss={onDismissSnackBar}
         action={{
-          label: "Undo",
+          label: "Закрыть",
           onPress: () => {},
         }}
       >
-        <Text>{text}asds</Text>
+        <Text>{text}</Text>
       </Snackbar>
     </View>
   );

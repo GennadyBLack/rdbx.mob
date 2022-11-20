@@ -8,6 +8,7 @@ import User from "./users";
 import Feed from "./feed";
 import InfinityScroll from "./infinityScroll";
 import storage from "../helpers/storage";
+import { makeAutoObservable } from "mobx";
 
 const initialvalue = {
   touch: false,
@@ -62,9 +63,14 @@ export default class store {
     return { spiner: this.main_spiner, stack: this.request_stack.length };
   }
 
+  get getErrors() {
+    return this.errors;
+  }
+
   setError = (error, methodName) => {
+    console.log(this.errors, "errors");
     this.errors.push({
-      message: `${error?.message} from: ${methodName ?? ""}`,
+      message: `${error?.message ?? error} from: ${methodName ?? ""}`,
     });
   };
 
@@ -73,6 +79,7 @@ export default class store {
   };
 
   constructor() {
+    makeAutoObservable(this);
     this.api = apis;
     this.feed = new Feed(this);
     this.modal = new Modal(this);

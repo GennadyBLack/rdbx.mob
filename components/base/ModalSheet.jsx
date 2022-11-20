@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
+  ScrollView,
   Modal,
   TouchableWithoutFeedback,
 } from "react-native";
@@ -20,7 +21,7 @@ import Animated, {
   runOnJS,
   withTiming,
 } from "react-native-reanimated";
-
+// import ErrorPopupList from "./ErrorPopupList";
 import { toJS } from "mobx";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -89,7 +90,8 @@ const ModalSheet = ({ visible, children, toggle, startAt }) => {
       </TouchableWithoutFeedback>
       <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.bottomContainer, rBottonStyle]}>
-          <View style={styles.line}></View>
+          {/* <ErrorPopupList /> */}
+          <ScrollView style={styles.line}></ScrollView>
           {toJS(children)}
         </Animated.View>
       </GestureDetector>

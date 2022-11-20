@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import BaseTopMenu from "./BaseTopMenu";
 
 import Animated, {
   useAnimatedStyle,
@@ -16,14 +17,17 @@ const ModalWrapper = ({ children, props }) => {
     return { opacity: opacity.value };
   });
   return (
-    <GestureHandlerRootView style={{ flex: 1, justifyContent: "flex-end" }}>
-      
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar />
-      <Animated.View style={[styles.containerModal, mainWrappStyle]} nativeID='modelV'>
+      <Animated.View
+        style={[styles.containerModal, mainWrappStyle]}
+        nativeID="modelV"
+      >
+        <BaseTopMenu />
         {children}
+        {/* <LeftMenu /> */}
+        {/* <BaseTopMenu /> */}
       </Animated.View>
-      <LeftMenu />
-  
     </GestureHandlerRootView>
   );
 };
@@ -32,6 +36,7 @@ const styles = StyleSheet.create({
   containerModal: {
     flex: 1,
     color: "white",
+    flexDirection: "column",
   },
 });
 

@@ -47,7 +47,7 @@ const ProfileSettings = () => {
       <View style={s.settings_switch}>
         <Text>Свет</Text>
         <Switch
-          value={all.light}
+          value={all?.light}
           onValueChange={(val) => {
             setData("light", val);
           }}

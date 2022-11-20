@@ -4,20 +4,21 @@ import ErrorPopup from "./ErrorPopup";
 import useStore from "../../hooks/useStore";
 import { StyleSheet, View, Text, Vibration } from "react-native";
 import { useKeepAwake } from "expo-keep-awake";
-import storage from "../../helpers/storage";
+
 import { Audio } from "expo-av";
 
-export default observer(ErrorPopupList);
-function ErrorPopupList() {
+const ErrorPopupList = (props) => {
+  console.log(props, "props");
   const root = useStore();
   const [sound, setSound] = useState();
+
   const all = root.settings;
 
   const playSignal = async () => {
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/mp3/oh-hi-mark.mp3")
     );
-    await sound.playAsync();
+    all.signal ? await sound.playAsync() : null;
   };
 
   const vibration = () => {
@@ -26,36 +27,38 @@ function ErrorPopupList() {
 
   all.light ? useKeepAwake() : null;
 
-  const errors = root?.errors;
+  const errors = root?.getErrors;
 
   let remove = (index) => {
     root.removeError(index);
   };
 
-  const mappedErrors = errors.length ? (
-    <View style={styles.error_container} nativeID="error-id">
-      {errors?.length > 0 ? (
-        errors.map((item, index) => {
-          vibration();
-          playSignal();
-          return (
-            <ErrorPopup
-              key={index}
-              text={item.message}
-              onDelete={() => remove(index)}
-            />
-          );
-        })
+  return (
+    <View nativeID="error-id" style={styles.error_container}>
+      {errors.length ? (
+        <View style={styles.error_container}>
+          {errors?.length > 0 ? (
+            errors.map((item, index) => {
+              vibration();
+              playSignal();
+              return (
+                <ErrorPopup
+                  key={index}
+                  text={item.message}
+                  onDelete={() => remove(index)}
+                />
+              );
+            })
+          ) : (
+            <Text></Text>
+          )}
+        </View>
       ) : (
         <Text></Text>
       )}
     </View>
-  ) : (
-    <Text></Text>
   );
-
-  return <View>{mappedErrors}</View>;
-}
+};
 
 const styles = StyleSheet.create({
   error_container: {
@@ -65,6 +68,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     left: 10,
-    bottom: 50,
+    top: 40,
+    zIndex: 500000,
   },
 });
+
+export default observer(ErrorPopupList);

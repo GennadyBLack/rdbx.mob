@@ -100,13 +100,13 @@ export const availableLinks = [
   {
     name: "Test",
     component: Test,
-    leftMenu: true,
-    type: "public",
+    type: "private",
     options: {
       headerShown: false,
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
+    leftMenu: true,
     layout: "public",
     icon: "infocirlce",
     title: "Тестовый стенд",
@@ -115,6 +115,7 @@ export const availableLinks = [
     name: "Recomendations",
     component: Recomendations,
     type: "private",
+    leftMenu: true,
     options: {
       headerShown: false,
       tabBarLabel: "",

@@ -17,6 +17,7 @@ import Layout from "./Layout";
 const { Screen, Navigator } = createNativeStackNavigator();
 const PERSISTENCE_KEY = "NAVIGATION_STATE_V1";
 
+import ErrorPopupList from "./ErrorPopupList";
 function Routes() {
   const [isReady, setIsReady] = React.useState(__DEV__ ? false : true);
   const [initialState, setInitialState] = React.useState();
@@ -86,6 +87,7 @@ function Routes() {
           AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
         }
       >
+        <ErrorPopupList />
         <Navigator
           initialRouteName="Public"
           activeColor="#fff"

@@ -54,7 +54,7 @@ const Test = () => {
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
         <Text>persons{getIcon("persons")}</Text>
       </View>
-      <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
+      <View {...getStyle("prymary_bg.j_c_center.a_i_center.h_3")}>
         <Text>edit{getIcon("edit")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
@@ -164,19 +164,19 @@ const Test = () => {
         <Text>{getIcon("dots-three-vertical")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
-        <Text>fingerprint{getIcon("fingerprint")}</Text>
+        <Text>fingerprint {getIcon("fingerprint")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
-        <Text>question{getIcon("question")}</Text>
+        <Text>question {getIcon("question")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
-        <Text>question{getIcon("question")}</Text>
+        <Text>question {getIcon("question")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
-        <Text>question{getIcon("question")}</Text>
+        <Text>question {getIcon("question")}</Text>
       </View>
       <View {...getStyle("lpink_bg.j_c_center.a_i_center.h_3")}>
-        <Text>question{getIcon("question")}</Text>
+        <Text>question {getIcon("question")}</Text>
       </View>
     </ScrollView>
   );

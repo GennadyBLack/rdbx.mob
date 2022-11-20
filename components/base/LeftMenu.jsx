@@ -67,7 +67,7 @@ const LeftMenu = () => {
       <View
         style={{
           position: "absolute",
-          top: 10,
+          top: 20,
           right: -50,
         }}
       >
@@ -96,7 +96,6 @@ const LeftMenu = () => {
           style={[s.prymary_bg, { flex: 1, justifyContent: "space-between" }]}
         >
           <View>
-            <StatusBar />
             <LeftMenuHeader toggle={toggleMenu} />
             <View>
               {menu?.leftRoutes.map((item, idx) => {

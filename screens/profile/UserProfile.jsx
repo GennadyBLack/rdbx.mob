@@ -9,6 +9,7 @@ import ModalSheet from "../../components/base/ModalSheet";
 import Form from "../../components/validation/Form";
 import PostItemList from "../../components/post/PostItemList";
 import ScrollList from "../../components/list/ScrollList";
+import apis from "../../api/api";
 
 import Spiner from "../../components/base/Spiner";
 import ProfilePageHeader from "../../components/profile/ProfilePageHeader";
@@ -19,13 +20,27 @@ const UserProfile = ({ navigation }) => {
   const [active, toggle] = ModalSheet.useModal();
   const [activeQr, toggleQr] = ModalSheet.useModal();
 
-  const sendCode = (val) => {
+  const sendCode = async (val) => {
+    console.log(apis.methodts, "apis.media.confirm_ticket_use_by_code");
+    await apis?.methodts
+      ?.confirm_ticket_use_by_code(val)
+      .then((res) => {
+        console.error(res.status, "res.status");
+        if (res.status === 500 || res.message) {
+          root.setError(res.data);
+        }
+      })
+      .catch((error) => {
+        auth.root.setError(error.response.data);
+      });
+
     console.log(val, "sendCode");
   };
   const getQrCode = (data) => {
     const pre = data.split("/").pop();
+    console.log(pre, "preeeee-----");
     toggleQr(!activeQr);
-    sendCode(pre);
+    sendCode({ code: pre });
   };
 
   return (

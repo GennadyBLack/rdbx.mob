@@ -18,7 +18,7 @@ const LeftMenuHeader = ({ toggle }) => {
         toggle();
       }}
     >
-      <View style={s.p_3}>
+      <View style={s.p_1}>
         <View style={s.profile_wrapper}>
           <ProfileImg width={45} path={user?.avatar} />
           <View style={s.ml_4}>

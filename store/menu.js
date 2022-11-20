@@ -50,7 +50,6 @@ export default class Menu {
         }
       }),
     ];
-    console.log(this.availableRoutes, "availableRoutes");
   }
 
   get allRoutes() {

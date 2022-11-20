@@ -6,7 +6,6 @@ import ModalSheet from "../base/ModalSheet";
 const PostItemList = ({ item, included }) => {
   const placeholder = require("../../assets/placeholder.jpg");
   const [visible, setVisible] = useState(false);
-  console.log(item, "IIIITEEEEM");
 
   const qr = item?.meta?.qr_code;
   const image =
@@ -98,10 +97,26 @@ const PostItemList = ({ item, included }) => {
           <Pressable onPress={() => onShare()} style={[s.button]}>
             <Text>Пригласить</Text>
           </Pressable>
-          {/* <Image
-            source={{ uri: qr }}
-            style={{ width: "100%", height: 250, marginBottom: 20 }}
-          /> */}
+          <View style={{ flex: 1 }}>
+            <Image
+              source={{ uri: qr }}
+              style={{ width: "100%", height: 250, marginBottom: 20 }}
+            />
+          </View>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
+          <Text>Пригласить</Text>
         </ScrollView>
       </ModalSheet>
     </View>

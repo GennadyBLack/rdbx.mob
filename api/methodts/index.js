@@ -1,5 +1,6 @@
 import api from "../index";
-const media = {
+
+const methodts = {
   add_one_organizer: async (data) =>
     api.post(`methods/add_one_organizer`, data),
   add_one_activity: async (data) => api.post(`methods/add_one_activity`, data),
@@ -104,4 +105,4 @@ const media = {
   buy_multiple_ticket: async (data) =>
     api.post(`methods/buy_multiple_ticket`, data),
 };
-export default media;
+export default methodts;
