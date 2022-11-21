@@ -39,7 +39,7 @@ export default function App() {
         });
 
         await new Promise((resolve) => {
-          let res = rootStore.auth.fetchMe();
+          // let res = rootStore.auth.fetchMe();
           // resolve(res, "SuperRes");
           resolve({}, "SuperRes");
         });
@@ -72,6 +72,7 @@ export default function App() {
     };
     initialApp();
   }, []);
+
   // const onLayoutRootView = useCallback(async () => {
   //   if (isReady) {
   //     await SplashScreen.hideAsync();
