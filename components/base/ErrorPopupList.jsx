@@ -18,7 +18,8 @@ const ErrorPopupList = (props) => {
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/mp3/oh-hi-mark.mp3")
     );
-    all?.signal ? await sound.playAsync() : null;
+    console.log(all?.single, "all?.signal");
+    all?.single ? await sound.playAsync() : null;
   };
 
   const vibration = () => {
