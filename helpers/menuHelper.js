@@ -8,6 +8,7 @@ import UserProfile from "../screens/profile/UserProfile";
 import ProfileSettings from "../screens/profile/ProfileSettings";
 import Recomendations from "../screens/search/Recomendations";
 import NotificationList from "../screens/NotificationList";
+import { Badge } from "react-native-paper";
 
 export const availableLinks = [
   {
@@ -79,7 +80,7 @@ export const availableLinks = [
       tabBarIcon: ({ color, size }) => getIcon("user", color, size),
     },
     leftMenu: false,
-    layout: "public",
+    layout: "empty",
     icon: "login",
     title: "Настройки",
   },
@@ -133,6 +134,7 @@ export const availableLinks = [
     type: "private",
     leftMenu: true,
     options: {
+      title: "Уведомления",
       headerShown: true,
       tabBarLabel: "",
       tabBarIcon: ({ color, size }) => getIcon("notification", color, size),
@@ -140,6 +142,9 @@ export const availableLinks = [
     layout: "empty",
     icon: "notification",
     title: "Уведомления",
+    menuBar: (store) => {
+      return <Badge>{store?.root?.notify?.data?.meta?.data_count}</Badge>;
+    },
   },
 ];
 

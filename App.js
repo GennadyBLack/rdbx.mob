@@ -6,14 +6,6 @@ import useLocation from "./hooks/useLocation";
 import Routes from "./components/base/Routes";
 import s from "./helpers/styleHelper";
 
-// import {
-//   getFromStorage,
-//   getToken,
-//   removeFromStorage,
-//   removeToken,
-//   setInStorage,
-// } from "./helpers/storage";
-
 import store from "./store/index";
 
 import StoreContext from "./context";
@@ -47,7 +39,7 @@ export default function App() {
         });
 
         await new Promise((resolve) => {
-          // let res = rootStore.auth.fetchMe();
+          let res = rootStore.auth.fetchMe();
           // resolve(res, "SuperRes");
           resolve({}, "SuperRes");
         });

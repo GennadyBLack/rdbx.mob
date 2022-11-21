@@ -45,7 +45,7 @@ const ProfileSettings = () => {
         />
       </View>
       <View style={s.settings_switch}>
-        <Text>Свет</Text>
+        <Text>Оставлять экран включеным</Text>
         <Switch
           value={all?.light}
           onValueChange={(val) => {
@@ -73,7 +73,7 @@ const ProfileSettings = () => {
       </View>
       <Pressable
         onPress={() => setPasswordModal(!passwordModal)}
-        style={[s.settings_switch, { height: 56 }]}
+        style={[s.settings_switch, { height: 56 }, s.button]}
       >
         <Text>Сменить пароль</Text>
       </Pressable>

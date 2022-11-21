@@ -3,10 +3,12 @@ import {
   View,
   Text,
   StyleSheet,
+  Image,
   TouchableOpacity,
   Dimensions,
   Pressable,
 } from "react-native";
+
 import s, { constants } from "../../helpers/styleHelper";
 import { observer } from "mobx-react-lite";
 import useStore from "../../hooks/useStore";
@@ -55,9 +57,20 @@ function Login() {
   }, []);
 
   return (
-    <Animated.View style={[s.flex, s.light_bg]}>
-      <Text style={s.dark_c}>Welcome !</Text>
-      <Animated.View style={[styles.login_content]}>
+    <Animated.View
+      style={[
+        s.flex,
+        { alignItems: "center", backgroundColor: "rgb(238 238 238)" },
+      ]}
+    >
+      <Image
+        source={require("../../assets/logo.svg")}
+        style={[
+          { height: 100, width: 100, borderRadius: 10, marginBottom: 40 },
+        ]}
+      />
+
+      <Animated.View style={[styles.login_content, { width: "100%" }]}>
         <TextInput
           mode="outlined"
           label="Email"

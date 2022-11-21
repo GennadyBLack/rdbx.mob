@@ -78,7 +78,9 @@ const BaseTopMenu = () => {
                 >
                   <View {...getStyle("a_i_center", { flexDirection: "row" })}>
                     <Text> {getIcon(item.icon)}</Text>
-                    <Text style={styles.menu_link}>{item?.title}</Text>
+                    <Text style={styles.menu_link}>
+                      {item?.title} {item?.menuBar ? item?.menuBar(auth) : ""}
+                    </Text>
                   </View>
                 </TouchableHighlight>
               );
