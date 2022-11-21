@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { setScanHistory } from "../../helpers/storage";
 import { View, ScrollView, Pressable, Text } from "react-native";
 import ScanerQr from "../../components/base/ScanerQr";
 import ProfilePost from "../../components/profile/ProfilePost";
@@ -21,24 +22,28 @@ const UserProfile = ({ navigation }) => {
   const [activeQr, toggleQr] = ModalSheet.useModal();
 
   const sendCode = async (val) => {
-    console.log(apis.methodts, "apis.media.confirm_ticket_use_by_code");
     await apis?.methodts
       ?.confirm_ticket_use_by_code(val)
-      .then((res) => {
-        console.error(res.status, "res.status");
-        if (res.status === 500 || res.message) {
-          root.setError(res.data);
-        }
+      .then(async (res) => {
+        await setScanHistory({
+          succes: true,
+          date: new Date(),
+          code: val ?? "",
+        });
       })
-      .catch((error) => {
+      .catch(async (error) => {
         auth.root.setError(error.response.data);
+        await setScanHistory({
+          succes: false,
+          date: new Date(),
+          code: val ?? "",
+        });
       });
-
-    console.log(val, "sendCode");
   };
+
   const getQrCode = (data) => {
     const pre = data.split("/").pop();
-    console.log(pre, "preeeee-----");
+
     toggleQr(!activeQr);
     sendCode({ code: pre });
   };

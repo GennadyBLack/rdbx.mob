@@ -101,4 +101,13 @@ export const removeToken = async () => {
   }
 };
 
+export const getScanHistory = async () => {
+  const all = await getStorageData("scan_history");
+  return all;
+};
+export const setScanHistory = async (item) => {
+  const all = (await getStorageData("scan_history")) ?? [];
+  await setStorageData("scan_history", [...all, item]);
+};
+
 export default { set: setStorageData, get: getStorageData };

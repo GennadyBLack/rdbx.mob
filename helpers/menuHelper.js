@@ -9,6 +9,7 @@ import ProfileSettings from "../screens/profile/ProfileSettings";
 import Recomendations from "../screens/search/Recomendations";
 import NotificationList from "../screens/NotificationList";
 import { Badge } from "react-native-paper";
+import ScanHistory from "../screens/ScanHistory";
 
 export const availableLinks = [
   {
@@ -127,7 +128,21 @@ export const availableLinks = [
     icon: "hearto",
     title: "Для вас",
   },
-
+  {
+    name: "ScanHistory",
+    component: ScanHistory,
+    type: "private",
+    leftMenu: true,
+    options: {
+      title: "История сканирования",
+      headerShown: true,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("qr", color, size),
+    },
+    layout: "empty",
+    icon: "qr",
+    title: "История сканирования",
+  },
   {
     name: "NotificationList",
     component: NotificationList,

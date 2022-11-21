@@ -39,7 +39,7 @@ export default function App() {
         });
 
         await new Promise((resolve) => {
-          // let res = rootStore.auth.fetchMe();
+          rootStore.auth.fetchMe();
           // resolve(res, "SuperRes");
           resolve({}, "SuperRes");
         });
