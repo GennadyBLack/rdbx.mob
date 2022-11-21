@@ -9,6 +9,8 @@ import {
   Pressable,
 } from "react-native";
 
+import PinModal from "../../components/auth/PinModal";
+
 import s, { constants } from "../../helpers/styleHelper";
 import { observer } from "mobx-react-lite";
 import useStore from "../../hooks/useStore";
@@ -116,8 +118,17 @@ function Login() {
             <Text style={{ color: constants.GREEN }}>Еще нет аккаунта ?</Text>
           </TouchableOpacity>
         </View>
-        {auth.root.settings.touch && content}
+        {auth.root.settings.touch && auth.root.token && content}
       </Animated.View>
+      <PinModal
+        show={
+          !auth.root.settings.touch &&
+          auth.root.settings.pin &&
+          auth.root.pin &&
+          auth.root.token
+        }
+        success={async () => await auth.fetchMe()}
+      />
     </Animated.View>
   );
 }

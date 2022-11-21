@@ -15,6 +15,7 @@ const initialvalue = {
   light: false,
   single: false,
   vibration: false,
+  pin: false,
 };
 export default class store {
   errors = [];
@@ -23,6 +24,8 @@ export default class store {
   internet_connection = false;
   settings = null;
   notify = null;
+  pin = null;
+  token = null;
 
   //stack of ids like ['quiz','questions'] you to add in request_stack and show main spiner if error - delete from stack
   setSpinerValue = (value) => {
@@ -40,6 +43,16 @@ export default class store {
     const data = await storage.get("settings");
     const pre = { ...initialvalue, ...data };
     this.settings = pre;
+  };
+
+  setPin = async () => {
+    const data = await storage.get("pin");
+
+    this.pin = data;
+  };
+  setToken = async () => {
+    const data = await storage.get("token");
+    this.token = data;
   };
 
   addInStack = ([requests]) => {

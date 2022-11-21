@@ -24,6 +24,8 @@ export default function App() {
   useEffect(() => {
     const initialApp = async () => {
       try {
+        await rootStore.setPin();
+        await rootStore.setToken();
         await rootStore.setSettings();
         await rootStore.fetchNotify();
         await Network.getNetworkStateAsync().then((res) => {
