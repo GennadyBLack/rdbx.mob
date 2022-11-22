@@ -10,6 +10,7 @@ import Recomendations from "../screens/search/Recomendations";
 import NotificationList from "../screens/NotificationList";
 import { Badge } from "react-native-paper";
 import ScanHistory from "../screens/ScanHistory";
+import ActiviesForm from "../screens/activies/ActiviesForm";
 
 export const availableLinks = [
   {
@@ -160,6 +161,21 @@ export const availableLinks = [
     menuBar: (store) => {
       return <Badge>{store?.root?.notify?.data?.meta?.data_count}</Badge>;
     },
+  },
+  {
+    name: "ActiviesForm",
+    component: ActiviesForm,
+    type: "public",
+    leftMenu: true,
+    options: {
+      title: "Создание мероприятия",
+      headerShown: true,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("add-to-photos", color, size),
+    },
+    layout: "empty",
+    icon: "add-to-photos",
+    title: "Создание мероприятия",
   },
 ];
 

@@ -75,7 +75,6 @@ function Login() {
             width: 100,
             borderRadius: 10,
             marginBottom: 40,
-            backgroundColor: "red",
           },
         ]}
       />

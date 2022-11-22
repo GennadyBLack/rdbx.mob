@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
 import File from "./File";
+import Picker from "./Select";
 import Select from "./Select";
 import Upload from "./UploadValidation";
 import { View, Button, StyleSheet, Pressable, Text } from "react-native";
