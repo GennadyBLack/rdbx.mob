@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "cypress": "^11.1.0",
     "eslint": "^8.28.0"
   },
   "private": true
