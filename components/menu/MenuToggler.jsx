@@ -91,10 +91,6 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
                 style={[styles.menu, modalStyle]}
                 onLayout={(event) => {
                   const layout = event.nativeEvent.layout;
-                  // console.log("height:", layout.height);
-                  // console.log("width:", layout.width);
-                  // console.log("x:", layout.x);
-                  // console.log("y:", layout.y);
                 }}
               >
                 {items.map((item, idx) => {

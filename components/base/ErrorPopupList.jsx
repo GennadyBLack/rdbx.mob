@@ -8,7 +8,6 @@ import { useKeepAwake } from "expo-keep-awake";
 import { Audio } from "expo-av";
 
 const ErrorPopupList = (props) => {
-  console.log(props, "props");
   const root = useStore();
   const [sound, setSound] = useState();
 
@@ -18,7 +17,6 @@ const ErrorPopupList = (props) => {
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/mp3/oh-hi-mark.mp3")
     );
-    console.log(all?.single, "all?.signal");
     all?.single ? await sound.playAsync() : null;
   };
 
@@ -64,8 +62,8 @@ const ErrorPopupList = (props) => {
 const styles = StyleSheet.create({
   error_container: {
     flex: 1,
-    width: 100,
-    height: 100,
+    width: 10,
+    height: 10,
     position: "absolute",
     zIndex: 2,
     left: 10,

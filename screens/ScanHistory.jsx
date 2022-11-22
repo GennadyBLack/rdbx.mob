@@ -8,7 +8,6 @@ const ScanHistory = () => {
 
   const getData = async () => {
     const data = await getScanHistory();
-    console.log(data, "setList");
     setList(data);
   };
   useEffect(() => {
@@ -16,7 +15,7 @@ const ScanHistory = () => {
   }, []);
   return (
     <ScrollView>
-      {list.map((item) => {
+      {list?.map((item) => {
         return (
           <View
             style={[

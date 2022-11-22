@@ -67,6 +67,13 @@ const UserProfile = ({ navigation }) => {
                   },
                 ]}
               >
+                {/* <Pressable
+                  onPress={() => {
+                    auth.test_logout();
+                  }}
+                >
+                  <Text>logout</Text>
+                </Pressable> */}
                 <Pressable
                   onPress={() => {
                     toggle();

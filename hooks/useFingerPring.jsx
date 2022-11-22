@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 export default function useFingerPrint(success) {
   const [supportBiometric, setSupportBiometric] = useState(false);
   const [fingerprint, setFingerprint] = useState(false);
-  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -28,7 +27,6 @@ export default function useFingerPrint(success) {
       });
       if (biometricAuth.success) {
         await success();
-        // await navigation.replace("Public");
       }
     } catch (error) {
       console.log(error);

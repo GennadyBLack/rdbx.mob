@@ -22,7 +22,6 @@ function Form({
     control,
     formState: { errors, dirtyFields },
   } = methods;
-  // console.log(dirtyFields, "dirtyFields");
   const wrap = async (e) => {
     await onSubmit(e);
     resetForm ? await reset({ defaultValues }) : null;

@@ -48,7 +48,6 @@ const getStorageData = async (key) => {
       value = JSON.parse(pre);
     } else {
       const pre = await SecureStore?.getItemAsync(key);
-
       value = JSON.parse(pre);
     }
     if (value !== null || value !== "null") {

@@ -103,7 +103,7 @@ export const availableLinks = [
   {
     name: "Test",
     component: Test,
-    type: "private",
+    type: "public",
     options: {
       headerShown: false,
       tabBarLabel: "",

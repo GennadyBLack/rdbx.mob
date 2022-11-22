@@ -20,12 +20,12 @@ const { height, width } = Dimensions.get("window");
 import useFingerPrint from "../../hooks/useFingerPring";
 import { getToken } from "../../helpers/storage";
 import { useNavigation } from "@react-navigation/native";
+import logo from "../../assets/images/logo.svg";
 export default observer(Login);
 
 function Login() {
   const navigation = useNavigation();
   let [auth] = useStore("auth");
-  // let [root] = useStore();
   let [form, setForm] = useState({
     password: "",
     email: "",
@@ -43,13 +43,15 @@ function Login() {
     setForm({ ...form, [field]: e });
   };
 
+  console.log(logo, "logologo");
+
   let login = async () => {
     await auth.login(form, () => navigation.navigate("Public"));
   };
 
   const loginLogic = async () => {
     const token = await getToken();
-    if (token && auth.root.settings.touch) {
+    if (token && auth?.root?.settings?.touch) {
       handle();
     }
   };
@@ -66,9 +68,15 @@ function Login() {
       ]}
     >
       <Image
-        source={require("../../assets/logo.svg")}
+        source={logo}
         style={[
-          { height: 100, width: 100, borderRadius: 10, marginBottom: 40 },
+          {
+            height: 100,
+            width: 100,
+            borderRadius: 10,
+            marginBottom: 40,
+            backgroundColor: "red",
+          },
         ]}
       />
 
@@ -118,17 +126,20 @@ function Login() {
             <Text style={{ color: constants.GREEN }}>Еще нет аккаунта ?</Text>
           </TouchableOpacity>
         </View>
-        {auth.root.settings.touch && auth.root.token && content}
+
+        {auth?.root?.settings?.touch && auth?.root?.token && content}
+        <PinModal
+          token={auth?.root?.token}
+          pin={auth?.root?.pin}
+          show={
+            !auth?.root?.settings?.touch &&
+            auth?.root?.settings?.pin &&
+            auth?.root?.pin &&
+            auth?.root?.token
+          }
+          success={async () => await auth.fetchMe()}
+        />
       </Animated.View>
-      <PinModal
-        show={
-          !auth.root.settings.touch &&
-          auth.root.settings.pin &&
-          auth.root.pin &&
-          auth.root.token
-        }
-        success={async () => await auth.fetchMe()}
-      />
     </Animated.View>
   );
 }

@@ -1,11 +1,11 @@
 import Axios from "axios";
-import { getToken } from "../helpers/storage";
+import storage from "../helpers/storage";
 
 const baseURL = "https://api.stage.zelfi.ru/api";
 const apiUrl = `${baseURL}`;
 
 let token = null;
-getToken().then((res) => (token = res));
+storage.get("token").then((res) => (token = res));
 const axiosParams = {
   baseURL: `${apiUrl}`,
   headers: {
@@ -20,7 +20,7 @@ if (token && token !== "null") {
 const axiosInstance = Axios.create(axiosParams);
 
 axiosInstance.interceptors.request.use(async (config) => {
-  await getToken().then((res) => (token = res));
+  await storage.get("token").then((res) => (token = res));
   config.headers = {
     ...config.headers,
   };

@@ -7,6 +7,7 @@ import {
 } from "../helpers/storage";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
+import storage from "../helpers/storage";
 
 export default class Auth {
   user = null;
@@ -19,12 +20,16 @@ export default class Auth {
   auth_data = null;
   settings = null;
 
+  test_logout = () => {
+    this.logged = false;
+  };
   fetchMe = async () => {
     try {
-      let token = await getToken();
+      let token = await storage.get("token");
       if (this?.user?.id || !token || token == "null") {
         return;
       }
+
       this.loading = true;
       await this?.root?.api?.cabinet?.profile({}).then((res) => {
         runInAction(async () => {
@@ -47,7 +52,7 @@ export default class Auth {
         });
       });
     } catch (error) {
-      await removeToken();
+      // await removeToken();
       this.root.setError(error, "auth fetch me");
       this.loading = false;
     }
@@ -60,11 +65,7 @@ export default class Auth {
         runInAction(async () => {
           const token = res?.data?.data?.attributes?.access_token;
           if (token) {
-            if (Platform.OS === "web") {
-              await setToken(token);
-            } else {
-              await SecureStore?.setItemAsync("token", token);
-            }
+            await storage.set("token", token);
             await this.fetchMe();
             callback();
           }

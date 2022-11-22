@@ -9,6 +9,7 @@ import Feed from "./feed";
 import InfinityScroll from "./infinityScroll";
 import storage from "../helpers/storage";
 import { makeAutoObservable } from "mobx";
+import { getToken } from "../helpers/storage";
 
 const initialvalue = {
   touch: false,
@@ -47,19 +48,18 @@ export default class store {
 
   setPin = async () => {
     const data = await storage.get("pin");
-
     this.pin = data;
   };
+
   setToken = async () => {
-    const data = await storage.get("token");
-    this.token = data;
+    let token = await storage.get("token");
+    this.token = token;
   };
 
   addInStack = ([requests]) => {
     const id = Math.floor(Math.random()) * 100;
     this.request_stack.push(id);
     this.main_spiner = true;
-    console.log("addInStack", this.getSpiner);
     return id;
   };
 
@@ -85,7 +85,6 @@ export default class store {
   }
 
   setError = (error, methodName) => {
-    console.log(this.errors, "errors");
     this.errors.push({
       message: `${error?.message ?? error} from: ${methodName ?? ""}`,
     });

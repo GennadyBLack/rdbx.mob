@@ -9,7 +9,6 @@ const Toggler = ({
   list,
   data = {},
 }) => {
-  
   const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
@@ -20,7 +19,7 @@ const Toggler = ({
     if (!list?.length) return;
     return (
       <View>
-        {list.map((item, idx) =>
+        {list?.map((item, idx) =>
           template ? template(item) : <View key={idx}>{item}</View>
         )}
       </View>

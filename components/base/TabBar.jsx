@@ -31,7 +31,6 @@ const TabBar = (props) => {
   const scrollTo = useCallback((destination) => {
     "worklet";
     translate.value = withSpring(destination, { damping: 50 });
-    console.log(translate.value, "UUUUU");
   }, []);
 
   const getPath = () => {

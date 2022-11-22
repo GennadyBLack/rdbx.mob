@@ -18,7 +18,6 @@ export default function useUploadImage(value = null, onChange) {
         }
       }
     })();
-    console.log(value, "valuevalue==");
   }, []);
 
   const pickImage = async () => {
