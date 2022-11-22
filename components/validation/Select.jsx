@@ -20,8 +20,9 @@ export default function Select({
   };
   return (
     <Controller
+      style={{ height: 100 }}
       render={({ field: { value, onChange }, fieldState }) => (
-        <View style={{ height: 50 }}>
+        <View style={{ height: 100 }}>
           <Picker
             style={{ height: 100 }}
             error={fieldState?.error?.message}

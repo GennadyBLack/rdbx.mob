@@ -56,7 +56,8 @@
     "webpack-dev-server": "~3.11.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "eslint": "^8.28.0"
   },
   "private": true
 }

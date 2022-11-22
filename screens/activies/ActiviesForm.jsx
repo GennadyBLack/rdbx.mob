@@ -6,6 +6,7 @@ import s from "../../helpers/styleHelper";
 
 const ActiviesForm = () => {
   const createActivity = async (data) => {
+    console.log(api.methodts, "api.methodts");
     await api.methodts.add_one_activity(data).then((res) => {
       console.log(res);
     });

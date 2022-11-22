@@ -192,6 +192,9 @@ export const linking = {
       Public: "/",
       Test: "test",
       Recomendations: "recomendations",
+      NotificationList: "NotificationList",
+      ActiviesForm: "ActiviesForm",
+      ScanHistory: "ScanHistory",
 
       // Profile: {
       //   path: "profile",
