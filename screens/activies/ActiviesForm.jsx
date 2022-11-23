@@ -3,6 +3,7 @@ import { View, ScrollView, Text } from "react-native";
 import Form from "../../components/validation/Form";
 import api from "../../api";
 import s from "../../helpers/styleHelper";
+import DateInput from "../../components/validation/Date";
 
 const ActiviesForm = () => {
   const createActivity = async (data) => {
@@ -157,6 +158,12 @@ const ActiviesForm = () => {
           placeholder="lon"
           label="lon"
           mode="dropdown"
+        />
+        <Form.Date
+          style={s.mb_3}
+          name="dates"
+          placeholder="date"
+          label="date"
         />
       </Form>
     </ScrollView>

@@ -5,9 +5,10 @@ import File from "./File";
 import Picker from "./Select";
 import Select from "./Select";
 import Upload from "./UploadValidation";
-import { View, Button, StyleSheet, Pressable, Text } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import s from "../../helpers/styleHelper";
 import constants from "../../helpers/styleHelper";
+import DateInput from "./Date";
 
 function Form({
   defaultValues,
@@ -23,7 +24,6 @@ function Form({
     control,
     formState: { errors, dirtyFields },
   } = methods;
-  // console.log(dirtyFields, "dirtyFields");
   const wrap = async (e) => {
     await onSubmit(e);
     resetForm ? await reset({ defaultValues }) : null;
@@ -54,6 +54,7 @@ Form.Input = Input;
 Form.Select = Select;
 Form.Upload = Upload;
 Form.File = File;
+Form.Date = DateInput;
 
 export default Form;
 

@@ -43,8 +43,6 @@ function Login() {
     setForm({ ...form, [field]: e });
   };
 
-  console.log(logo, "logologo");
-
   let login = async () => {
     await auth.login(form, () => navigation.navigate("Public"));
   };
@@ -81,6 +79,7 @@ function Login() {
 
       <Animated.View style={[styles.login_content, { width: "100%" }]}>
         <TextInput
+          testID="login_email"
           mode="outlined"
           label="Email"
           value={form?.email}
@@ -88,6 +87,7 @@ function Login() {
           style={{ marginBottom: 20 }}
         />
         <TextInput
+          testID="login_password"
           secureTextEntry
           mode="outlined"
           label="Password"
@@ -96,6 +96,7 @@ function Login() {
           onChangeText={(text) => setText(text, "password")}
         />
         <Pressable
+          testID="login_btn"
           onPress={() => {
             login();
           }}

@@ -22,7 +22,14 @@ export default function Select({
     <Controller
       style={{ height: 100 }}
       render={({ field: { value, onChange }, fieldState }) => (
-        <View style={{ height: 100 }}>
+        <View
+          style={{
+            height: 60,
+            borderWidth: 1,
+            borderColor: "grey",
+            borderRadius: 3,
+          }}
+        >
           <Picker
             style={{ height: 100 }}
             error={fieldState?.error?.message}
