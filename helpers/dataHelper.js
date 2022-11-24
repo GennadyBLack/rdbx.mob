@@ -12,6 +12,7 @@ const dataHelper = (included, relations) => {
         }
       });
     }
+
     return relations ? concatData(relations, preData) : preData;
   } catch (error) {
     console.error(error, "dataHelper");
@@ -21,6 +22,7 @@ const dataHelper = (included, relations) => {
 export default dataHelper;
 
 export const concatData = (data, include) => {
+  console.log(data, "data", include, "include");
   try {
     const pre = [];
     Array.isArray(data) &&

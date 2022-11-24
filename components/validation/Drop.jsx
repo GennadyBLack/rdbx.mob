@@ -32,8 +32,8 @@ export default function Drop({
   return (
     <Controller
       render={({ field: { value, onChange }, fieldState }) => (
-        <Provider theme={nightMode ? DarkTheme : DefaultTheme}>
-          <ThemeProvider theme={nightMode ? DarkTheme : DefaultTheme}>
+        <Provider>
+          <ThemeProvider>
             <StatusBar
               backgroundColor={
                 nightMode
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   safeContainerStyle: {
     flex: 1,
-    margin: 20,
+    // margin: 20,
     justifyContent: "center",
   },
 });

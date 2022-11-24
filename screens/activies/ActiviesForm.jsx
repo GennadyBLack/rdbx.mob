@@ -158,12 +158,39 @@ const ActiviesForm = () => {
             { label: "123", value: 12 },
             { label: "1231", value: 122 },
             { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
           ]}
           name="lon"
           title="label"
           placeholder="lon"
           label="lon"
-          mode="dropdown"
+          mode="outlined"
         />
         <Form.Date
           style={s.mb_3}

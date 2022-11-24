@@ -8,6 +8,7 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
+import Spiner from "../../components/base/Spiner";
 
 import PinModal from "../../components/auth/PinModal";
 
@@ -65,6 +66,7 @@ function Login() {
         { alignItems: "center", backgroundColor: "rgb(238 238 238)" },
       ]}
     >
+      <Spiner loading={auth.loading} />
       <Image
         source={logo}
         style={[
@@ -76,7 +78,6 @@ function Login() {
           },
         ]}
       />
-
       <Animated.View style={[styles.login_content, { width: "100%" }]}>
         <TextInput
           testID="login_email"

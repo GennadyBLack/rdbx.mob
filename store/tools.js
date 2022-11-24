@@ -10,7 +10,7 @@ export default class Tools {
   uploadImage = async (file) => {
     try {
       this.loading = true;
-      this.imageName = (await this?.api?.upload(file)).data;
+      this.imageName = (await this?.api?.media?.upload_image(file)).data;
     } catch (error) {
       this.root.setError(error);
       this.loading = false;
