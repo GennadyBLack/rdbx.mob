@@ -7,10 +7,11 @@ import DateInput from "../../components/validation/Date";
 
 const ActiviesForm = () => {
   const createActivity = async (data) => {
-    console.log(api.methodts, "api.methodts");
-    await api.methodts.add_one_activity(data).then((res) => {
-      console.log(res);
-    });
+    console.log(data);
+    // console.log(api.methodts, "api.methodts");
+    // await api.methodts.add_one_activity(data).then((res) => {
+    //   console.log(res);
+    // });
   };
   return (
     <ScrollView>
@@ -151,10 +152,15 @@ const ActiviesForm = () => {
           mode="outlined"
         />
 
-        <Form.Select
+        <Form.DropDown
           style={s.mb_3}
-          options={[{ label: "123", value: 12 }]}
+          options={[
+            { label: "123", value: 12 },
+            { label: "1231", value: 122 },
+            { label: "12321", value: 212 },
+          ]}
           name="lon"
+          title="label"
           placeholder="lon"
           label="lon"
           mode="dropdown"
@@ -162,8 +168,9 @@ const ActiviesForm = () => {
         <Form.Date
           style={s.mb_3}
           name="dates"
-          placeholder="date"
-          label="date"
+          placeholder="Date"
+          label="Date"
+          mode="outlined"
         />
       </Form>
     </ScrollView>

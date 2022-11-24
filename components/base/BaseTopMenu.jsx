@@ -29,7 +29,15 @@ const BaseTopMenu = () => {
   return (
     <View>
       <StatusBar />
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          padding: 20,
+          borderWidth: 1,
+          borderColor: "#eee",
+        }}
+      >
         <Text>
           <Pressable
             onPress={() => {

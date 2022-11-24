@@ -3,6 +3,7 @@ import { DatePickerModal, DatePickerInput } from "react-native-paper-dates";
 import * as React from "react";
 import { View, Text } from "react-native";
 import { Controller } from "react-hook-form";
+import moment from "moment";
 
 export default function DateInput({
   name,
@@ -12,20 +13,17 @@ export default function DateInput({
   rules,
   ...rest
 }) {
-  const [inputDate, setInputDate] = React.useState(undefined);
-
   return (
     <Controller
       render={({ field: { value, onChange }, fieldState }) => (
         <View style={{ marginVertical: 10 }}>
           <DatePickerInput
-            locale="ru"
+            locale="Ru"
             error={fieldState?.error?.message}
-            value={value || ""}
+            value={value || null}
             label={label || ""}
             onChange={(d) => {
-              onChange(d);
-              setInputDate(d);
+              onChange(moment(d));
             }}
             inputMode="start"
             {...{

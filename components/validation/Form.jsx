@@ -9,6 +9,7 @@ import { View, StyleSheet, Pressable, Text } from "react-native";
 import s from "../../helpers/styleHelper";
 import constants from "../../helpers/styleHelper";
 import DateInput from "./Date";
+import DropDown from "./Drop";
 
 function Form({
   defaultValues,
@@ -55,6 +56,7 @@ Form.Select = Select;
 Form.Upload = Upload;
 Form.File = File;
 Form.Date = DateInput;
+Form.DropDown = DropDown;
 
 export default Form;
 
