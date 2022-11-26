@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Pressable } from "react-native";
 import storage from "../../helpers/storage";
 import ModalSheet from "../base/ModalSheet";
@@ -8,27 +8,39 @@ import useStore from "../../hooks/useStore";
 import { observer } from "mobx-react-lite";
 import { getIcon } from "../../helpers/iconHelper";
 
-const PinModal = ({ success, show, pin, token }) => {
+const PinModal = ({ success, show, pin, token, children }) => {
+  const [pincode, setPinCode] = useState("");
   const root = useStore();
+
+  const setPin = (val) => {
+    setPinCode(pincode + val);
+  };
+
+  const deleteChapter = () => {
+    setPinCode(pincode.slice(0, -1));
+  };
+
   const [visible, setVisible] = useState(() => {
     return show;
   });
 
-  const submit = async (data) => {
-    try {
-      const pin = await storage.get("pin");
-      if (pin === data.pin) {
-        await success();
+  const successFunc = async () => {
+    await success();
+  };
+
+  useEffect(() => {
+    if (pincode?.length === pin?.length) {
+      if (pincode === pin) {
+        setVisible(!visible);
+        successFunc();
       } else {
         root.setError({ message: "не верный пин код" });
       }
-    } catch (error) {
-      console.error(error);
     }
-  };
+  }, [pincode]);
+
   return (
     <View style={{ flex: 1 }}>
-      <Text nativeID="asds"></Text>
       <Pressable
         style={{ height: 30, width: 30 }}
         onPress={() => {
@@ -38,21 +50,149 @@ const PinModal = ({ success, show, pin, token }) => {
         {token && pin ? <Text>{getIcon("hand")}</Text> : <Text></Text>}
       </Pressable>
       <ModalSheet
+        startAt={1}
         visible={visible}
         toggle={() => {
           setVisible(!visible);
         }}
       >
-        <Form onSubmit={submit}>
-          <Form.Input
-            keyboardType="numeric"
-            style={s.mb_3}
-            name="pin"
-            placeholder="Pin"
-            label="Pin"
-            mode="outlined"
-          />
-        </Form>
+        <View
+          style={{
+            justifyContent: "flex-end",
+            flex: 1,
+            flexDirection: "column",
+            alignItems: "center",
+            marginBottom: 40,
+          }}
+        >
+          <View>
+            {children}
+            <Text>{pincode}</Text>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(1);
+              }}
+            >
+              <View>
+                <Text>1</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(2);
+              }}
+            >
+              <View>
+                <Text>2</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(3);
+              }}
+            >
+              <View>
+                <Text>3</Text>
+              </View>
+            </Pressable>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(4);
+              }}
+            >
+              <View>
+                <Text>4</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(5);
+              }}
+            >
+              <View>
+                <Text>5</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(6);
+              }}
+            >
+              <View>
+                <Text>6</Text>
+              </View>
+            </Pressable>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(7);
+              }}
+            >
+              <View>
+                <Text>7</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(8);
+              }}
+            >
+              <View>
+                <Text>8</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(9);
+              }}
+            >
+              <View>
+                <Text>9</Text>
+              </View>
+            </Pressable>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setVisible(!visible);
+              }}
+            >
+              <View>
+                <Text>{getIcon("close")}</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={s.pin_button}
+              onPress={() => {
+                setPin(0);
+              }}
+            >
+              <View>
+                <Text>0</Text>
+              </View>
+            </Pressable>
+            <Pressable style={s.pin_button} onPress={() => deleteChapter()}>
+              <View>
+                <Text>Del</Text>
+              </View>
+            </Pressable>
+          </View>
+        </View>
       </ModalSheet>
     </View>
   );

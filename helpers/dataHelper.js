@@ -22,22 +22,25 @@ const dataHelper = (included, relations) => {
 export default dataHelper;
 
 export const concatData = (data, include) => {
-  console.log(data, "data", include, "include");
   try {
     const pre = [];
     Array.isArray(data) &&
-      data.length &&
-      data.forEach((item) => {
+      data?.length &&
+      data?.forEach((item) => {
         const preItem = { ...item };
         for (const key in item.relationships) {
-          if (include[key][item?.relationships[key]?.id]) {
+          if (
+            include[key] &&
+            include[key][item?.relationships[key]] &&
+            include[key][item?.relationships[key]?.id]
+          ) {
             preItem[key] = include[key][item?.relationships[key]?.id];
           }
         }
-        pre.push({ ...preItem, include: include });
+        pre.push({ ...(preItem ?? {}), include: include ?? {} });
       });
     return pre;
   } catch (error) {
-    console.error(error, "dataHelper");
+    console.error(error, "concatData");
   }
 };

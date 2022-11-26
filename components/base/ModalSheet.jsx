@@ -53,9 +53,7 @@ const ModalSheet = ({ visible, children, toggle, startAt }) => {
 
   const gesture = Gesture.Pan()
     .minDistance(25)
-    .onTouchesDown((e) => {
-      console.log(e, "touchDown");
-    })
+    .onTouchesDown((e) => {})
     .onBegin((e) => {
       context.value = { y: translateY?.value };
     })

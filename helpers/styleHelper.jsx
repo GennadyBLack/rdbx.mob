@@ -444,6 +444,15 @@ const mainStyles = {
     padding: 10,
     borderRadius: 5,
   },
+  pin_button: {
+    backgroundColor: PRIMARY,
+    width: 60,
+    height: 60,
+    margin: 10,
+    justifyContent: "center",
+    borderRadius: 30,
+    alignItems: "center",
+  },
 };
 
 const s = StyleSheet.create(mainStyles);

@@ -4,6 +4,8 @@ import * as React from "react";
 import { View, Text } from "react-native";
 import { Controller } from "react-hook-form";
 import moment from "moment";
+import "intl";
+import "intl/locale-data/jsonp/ru"; // or any other locale you need
 
 export default function DateInput({
   name,

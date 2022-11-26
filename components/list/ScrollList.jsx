@@ -36,7 +36,6 @@ const ScrollList = ({
   };
   const loadData = async () => {
     try {
-      console.log(page > count / limit && !firstRequest);
       if (page > count / limit && !firstRequest) return;
       setLoading(true);
       const config = getConfig();

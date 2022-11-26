@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
 import File from "./File";
-import Picker from "./Select";
+// import Picker from "./Select";
 import Select from "./Select";
 import Upload from "./UploadValidation";
 import { View, StyleSheet, Pressable, Text } from "react-native";
@@ -10,6 +10,7 @@ import s from "../../helpers/styleHelper";
 import constants from "../../helpers/styleHelper";
 import DateInput from "./Date";
 import DropDown from "./Drop";
+import Picker from "./Picker";
 
 function Form({
   defaultValues,
@@ -57,6 +58,7 @@ Form.Upload = Upload;
 Form.File = File;
 Form.Date = DateInput;
 Form.DropDown = DropDown;
+Form.Picker = Picker;
 
 export default Form;
 

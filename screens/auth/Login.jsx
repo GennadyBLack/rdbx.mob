@@ -139,7 +139,9 @@ function Login() {
             auth?.root?.token
           }
           success={async () => await auth.fetchMe()}
-        />
+        >
+          <Spiner loading={auth.loading} />
+        </PinModal>
       </Animated.View>
     </Animated.View>
   );

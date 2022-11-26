@@ -75,7 +75,6 @@ export default function Cam() {
       await prepareCamera();
     }
   };
-  // console.log(avaliableSizes, "avaliable");
   const takePicture = async () => {
     let options = {
       base64: true,

@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, ScrollView, Text } from "react-native";
 import Form from "../../components/validation/Form";
-import api from "../../api";
+import apis from "../../api/api";
 import s from "../../helpers/styleHelper";
-import DateInput from "../../components/validation/Date";
+import Drop from "../../components/validation/Drop";
 
 const ActiviesForm = () => {
+  const [city, setCity] = useState([]);
+  const [category, setCategory] = useState([]);
+
+  const getCities = async () => {
+    const pre = (await apis.publics.get_all_city()).data.data.map((item) => {
+      return { label: item.attributes.title, value: item.id };
+    });
+    setCity(pre);
+  };
+  const getCategory = async () => {
+    const pre = (await apis.publics.get_all_category()).data.data.map(
+      (item) => {
+        return { label: item.attributes.title, value: item.id };
+      }
+    );
+    setCategory(pre);
+  };
+
+  useEffect(() => {
+    getCities();
+    getCategory();
+  }, []);
   const createActivity = async (data) => {
     console.log(data);
-    // console.log(api.methodts, "api.methodts");
-    // await api.methodts.add_one_activity(data).then((res) => {
-    //   console.log(res);
-    // });
+    await apis.methodts.add_one_activity(data).then((res) => {
+      console.log(res);
+    });
   };
   return (
     <ScrollView>
@@ -66,27 +87,14 @@ const ActiviesForm = () => {
           mode="outlined"
         />
 
-        <Form.Input
-          style={s.mb_3}
-          name="contact_city"
-          placeholder="Контактный город"
-          label="Контактный город"
-          mode="outlined"
-        />
-        <Form.Input
+        {/* <Form.Input
           style={s.mb_3}
           name="contact_city"
           placeholder="contact_city"
           label="contact_city"
           mode="outlined"
-        />
-        <Form.Input
-          style={s.mb_3}
-          name="category"
-          placeholder="Категория"
-          label="Категория"
-          mode="outlined"
-        />
+        /> */}
+
         <Form.Input
           style={s.mb_3}
           name="general_image"
@@ -152,51 +160,27 @@ const ActiviesForm = () => {
           mode="outlined"
         />
 
-        <Form.DropDown
-          style={s.mb_3}
-          options={[
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-            { label: "123", value: 12 },
-            { label: "1231", value: 122 },
-            { label: "12321", value: 212 },
-          ]}
-          name="lon"
-          title="label"
-          placeholder="lon"
-          label="lon"
-          mode="outlined"
-        />
         <Form.Date
           style={s.mb_3}
           name="dates"
           placeholder="Date"
           label="Date"
+          mode="outlined"
+        />
+        <Form.DropDown
+          style={s.mb_3}
+          options={[...category]}
+          name="category"
+          placeholder="Категория"
+          label="Категория"
+          mode="outlined"
+        />
+        <Form.DropDown
+          style={s.mb_3}
+          options={[...city]}
+          name="contact_city"
+          placeholder="Контактный город"
+          label="Контактный город"
           mode="outlined"
         />
       </Form>

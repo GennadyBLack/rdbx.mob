@@ -33,8 +33,10 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
       <View
         style={[customClass]}
         onLayout={(event) => {
+          event.target.measure((x, y, width, height, pageX, pageY) => {
+            elemP.value = { x: pageX, y: pageY };
+          });
           const layout = event.nativeEvent.layout;
-          elemP.value = { x: layout.y, y: layout.top };
         }}
         ref={ref}
       >

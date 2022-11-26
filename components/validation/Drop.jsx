@@ -24,7 +24,7 @@ export default function Drop({
   const mappedItems = () => {
     return rest?.options?.map((item) => {
       return {
-        label: rest?.title ? item[rest?.title] : item?.title,
+        label: rest?.title ? item[rest?.title] : item?.label,
         value: item.value,
       };
     });
@@ -46,6 +46,12 @@ export default function Drop({
             <Surface style={styles.containerStyle}>
               <SafeAreaView style={styles.safeContainerStyle}>
                 <DropDown
+                  dropDownStyle={{
+                    width: 400,
+                    backgroundColor: "white",
+                    borderColor: "white",
+                    shadowColor: "white",
+                  }}
                   error={fieldState?.error?.message}
                   value={value || ""}
                   label={label || ""}
