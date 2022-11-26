@@ -1,18 +1,19 @@
-import DropDownPicker from "react-native-dropdown-picker";
 import React, { useState, useEffect } from "react";
+import Pick from "../fields/Pick";
 
 import { Controller } from "react-hook-form";
 
-import { StyleSheet, View, Text, StatusBar, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+
 export default function Picker({
   name,
   label,
   variant,
   control,
   rules,
+  value,
   ...rest
 }) {
-  const [open, setOpen] = useState(false);
   const mappedItems = () => {
     return rest?.options?.map((item) => {
       return {
@@ -25,13 +26,10 @@ export default function Picker({
     <Controller
       render={({ field: { value, onChange }, fieldState }) => (
         <View>
-          <DropDownPicker
+          <Pick
             value={value}
             label={label || ""}
-            open={open}
-            setOpen={setOpen}
-            setValue={(value) => onChange(value)}
-            setItems={(value) => onChange(value)}
+            onChange={(value) => onChange(value)}
             items={mappedItems()}
             {...{
               ...fieldState,

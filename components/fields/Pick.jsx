@@ -14,65 +14,84 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 
-const { height, width } = Dimensions.get("window");
+// const { height, width } = Dimensions.get("window");
 
-const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
+const Pick = ({
+  items = [],
+  customClass = {},
+  value,
+  placeholder,
+  onChange,
+}) => {
   const [visible, setVisible] = useState(false);
-
   const elemP = useSharedValue({ x: 0, y: 0 });
-
   const openMenu = () => setVisible(true);
   const toggle = () => {
     setVisible(!visible);
+  };
+
+  const getActiveItem = () => {
+    return items.find((item) => {
+      return item.value === value;
+    });
   };
 
   const closeMenu = () => setVisible(false);
   const ref = useRef();
 
   const toggleButton = () => {
-    return anchor ? (
-      <View
-        style={[customClass]}
-        onLayout={(event) => {
-          if (Platform.OS === "web") {
-            event?.nativeEvent?.target?.measure((...rest) => {
-              // console.log(rest, "AAAAA____");rest[4]
-              elemP.value = { x: 0, y: rest[5] };
-            });
-          } else {
-            event?.target?.measure((...rest) => {
-              // console.log(rest, "AAAAA____");rest[4]
-              elemP.value = { x: 0, y: rest[5] };
-            });
-          }
-        }}
-        ref={ref}
+    return (
+      <Pressable
+        onPress={toggle}
+        style={[
+          {
+            height: 60,
+            width: "100%",
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderColor: "black",
+            // alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 5,
+          },
+          customClass,
+        ]}
       >
-        <Pressable onPress={toggle}>
-          <Text>{anchor}</Text>
-        </Pressable>
-      </View>
-    ) : (
-      <Pressable onPress={openMenu}>
-        <Text>Show menu</Text>
+        <View
+          onLayout={(event) => {
+            if (Platform.OS === "web") {
+              event?.nativeEvent?.target?.measure((...rest) => {
+                elemP.value = { x: 0, y: rest[5] };
+              });
+            } else {
+              event?.target?.measure((...rest) => {
+                elemP.value = { x: 0, y: rest[5] };
+              });
+            }
+          }}
+          ref={ref}
+        >
+          <View>
+            <View>
+              <Text style={{ marginLeft: 20 }}>
+                {value ? getActiveItem()?.label : placeholder}
+              </Text>
+            </View>
+          </View>
+        </View>
       </Pressable>
     );
   };
 
-  // useEffect(() => {
-  //   const elem = { left: 100, top: 100 }; //ref.current.getBoundingClientRect();
-  //   elemP.value = { x: elem.left, y: elem.top };
-  // }, []);
-
   const modalStyle = useAnimatedStyle(() => {
     return {
-      right: elemP?.value?.x + 30 ?? 0 + 30,
-      top: elemP?.value?.y ?? 0 + 30,
+      right: elemP?.value?.x + 30 ?? 30,
+      top: elemP?.value?.y + 60 ?? 0 + 60,
     };
   });
 
   if (!items.length) {
-    return <Text>no</Text>;
+    return <Text>Нет данных</Text>;
   }
   return (
     <View
@@ -109,15 +128,22 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
                       {item?.icon ? <Text>{item?.icon}</Text> : <Text></Text>}
                       <Pressable
                         key={idx}
-                        onPress={async () => {
-                          typeof item?.onPress === "function"
-                            ? await item?.onPress()
+                        onPress={() => {
+                          typeof onChange === "function"
+                            ? onChange(item?.value)
                             : null;
-                          toggle();
+                          setVisible(false);
                         }}
-                        style={styles?.menuItem}
+                        style={[
+                          styles?.menuItem,
+                          {
+                            backgroundColor: `${
+                              value === item.value ? "#86e9b0" : "white"
+                            }`,
+                          },
+                        ]}
                       >
-                        <Text> {item?.title}</Text>
+                        <Text>{item?.label}</Text>
                       </Pressable>
                     </View>
                   );
@@ -134,9 +160,10 @@ const MenuToggler = ({ items = [], anchor, customClass = {} }) => {
 const styles = StyleSheet.create({
   menuItem: {
     zIndex: 10,
-    padding: 10,
+    padding: 20,
   },
   menu: {
+    width: "90%",
     borderRadius: 10,
     borderColor: "#eee",
     borderWidth: 1,
@@ -148,4 +175,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MenuToggler;
+export default Pick;

@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from "react-native";
 import Form from "../../components/validation/Form";
 import apis from "../../api/api";
 import s from "../../helpers/styleHelper";
-import Drop from "../../components/validation/Drop";
+import TestPick from "../../components/fields/Pick";
 
 const ActiviesForm = () => {
   const [city, setCity] = useState([]);
@@ -37,6 +37,15 @@ const ActiviesForm = () => {
   return (
     <ScrollView>
       <Form onSubmit={createActivity}>
+        <Form.Picker
+          name="contasct_city"
+          items={[
+            { label: "hi", value: 1 },
+            { label: "hiasd", value: 12 },
+            { label: "hi2", value: 1123 },
+          ]}
+          placeholder="ntcn"
+        />
         <Form.Input
           style={s.mb_3}
           name="type"
@@ -87,14 +96,6 @@ const ActiviesForm = () => {
           mode="outlined"
         />
 
-        {/* <Form.Input
-          style={s.mb_3}
-          name="contact_city"
-          placeholder="contact_city"
-          label="contact_city"
-          mode="outlined"
-        /> */}
-
         <Form.Input
           style={s.mb_3}
           name="general_image"
@@ -114,6 +115,22 @@ const ActiviesForm = () => {
           name="ageRating"
           placeholder="Возрастной рейтинг"
           label="Возрастной рейтинг"
+          mode="outlined"
+        />
+        <Form.Picker
+          style={s.mb_3}
+          options={[...category]}
+          name="category"
+          placeholder="Категория"
+          label="Категория"
+          mode="outlined"
+        />
+        <Form.Picker
+          style={s.mb_3}
+          options={[...city]}
+          name="contact_city"
+          placeholder="Контактный город"
+          label="Контактный город"
           mode="outlined"
         />
         <Form.Input
@@ -165,22 +182,6 @@ const ActiviesForm = () => {
           name="dates"
           placeholder="Date"
           label="Date"
-          mode="outlined"
-        />
-        <Form.DropDown
-          style={s.mb_3}
-          options={[...category]}
-          name="category"
-          placeholder="Категория"
-          label="Категория"
-          mode="outlined"
-        />
-        <Form.DropDown
-          style={s.mb_3}
-          options={[...city]}
-          name="contact_city"
-          placeholder="Контактный город"
-          label="Контактный город"
           mode="outlined"
         />
       </Form>
