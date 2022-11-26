@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   View,
@@ -11,10 +11,12 @@ import {
 } from "react-native";
 import Animated, {
   useAnimatedStyle,
+  useAnimatedRef,
   useSharedValue,
+  measure,
+  Extrapolate,
+  interpolate,
 } from "react-native-reanimated";
-
-// const { height, width } = Dimensions.get("window");
 
 const Pick = ({
   items = [],
@@ -24,8 +26,9 @@ const Pick = ({
   onChange,
 }) => {
   const [visible, setVisible] = useState(false);
-  const elemP = useSharedValue({ x: 0, y: 0 });
+  const ref = useAnimatedRef();
   const openMenu = () => setVisible(true);
+
   const toggle = () => {
     setVisible(!visible);
   };
@@ -37,56 +40,12 @@ const Pick = ({
   };
 
   const closeMenu = () => setVisible(false);
-  const ref = useRef();
-
-  const toggleButton = () => {
-    return (
-      <Pressable
-        onPress={toggle}
-        style={[
-          {
-            height: 60,
-            width: "100%",
-            backgroundColor: "white",
-            borderWidth: 1,
-            borderColor: "black",
-            // alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 5,
-          },
-          customClass,
-        ]}
-      >
-        <View
-          onLayout={(event) => {
-            if (Platform.OS === "web") {
-              event?.nativeEvent?.target?.measure((...rest) => {
-                elemP.value = { x: 0, y: rest[5] };
-              });
-            } else {
-              event?.target?.measure((...rest) => {
-                elemP.value = { x: 0, y: rest[5] };
-              });
-            }
-          }}
-          ref={ref}
-        >
-          <View>
-            <View>
-              <Text style={{ marginLeft: 20 }}>
-                {value ? getActiveItem()?.label : placeholder}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </Pressable>
-    );
-  };
 
   const modalStyle = useAnimatedStyle(() => {
+    const d = measure(ref);
+    console.log(d, "DDDD");
     return {
-      right: elemP?.value?.x + 30 ?? 30,
-      top: elemP?.value?.y + 60 ?? 0 + 60,
+      top: d,
     };
   });
 
@@ -94,14 +53,38 @@ const Pick = ({
     return <Text>Нет данных</Text>;
   }
   return (
-    <View
+    <Animated.View
       style={{
         zIndex: 1000000,
         position: "relative",
       }}
     >
-      <View>
-        {toggleButton()}
+      <View ref={ref}>
+        <Pressable
+          onPress={() => toggle()}
+          style={[
+            {
+              height: 60,
+              width: "100%",
+              backgroundColor: "white",
+              borderWidth: 1,
+              borderColor: "black",
+              justifyContent: "center",
+              borderRadius: 5,
+            },
+            customClass,
+          ]}
+        >
+          <View>
+            <View>
+              <View>
+                <Text style={{ marginLeft: 20 }}>
+                  {value ? getActiveItem()?.label : placeholder}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </Pressable>
         <View style={styles.menu}>
           <Modal
             contentContainerStyle={{
@@ -116,12 +99,7 @@ const Pick = ({
             transparent={true}
           >
             <Pressable onPress={() => setVisible(false)} style={{ flex: 1 }}>
-              <Animated.View
-                style={[styles.menu, modalStyle]}
-                onLayout={(event) => {
-                  const layout = event.nativeEvent.layout;
-                }}
-              >
+              <Animated.View style={[styles.menu, modalStyle]}>
                 {items.map((item, idx) => {
                   return (
                     <View style={{ zIndex: 10000 }} key={idx}>
@@ -153,7 +131,7 @@ const Pick = ({
           </Modal>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -163,6 +141,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   menu: {
+    maxHeight: 300,
+    overflow: "scroll",
     width: "90%",
     borderRadius: 10,
     borderColor: "#eee",

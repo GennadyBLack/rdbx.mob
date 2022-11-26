@@ -37,7 +37,7 @@ const ActiviesForm = () => {
   return (
     <ScrollView>
       <Form onSubmit={createActivity}>
-        <Form.Picker
+        {/* <Form.Picker
           name="contasct_city"
           items={[
             { label: "hi", value: 1 },
@@ -45,7 +45,7 @@ const ActiviesForm = () => {
             { label: "hi2", value: 1123 },
           ]}
           placeholder="ntcn"
-        />
+        /> */}
         <Form.Input
           style={s.mb_3}
           name="type"
@@ -117,22 +117,22 @@ const ActiviesForm = () => {
           label="Возрастной рейтинг"
           mode="outlined"
         />
-        <Form.Picker
+        {/* <Form.Picker
           style={s.mb_3}
           options={[...category]}
           name="category"
           placeholder="Категория"
           label="Категория"
           mode="outlined"
-        />
-        <Form.Picker
+        /> */}
+        {/* <Form.Picker
           style={s.mb_3}
           options={[...city]}
           name="contact_city"
           placeholder="Контактный город"
           label="Контактный город"
           mode="outlined"
-        />
+        /> */}
         <Form.Input
           style={s.mb_3}
           name="organizer"
