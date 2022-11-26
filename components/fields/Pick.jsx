@@ -9,14 +9,6 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import Animated, {
-  useAnimatedStyle,
-  useAnimatedRef,
-  useSharedValue,
-  measure,
-  Extrapolate,
-  interpolate,
-} from "react-native-reanimated";
 
 const Pick = ({
   items = [],
@@ -24,9 +16,9 @@ const Pick = ({
   value,
   placeholder,
   onChange,
+  label,
 }) => {
   const [visible, setVisible] = useState(false);
-  const ref = useAnimatedRef();
   const openMenu = () => setVisible(true);
 
   const toggle = () => {
@@ -41,97 +33,95 @@ const Pick = ({
 
   const closeMenu = () => setVisible(false);
 
-  const modalStyle = useAnimatedStyle(() => {
-    const d = measure(ref);
-    console.log(d, "DDDD");
-    return {
-      top: d,
-    };
-  });
-
   if (!items.length) {
     return <Text>Нет данных</Text>;
   }
   return (
-    <Animated.View
+    <View
       style={{
         zIndex: 1000000,
         position: "relative",
+        paddingBottom: 10,
       }}
     >
-      <View ref={ref}>
-        <Pressable
-          onPress={() => toggle()}
-          style={[
-            {
-              height: 60,
-              width: "100%",
-              backgroundColor: "white",
-              borderWidth: 1,
-              borderColor: "black",
-              justifyContent: "center",
-              borderRadius: 5,
-            },
-            customClass,
-          ]}
-        >
-          <View>
-            <View>
-              <View>
-                <Text style={{ marginLeft: 20 }}>
-                  {value ? getActiveItem()?.label : placeholder}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </Pressable>
-        <View style={styles.menu}>
-          <Modal
-            contentContainerStyle={{
-              borderRadius: 10,
-              borderColor: "#eee",
-              borderWidth: 1,
-              backgroundColor: "white",
-              position: "absolute",
-              right: 10,
-            }}
-            visible={visible}
-            transparent={true}
-          >
-            <Pressable onPress={() => setVisible(false)} style={{ flex: 1 }}>
-              <Animated.View style={[styles.menu, modalStyle]}>
-                {items.map((item, idx) => {
-                  return (
-                    <View style={{ zIndex: 10000 }} key={idx}>
-                      {item?.icon ? <Text>{item?.icon}</Text> : <Text></Text>}
-                      <Pressable
-                        key={idx}
-                        onPress={() => {
-                          typeof onChange === "function"
-                            ? onChange(item?.value)
-                            : null;
-                          setVisible(false);
-                        }}
-                        style={[
-                          styles?.menuItem,
-                          {
-                            backgroundColor: `${
-                              value === item.value ? "#86e9b0" : "white"
-                            }`,
-                          },
-                        ]}
-                      >
-                        <Text>{item?.label}</Text>
-                      </Pressable>
-                    </View>
-                  );
-                })}
-              </Animated.View>
-            </Pressable>
-          </Modal>
+      <Text style={{ paddingTop: 10 }}>{label ? label : ""}</Text>
+      <Pressable
+        onPress={() => toggle()}
+        style={[
+          customClass,
+          {
+            height: 60,
+            width: "100%",
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderColor: "black",
+            borderRadius: 5,
+          },
+        ]}
+      >
+        <View style={{}}>
+          <Text style={{ marginLeft: 20, marginTop: 20 }}>
+            {value ? getActiveItem()?.label : placeholder}
+          </Text>
         </View>
-      </View>
-    </Animated.View>
+
+        <Modal
+          style={{
+            borderRadius: 10,
+            borderColor: "#eee",
+            borderWidth: 1,
+            backgroundColor: "white",
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            right: 0,
+            left: 0,
+          }}
+          visible={visible}
+          transparent={true}
+        >
+          <Pressable
+            onPress={() => setVisible(false)}
+            style={{
+              flex: 1,
+              height: "100%",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View style={[styles.menu]}>
+              {items.map((item, idx) => {
+                return (
+                  <View style={{ zIndex: 10000 }} key={idx}>
+                    {item?.icon ? <Text>{item?.icon}</Text> : <Text></Text>}
+                    <Pressable
+                      key={idx}
+                      onPress={() => {
+                        typeof onChange === "function"
+                          ? onChange(item?.value)
+                          : null;
+                        setVisible(false);
+                      }}
+                      style={[
+                        styles?.menuItem,
+                        {
+                          backgroundColor: `${
+                            value === item.value ? "#86e9b0" : "white"
+                          }`,
+                        },
+                      ]}
+                    >
+                      <Text>{item?.label}</Text>
+                    </Pressable>
+                  </View>
+                );
+              })}
+            </View>
+          </Pressable>
+        </Modal>
+      </Pressable>
+    </View>
   );
 };
 
@@ -141,12 +131,12 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   menu: {
-    maxHeight: 300,
+    maxHeight: "50%",
     overflow: "scroll",
     width: "90%",
     borderRadius: 10,
     borderColor: "#eee",
-    borderWidth: 1,
+    borderWidth: 2,
     backgroundColor: "white",
     position: "absolute",
   },

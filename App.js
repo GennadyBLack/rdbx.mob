@@ -50,27 +50,27 @@ export default function App() {
           },
         };
 
-        const socket = io(baseURL, iniOptions);
-        socket.on("connect", function () {
-          console.log("connect");
-        });
-        socket.on("event", function (data) {
-          console.log("event");
-        });
-        socket.on("disconnect", function () {
-          console.log("disconnect");
-        });
+        // const socket = io(baseURL, iniOptions);
+        // socket.on("connect", function () {
+        //   console.log("connect");
+        // });
+        // socket.on("event", function (data) {
+        //   console.log("event");
+        // });
+        // socket.on("disconnect", function () {
+        //   console.log("disconnect");
+        // });
 
-        socket.emit("ping");
-        socket.on("ping", () => {
-          console.log("ping");
-        });
-        socket.on("pong", () => {
-          console.log("pong");
-        });
-        socket.on("connection", () => {
-          console.log("socket was connected succesfull");
-        });
+        // socket.emit("ping");
+        // socket.on("ping", () => {
+        //   console.log("ping");
+        // });
+        // socket.on("pong", () => {
+        //   console.log("pong");
+        // });
+        // socket.on("connection", () => {
+        //   console.log("socket was connected succesfull");
+        // });
       } catch (e) {
         console.error(e);
       } finally {
