@@ -1,7 +1,8 @@
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import React, { useEffect, useCallback } from "react";
 
 import { View, StyleSheet, Dimensions } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+
 import Animated, {
   Extrapolate,
   interpolate,
@@ -64,11 +65,11 @@ const BottomSheet = ({ children, onOpacityChange }) => {
     modal.setScrollFn(toggleModal);
   });
 
-  const gesture = Gesture.Pan()
-    .onBegin((e) => {
+  const gesture = Gesture?.Pan()
+    ?.onBegin((e) => {
       context.value = { y: translateY?.value };
     })
-    .onUpdate((e) => {
+    ?.onUpdate((e) => {
       translateY.value = e.translationY + context?.value?.y;
       translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
     })
@@ -77,10 +78,8 @@ const BottomSheet = ({ children, onOpacityChange }) => {
         if (translateY.value > -SCREEN_HEIGHT / 3) {
           context.value = { y: 0 };
           scrollTo(0);
-          // onOpacityChange(1);
         } else if (translateY.value < -SCREEN_HEIGHT / 1.5) {
           scrollTo(-SCREEN_HEIGHT);
-          // onOpacityChange(0.1);
         }
       } catch (error) {
         console.log(error);
@@ -123,7 +122,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 20 },
-    // shadowOpacity: 1,
     shadowRadius: 40,
     elevation: 10,
   },

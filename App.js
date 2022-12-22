@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import * as Network from "expo-network";
@@ -13,7 +14,7 @@ import StoreContext from "./context";
 const rootStore = new store();
 
 import ErrorPopupList from "./components/base/ErrorPopupList";
-import "react-native-gesture-handler";
+
 import * as SplashScreen from "expo-splash-screen";
 import io from "./assets/soket/soket";
 import { baseURL } from "./api";

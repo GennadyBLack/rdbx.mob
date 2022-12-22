@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Pressable } from "react-native";
-import storage from "../../helpers/storage";
 import ModalSheet from "../base/ModalSheet";
-import Form from "../validation/Form";
 import s from "../../helpers/styleHelper";
 import useStore from "../../hooks/useStore";
 import { observer } from "mobx-react-lite";
@@ -10,6 +8,8 @@ import { getIcon } from "../../helpers/iconHelper";
 
 const PinModal = ({ success, show, pin, token, children }) => {
   const [pincode, setPinCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const root = useStore();
 
   const setPin = (val) => {
@@ -24,19 +24,25 @@ const PinModal = ({ success, show, pin, token, children }) => {
     return show;
   });
 
-  const successFunc = async () => {
-    await success();
+  const checkPin = async () => {
+    try {
+      if (pincode?.length === pin?.length) {
+        if (pincode === pin) {
+          await success();
+          setVisible(!visible);
+        } else {
+          root.setError({ message: "не верный пин код" });
+          setErrorMessage("Hе верный пин код");
+          setPinCode("");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
-    if (pincode?.length === pin?.length) {
-      if (pincode === pin) {
-        setVisible(!visible);
-        successFunc();
-      } else {
-        root.setError({ message: "не верный пин код" });
-      }
-    }
+    checkPin();
   }, [pincode]);
 
   return (
@@ -67,6 +73,7 @@ const PinModal = ({ success, show, pin, token, children }) => {
         >
           <View>
             {children}
+            <Text>{errorMessage}</Text>
             <Text>{pincode}</Text>
           </View>
           <View style={{ flexDirection: "row" }}>
@@ -197,4 +204,5 @@ const PinModal = ({ success, show, pin, token, children }) => {
     </View>
   );
 };
+
 export default observer(PinModal);

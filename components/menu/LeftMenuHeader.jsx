@@ -21,7 +21,7 @@ const LeftMenuHeader = ({ toggle }) => {
       <View style={s.p_1}>
         <View style={s.profile_wrapper}>
           <ProfileImg width={45} path={user?.avatar} />
-          <View style={s.ml_4}>
+          <View style={s.ml_4} testID="left_menu_header">
             <Text style={s.profile_name} numberOfLines={1} ellipsizeMode="tail">
               {`${user?.name} ${user?.last_name}`}
             </Text>

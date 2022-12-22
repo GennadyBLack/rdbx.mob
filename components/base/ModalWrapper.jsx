@@ -1,6 +1,7 @@
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import React from "react";
 import { StyleSheet, StatusBar } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import BaseTopMenu from "./BaseTopMenu";
 
 import Animated, {

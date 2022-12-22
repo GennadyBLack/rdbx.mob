@@ -4,7 +4,11 @@ import { ActivityIndicator, StyleSheet, Text, View, Modal } from "react-native";
 const Spiner = ({ loading = false }) => {
   return (
     <Modal visible={loading}>
-      <View style={[styles.container, styles.horizontal]} transparent>
+      <View
+        style={[styles.container, styles.horizontal]}
+        transparent
+        nativeID="spiner"
+      >
         <ActivityIndicator size="large" />
       </View>
     </Modal>

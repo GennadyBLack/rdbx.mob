@@ -8,6 +8,7 @@ import {
   Modal,
   Platform,
   Dimensions,
+  ScrollView,
 } from "react-native";
 
 const Pick = ({
@@ -88,9 +89,10 @@ const Pick = ({
               width: "100%",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "rgba(0,0,0,0.5)",
             }}
           >
-            <View style={[styles.menu]}>
+            <ScrollView style={[styles.menu]}>
               {items.map((item, idx) => {
                 return (
                   <View style={{ zIndex: 10000 }} key={idx}>
@@ -99,7 +101,7 @@ const Pick = ({
                       key={idx}
                       onPress={() => {
                         typeof onChange === "function"
-                          ? onChange(item?.value)
+                          ? onChange(item?.value === value ? null : item?.value)
                           : null;
                         setVisible(false);
                       }}
@@ -117,7 +119,7 @@ const Pick = ({
                   </View>
                 );
               })}
-            </View>
+            </ScrollView>
           </Pressable>
         </Modal>
       </Pressable>
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   menu: {
-    maxHeight: "50%",
+    height: "50%",
     overflow: "scroll",
     width: "90%",
     borderRadius: 10,

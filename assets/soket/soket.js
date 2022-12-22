@@ -157,199 +157,205 @@
       };
     },
     function (t, e, n) {
-      (function (r) {
-        "use strict";
-        function o() {
-          return (
-            !(
-              "undefined" == typeof window ||
-              !window.process ||
-              "renderer" !== window.process.type
-            ) ||
-            (("undefined" == typeof navigator ||
-              !navigator.userAgent ||
-              !navigator.userAgent
-                .toLowerCase()
-                .match(/(edge|trident)\/(\d+)/)) &&
-              (("undefined" != typeof document &&
-                document.documentElement &&
-                document.documentElement.style &&
-                document.documentElement.style.WebkitAppearance) ||
-                ("undefined" != typeof window &&
-                  window.console &&
-                  (window.console.firebug ||
-                    (window.console.exception && window.console.table))) ||
-                ("undefined" != typeof navigator &&
-                  navigator.userAgent &&
-                  navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) &&
-                  parseInt(RegExp.$1, 10) >= 31) ||
-                ("undefined" != typeof navigator &&
-                  navigator.userAgent &&
-                  navigator.userAgent
-                    .toLowerCase()
-                    .match(/applewebkit\/(\d+)/))))
-          );
-        }
-        function i(t) {
-          var n = this.useColors;
-          if (
-            ((t[0] =
-              (n ? "%c" : "") +
-              this.namespace +
-              (n ? " %c" : " ") +
-              t[0] +
-              (n ? "%c " : " ") +
-              "+" +
-              e.humanize(this.diff)),
-            n)
-          ) {
-            var r = "color: " + this.color;
-            t.splice(1, 0, r, "color: inherit");
-            var o = 0,
-              i = 0;
-            t[0].replace(/%[a-zA-Z%]/g, function (t) {
-              "%%" !== t && (o++, "%c" === t && (i = o));
-            }),
-              t.splice(i, 0, r);
+      try {
+        (function (r) {
+          "use strict";
+          function o() {
+            return (
+              !(
+                "undefined" == typeof window ||
+                !window?.process ||
+                "renderer" !== window?.process?.type
+              ) ||
+              (("undefined" == typeof navigator ||
+                !navigator.userAgent ||
+                !navigator.userAgent
+                  .toLowerCase()
+                  .match(/(edge|trident)\/(\d+)/)) &&
+                (("undefined" != typeof document &&
+                  document.documentElement &&
+                  document.documentElement.style &&
+                  document.documentElement.style.WebkitAppearance) ||
+                  ("undefined" != typeof window &&
+                    window.console &&
+                    (window.console.firebug ||
+                      (window.console.exception && window.console.table))) ||
+                  ("undefined" != typeof navigator &&
+                    navigator.userAgent &&
+                    navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) &&
+                    parseInt(RegExp.$1, 10) >= 31) ||
+                  ("undefined" != typeof navigator &&
+                    navigator.userAgent &&
+                    navigator.userAgent
+                      .toLowerCase()
+                      .match(/applewebkit\/(\d+)/))))
+            );
           }
-        }
-        function s() {
-          return (
-            "object" ===
-              ("undefined" == typeof console ? "undefined" : u(console)) &&
-            console.log &&
-            Function.prototype.apply.call(console.log, console, arguments)
-          );
-        }
-        function a(t) {
-          try {
-            null == t ? e.storage.removeItem("debug") : (e.storage.debug = t);
-          } catch (n) {}
-        }
-        function c() {
-          var t;
-          try {
-            t = e.storage.debug;
-          } catch (n) {}
-          return (
-            !t && "undefined" != typeof r && "env" in r && (t = r.env.DEBUG), t
-          );
-        }
-        function p() {
-          try {
-            return window.localStorage;
-          } catch (t) {}
-        }
-        var u =
-          "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
-            ? function (t) {
-                return typeof t;
-              }
-            : function (t) {
-                return t &&
-                  "function" == typeof Symbol &&
-                  t.constructor === Symbol &&
-                  t !== Symbol.prototype
-                  ? "symbol"
-                  : typeof t;
-              };
-        (e = t.exports = n(5)),
-          (e.log = s),
-          (e.formatArgs = i),
-          (e.save = a),
-          (e.load = c),
-          (e.useColors = o),
-          (e.storage =
-            "undefined" != typeof chrome && "undefined" != typeof chrome.storage
-              ? chrome.storage.local
-              : p()),
-          (e.colors = [
-            "#0000CC",
-            "#0000FF",
-            "#0033CC",
-            "#0033FF",
-            "#0066CC",
-            "#0066FF",
-            "#0099CC",
-            "#0099FF",
-            "#00CC00",
-            "#00CC33",
-            "#00CC66",
-            "#00CC99",
-            "#00CCCC",
-            "#00CCFF",
-            "#3300CC",
-            "#3300FF",
-            "#3333CC",
-            "#3333FF",
-            "#3366CC",
-            "#3366FF",
-            "#3399CC",
-            "#3399FF",
-            "#33CC00",
-            "#33CC33",
-            "#33CC66",
-            "#33CC99",
-            "#33CCCC",
-            "#33CCFF",
-            "#6600CC",
-            "#6600FF",
-            "#6633CC",
-            "#6633FF",
-            "#66CC00",
-            "#66CC33",
-            "#9900CC",
-            "#9900FF",
-            "#9933CC",
-            "#9933FF",
-            "#99CC00",
-            "#99CC33",
-            "#CC0000",
-            "#CC0033",
-            "#CC0066",
-            "#CC0099",
-            "#CC00CC",
-            "#CC00FF",
-            "#CC3300",
-            "#CC3333",
-            "#CC3366",
-            "#CC3399",
-            "#CC33CC",
-            "#CC33FF",
-            "#CC6600",
-            "#CC6633",
-            "#CC9900",
-            "#CC9933",
-            "#CCCC00",
-            "#CCCC33",
-            "#FF0000",
-            "#FF0033",
-            "#FF0066",
-            "#FF0099",
-            "#FF00CC",
-            "#FF00FF",
-            "#FF3300",
-            "#FF3333",
-            "#FF3366",
-            "#FF3399",
-            "#FF33CC",
-            "#FF33FF",
-            "#FF6600",
-            "#FF6633",
-            "#FF9900",
-            "#FF9933",
-            "#FFCC00",
-            "#FFCC33",
-          ]),
-          (e.formatters.j = function (t) {
-            try {
-              return JSON.stringify(t);
-            } catch (e) {
-              return "[UnexpectedJSONParseError]: " + e.message;
+          function i(t) {
+            var n = this.useColors;
+            if (
+              ((t[0] =
+                (n ? "%c" : "") +
+                this.namespace +
+                (n ? " %c" : " ") +
+                t[0] +
+                (n ? "%c " : " ") +
+                "+" +
+                e.humanize(this.diff)),
+              n)
+            ) {
+              var r = "color: " + this.color;
+              t.splice(1, 0, r, "color: inherit");
+              var o = 0,
+                i = 0;
+              t[0].replace(/%[a-zA-Z%]/g, function (t) {
+                "%%" !== t && (o++, "%c" === t && (i = o));
+              }),
+                t.splice(i, 0, r);
             }
-          }),
-          e.enable(c());
-      }.call(e, n(4)));
+          }
+          function s() {
+            return (
+              "object" ===
+                ("undefined" == typeof console ? "undefined" : u(console)) &&
+              console.log &&
+              Function.prototype.apply.call(console.log, console, arguments)
+            );
+          }
+          function a(t) {
+            try {
+              null == t ? e.storage.removeItem("debug") : (e.storage.debug = t);
+            } catch (n) {}
+          }
+          function c() {
+            var t;
+            try {
+              t = e.storage.debug;
+            } catch (n) {}
+            return (
+              !t && "undefined" != typeof r && "env" in r && (t = r.env.DEBUG),
+              t
+            );
+          }
+          function p() {
+            try {
+              return window.localStorage;
+            } catch (t) {}
+          }
+          var u =
+            "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+              ? function (t) {
+                  return typeof t;
+                }
+              : function (t) {
+                  return t &&
+                    "function" == typeof Symbol &&
+                    t.constructor === Symbol &&
+                    t !== Symbol.prototype
+                    ? "symbol"
+                    : typeof t;
+                };
+          (e = t.exports = n(5)),
+            (e.log = s),
+            (e.formatArgs = i),
+            (e.save = a),
+            (e.load = c),
+            (e.useColors = o),
+            (e.storage =
+              "undefined" != typeof chrome &&
+              "undefined" != typeof chrome.storage
+                ? chrome.storage.local
+                : p()),
+            (e.colors = [
+              "#0000CC",
+              "#0000FF",
+              "#0033CC",
+              "#0033FF",
+              "#0066CC",
+              "#0066FF",
+              "#0099CC",
+              "#0099FF",
+              "#00CC00",
+              "#00CC33",
+              "#00CC66",
+              "#00CC99",
+              "#00CCCC",
+              "#00CCFF",
+              "#3300CC",
+              "#3300FF",
+              "#3333CC",
+              "#3333FF",
+              "#3366CC",
+              "#3366FF",
+              "#3399CC",
+              "#3399FF",
+              "#33CC00",
+              "#33CC33",
+              "#33CC66",
+              "#33CC99",
+              "#33CCCC",
+              "#33CCFF",
+              "#6600CC",
+              "#6600FF",
+              "#6633CC",
+              "#6633FF",
+              "#66CC00",
+              "#66CC33",
+              "#9900CC",
+              "#9900FF",
+              "#9933CC",
+              "#9933FF",
+              "#99CC00",
+              "#99CC33",
+              "#CC0000",
+              "#CC0033",
+              "#CC0066",
+              "#CC0099",
+              "#CC00CC",
+              "#CC00FF",
+              "#CC3300",
+              "#CC3333",
+              "#CC3366",
+              "#CC3399",
+              "#CC33CC",
+              "#CC33FF",
+              "#CC6600",
+              "#CC6633",
+              "#CC9900",
+              "#CC9933",
+              "#CCCC00",
+              "#CCCC33",
+              "#FF0000",
+              "#FF0033",
+              "#FF0066",
+              "#FF0099",
+              "#FF00CC",
+              "#FF00FF",
+              "#FF3300",
+              "#FF3333",
+              "#FF3366",
+              "#FF3399",
+              "#FF33CC",
+              "#FF33FF",
+              "#FF6600",
+              "#FF6633",
+              "#FF9900",
+              "#FF9933",
+              "#FFCC00",
+              "#FFCC33",
+            ]),
+            (e.formatters.j = function (t) {
+              try {
+                return JSON.stringify(t);
+              } catch (e) {
+                return "[UnexpectedJSONParseError]: " + e.message;
+              }
+            }),
+            e.enable(c());
+        }.call(e, n(4)));
+      } catch (error) {
+        console.error(error);
+      }
     },
     function (t, e) {
       function n() {

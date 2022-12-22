@@ -127,21 +127,30 @@ function Login() {
             <Text style={{ color: constants.GREEN }}>Еще нет аккаунта ?</Text>
           </TouchableOpacity>
         </View>
-
-        {auth?.root?.settings?.touch && auth?.root?.token && content}
-        <PinModal
-          token={auth?.root?.token}
-          pin={auth?.root?.pin}
-          show={
-            !auth?.root?.settings?.touch &&
-            auth?.root?.settings?.pin &&
-            auth?.root?.pin &&
-            auth?.root?.token
-          }
-          success={async () => await auth.fetchMe()}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            padding: 20,
+          }}
         >
-          <Spiner loading={auth.loading} />
-        </PinModal>
+          <View>
+            {auth?.root?.settings?.touch && auth?.root?.token && content}
+          </View>
+          <PinModal
+            token={auth?.root?.token}
+            pin={auth?.root?.pin}
+            show={
+              !auth?.root?.settings?.touch &&
+              auth?.root?.settings?.pin &&
+              auth?.root?.pin &&
+              auth?.root?.token
+            }
+            success={async () => await auth.fetchMe()}
+          >
+            <Spiner loading={auth?.loading} />
+          </PinModal>
+        </View>
       </Animated.View>
     </Animated.View>
   );

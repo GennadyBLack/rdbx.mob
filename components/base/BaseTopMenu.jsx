@@ -40,6 +40,8 @@ const BaseTopMenu = () => {
       >
         <Text>
           <Pressable
+            testID="base_top_menu"
+            nativeID="base_top_menu"
             onPress={() => {
               setVisible(!visible);
             }}
@@ -72,27 +74,29 @@ const BaseTopMenu = () => {
             ) : (
               <Text></Text>
             )}
-            {menu?.leftRoutes.map((item, idx) => {
-              return (
-                <TouchableHighlight
-                  key={idx}
-                  style={{
-                    padding: 10,
-                  }}
-                  onPress={() => {
-                    navigation.navigate(item?.name);
-                    setVisible(!visible);
-                  }}
-                >
-                  <View {...getStyle("a_i_center", { flexDirection: "row" })}>
-                    <Text> {getIcon(item.icon)}</Text>
-                    <Text style={styles.menu_link}>
-                      {item?.title} {item?.menuBar ? item?.menuBar(auth) : ""}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              );
-            })}
+            <View testID="menu_links">
+              {menu?.leftRoutes.map((item, idx) => {
+                return (
+                  <TouchableHighlight
+                    key={idx}
+                    style={{
+                      padding: 10,
+                    }}
+                    onPress={() => {
+                      navigation.navigate(item?.name);
+                      setVisible(!visible);
+                    }}
+                  >
+                    <View {...getStyle("a_i_center", { flexDirection: "row" })}>
+                      <Text> {getIcon(item.icon)}</Text>
+                      <Text style={styles.menu_link}>
+                        {item?.title} {item?.menuBar ? item?.menuBar(auth) : ""}
+                      </Text>
+                    </View>
+                  </TouchableHighlight>
+                );
+              })}
+            </View>
           </View>
           {auth.logged ? (
             <TouchableHighlight
