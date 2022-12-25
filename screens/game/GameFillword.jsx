@@ -7,11 +7,11 @@ import getRandomInt from "../../helpers/random";
 const minHW = 60;
 
 const GameFillword = () => {
-  const [rowLength, setRowLength] = useState(5);
-  const [colLength, setColLength] = useState(5);
+  const [rowLength, setRowLength] = useState(3);
+  const [colLength, setColLength] = useState(3);
   const [busyLength, setBusyLength] = useState(0);
-  const [area, setArea] = useState(() => []);
   const [areaFree, setAreaFree] = useState(() => []);
+  const [area, setArea] = useState(() => []);
   const [startSelect, setStartSelect] = useState(false);
   const [selectedLetter, setSellectedLetter] = useState([]);
 
@@ -33,8 +33,8 @@ const GameFillword = () => {
       }
       preArea.push(preRow);
     }
-    setArea(preArea);
-    setAreaFree(preArea);
+    setArea(JSON.parse(JSON.stringify(preArea)));
+    setAreaFree(JSON.parse(JSON.stringify(preArea)));
   };
 
   const preFillArrea = () => {
@@ -46,8 +46,7 @@ const GameFillword = () => {
               return (
                 <Pressable style={styles.letter} key={index}>
                   <Text key={index}>
-                    {letter.key}
-                    {letter.letter ?? ""}
+                    {letter.letter ?? ""}-{letter.key}
                   </Text>
                 </Pressable>
               );
@@ -64,9 +63,9 @@ const GameFillword = () => {
   const freeCell = useMemo(() => {
     try {
       let l = 0;
-      for (let i = 0; i < rowLength; i++) {
-        for (let e = 0; e < colLength; e++) {
-          if (!area[i][e]?.init) {
+      for (let i = 0; i < areaFree?.length; i++) {
+        for (let e = 0; e < areaFree[i]?.length; e++) {
+          if (!areaFree[i][e]?.init) {
             l++;
           }
         }
@@ -76,7 +75,7 @@ const GameFillword = () => {
       console.log(error);
       return 0;
     }
-  }, [area, areaFree]);
+  }, [areaFree, area]);
 
   const getWord = () => {
     let word = null;
@@ -88,34 +87,35 @@ const GameFillword = () => {
     return word;
   };
 
-  const getNearCell = (current_cell) => {
+  const getNearCell = (current_cell, cloneArea) => {
     try {
       let top =
         current_cell?.x === 0
           ? false
-          : area[current_cell.x - 1][current_cell.y];
+          : cloneArea[current_cell.x - 1][current_cell.y];
 
       let bottom =
-        current_cell?.x >= colLength
+        current_cell?.x === colLength - 1
           ? false
-          : area[current_cell?.x + 1][current_cell?.y];
+          : cloneArea[current_cell?.x + 1][current_cell?.y];
 
       let left =
         current_cell?.y === 0
           ? false
-          : area[current_cell?.x][current_cell?.y - 1];
+          : cloneArea[current_cell?.x][current_cell?.y - 1];
 
       let right =
-        current_cell?.y >= rowLength
+        current_cell?.y === rowLength - 1
           ? false
-          : area[current_cell?.x][current_cell?.y + 1];
+          : cloneArea[current_cell?.x][current_cell?.y + 1];
 
-      console.log("current_cell", current_cell);
-      console.log("top", top);
-      console.log("bottom", bottom);
-      console.log("right", right);
-      console.log("left", left);
-      console.log("-----------------------------------");
+      //   console.log(current_cell?.y + 1, "current_cell?.y", rowLength);
+      //   console.log("current_cell", current_cell);
+      //   console.log("top", top);
+      //   console.log("bottom", bottom);
+      //   console.log("right", right);
+      //   console.log("left", left);
+      //   console.log("-----------------------------------");
 
       const next =
         right && !right?.init
@@ -124,51 +124,57 @@ const GameFillword = () => {
           ? left
           : bottom && !bottom?.init
           ? bottom
-          : top && !top?.initial
+          : top && !top?.init
           ? top
           : null;
+
       return next;
     } catch (error) {
       console.error(error);
     }
   };
 
-  const deleteSelectedCellFromFreeArea = (cell) => {
-    const cloneFreeArea = [...areaFree];
-    const row = cloneFreeArea[cell.x];
-    if (row.length > 1) {
-      delete row[cell.y];
+  const deleteSelectedCellFromFreeArea = async (cell) => {
+    let cloneFreeArea = [...areaFree];
+    if (cloneFreeArea[cell?.x]?.length == 1) {
+      cloneFreeArea.shift();
     } else {
-      delete cloneFreeArea[cell.x];
+      cloneFreeArea[cell.x]?.splice(cell?.y, 1);
     }
-    setAreaFree(cloneFreeArea);
+
+    setAreaFree(() => JSON.parse(JSON.stringify(cloneFreeArea)));
   };
 
   const fillArrea = () => {
     try {
       //если есть свободные ячейки то идем заполнять
       if (freeCell > 0) {
-        console.log(areaFree, "areaFree");
         //рандомная стартовая позиция для слова
-        const randomFreePosition =
-          areaFree[0][getRandomInt(areaFree[0].length)];
+        const rPosition = areaFree[0][getRandomInt(areaFree[0].length)];
         const word = getWord().name;
-        let currentPosition = randomFreePosition;
-        const cloneArea = [...area];
+        let currentPosition = rPosition;
+        let cloneArea = JSON.parse(JSON.stringify(area));
+
         for (let i = 0; i < word.length; i++) {
           if (i === 0) {
-            cloneArea[randomFreePosition.x][randomFreePosition.y].init = true;
-            cloneArea[randomFreePosition.x][randomFreePosition.y].letter =
-              word[i];
+            cloneArea[currentPosition.x][currentPosition.y].init = true;
+            cloneArea[currentPosition.x][currentPosition.y].letter = word[i];
           } else {
-            const nextLetter = getNearCell(currentPosition);
+            const nextLetter = getNearCell(currentPosition, cloneArea);
             console.log(nextLetter, "nextLetter");
             cloneArea[nextLetter.x][nextLetter.y].init = true;
             cloneArea[nextLetter.x][nextLetter.y].letter = word[i];
             currentPosition = nextLetter;
           }
+          //   console.log(
+          //     JSON.parse(JSON.stringify(cloneArea)),
+          //     "cloneArea---hereeee"
+          //   );
+
+          setArea(JSON.parse(JSON.stringify(cloneArea)));
+          //   console.log(JSON.parse(JSON.stringify(cloneArea)), "SSSSSSSSSSSSSS");
+          deleteSelectedCellFromFreeArea(currentPosition);
         }
-        setArea(cloneArea);
       }
     } catch (error) {
       console.error(error);
@@ -177,9 +183,17 @@ const GameFillword = () => {
 
   return (
     <View style={styles.area}>
-      <Text>{getRandomInt(5)}</Text>
-      {logHelper(area)}
-      <Pressable onPress={() => fillArrea()}>
+      {logHelper(areaFree, "--------freeCell------------------------")}
+
+      <Pressable
+        style={{
+          backgroundColor: "green",
+          padding: 10,
+          color: "white",
+          borderRadius: 2,
+        }}
+        onPress={() => fillArrea()}
+      >
         <Text>Create{meddium}</Text>
       </Pressable>
       <View>{preFillArrea()}</View>
