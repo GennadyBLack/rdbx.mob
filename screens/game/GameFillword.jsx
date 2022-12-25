@@ -7,15 +7,36 @@ import getRandomInt from "../../helpers/random";
 const minHW = 60;
 
 const GameFillword = () => {
-  const [rowLength, setRowLength] = useState(3);
-  const [colLength, setColLength] = useState(3);
-  const [busyLength, setBusyLength] = useState(0);
+  const [words, setWords] = useState([]);
+  const [ready, setReady] = useState(false);
+  const [rowLength, setRowLength] = useState(5);
+  const [colLength, setColLength] = useState(5);
   const [areaFree, setAreaFree] = useState(() => []);
   const [area, setArea] = useState(() => []);
   const [startSelect, setStartSelect] = useState(false);
   const [selectedLetter, setSellectedLetter] = useState([]);
 
-  const meddium = (rowLength + colLength) / 2;
+  const [meddium, setMeddium] = useState((rowLength + colLength) / 2);
+  const freeCell = useMemo(() => {
+    try {
+      let l = 0;
+      for (let i = 0; i < areaFree?.length; i++) {
+        for (let e = 0; e < areaFree[i]?.length; e++) {
+          if (!areaFree[i][e]?.init) {
+            l++;
+          }
+        }
+      }
+      return l;
+    } catch (error) {
+      console.log(error);
+      return 0;
+    }
+  }, [areaFree, area]);
+
+  useEffect(() => {
+    fillArrea();
+  }, [areaFree, ready]);
 
   const createArea = () => {
     const preArea = [];
@@ -45,9 +66,7 @@ const GameFillword = () => {
             item.map((letter, index) => {
               return (
                 <Pressable style={styles.letter} key={index}>
-                  <Text key={index}>
-                    {letter.letter ?? ""}-{letter.key}
-                  </Text>
+                  <Text key={index}>{letter.letter ?? ""}</Text>
                 </Pressable>
               );
             })}
@@ -60,29 +79,14 @@ const GameFillword = () => {
     createArea();
   }, []);
 
-  const freeCell = useMemo(() => {
-    try {
-      let l = 0;
-      for (let i = 0; i < areaFree?.length; i++) {
-        for (let e = 0; e < areaFree[i]?.length; e++) {
-          if (!areaFree[i][e]?.init) {
-            l++;
-          }
-        }
-      }
-      return l;
-    } catch (error) {
-      console.log(error);
-      return 0;
-    }
-  }, [areaFree, area]);
-
   const getWord = () => {
     let word = null;
     if (freeCell < meddium) {
-      word = testD[freeCell][0];
+      const random = getRandomInt(testD[freeCell].length);
+      word = testD[freeCell][random];
     } else {
-      word = testD[meddium][0];
+      const random = getRandomInt(testD[meddium].length);
+      word = testD[meddium][random];
     }
     return word;
   };
@@ -109,14 +113,6 @@ const GameFillword = () => {
           ? false
           : cloneArea[current_cell?.x][current_cell?.y + 1];
 
-      //   console.log(current_cell?.y + 1, "current_cell?.y", rowLength);
-      //   console.log("current_cell", current_cell);
-      //   console.log("top", top);
-      //   console.log("bottom", bottom);
-      //   console.log("right", right);
-      //   console.log("left", left);
-      //   console.log("-----------------------------------");
-
       const next =
         right && !right?.init
           ? right
@@ -134,26 +130,33 @@ const GameFillword = () => {
     }
   };
 
-  const deleteSelectedCellFromFreeArea = async (cell) => {
-    let cloneFreeArea = [...areaFree];
-    if (cloneFreeArea[cell?.x]?.length == 1) {
-      cloneFreeArea.shift();
-    } else {
-      cloneFreeArea[cell.x]?.splice(cell?.y, 1);
+  const deleteSelectedCellFromFreeArea = async (cell, free) => {
+    for (let i = 0; i < free?.length; i++) {
+      for (let e = 0; e < free[i]?.length; e++) {
+        if (free[i][e].key === cell.key) {
+          if (free[i]?.length === 1) {
+            console.log(free[i], i);
+            free.splice(i, 1);
+            return;
+          } else {
+            free[i].splice(e, 1);
+            return;
+          }
+        }
+      }
     }
-
-    setAreaFree(() => JSON.parse(JSON.stringify(cloneFreeArea)));
   };
 
   const fillArrea = () => {
+    console.log("init");
     try {
       //если есть свободные ячейки то идем заполнять
       if (freeCell > 0) {
-        //рандомная стартовая позиция для слова
-        const rPosition = areaFree[0][getRandomInt(areaFree[0].length)];
+        const free = JSON.parse(JSON.stringify(areaFree));
+        let cloneArea = JSON.parse(JSON.stringify(area));
+        const rPosition = free[0][getRandomInt(free[0].length)];
         const word = getWord().name;
         let currentPosition = rPosition;
-        let cloneArea = JSON.parse(JSON.stringify(area));
 
         for (let i = 0; i < word.length; i++) {
           if (i === 0) {
@@ -161,41 +164,38 @@ const GameFillword = () => {
             cloneArea[currentPosition.x][currentPosition.y].letter = word[i];
           } else {
             const nextLetter = getNearCell(currentPosition, cloneArea);
-            console.log(nextLetter, "nextLetter");
             cloneArea[nextLetter.x][nextLetter.y].init = true;
             cloneArea[nextLetter.x][nextLetter.y].letter = word[i];
             currentPosition = nextLetter;
           }
-          //   console.log(
-          //     JSON.parse(JSON.stringify(cloneArea)),
-          //     "cloneArea---hereeee"
-          //   );
-
-          setArea(JSON.parse(JSON.stringify(cloneArea)));
-          //   console.log(JSON.parse(JSON.stringify(cloneArea)), "SSSSSSSSSSSSSS");
-          deleteSelectedCellFromFreeArea(currentPosition);
+          deleteSelectedCellFromFreeArea(currentPosition, free);
         }
+        setArea(cloneArea);
+        setAreaFree(free);
+        setWords([...words, word]);
+      } else {
+        return;
       }
     } catch (error) {
+      setMeddium(meddium - 1);
       console.error(error);
+      setReady(!ready);
     }
+  };
+
+  const initData = async () => {
+    var interval = setInterval(function () {
+      if (freeCell === 0) {
+        clearInterval(interval);
+      }
+      console.log("iniit", freeCell);
+      fillArrea();
+    }, 1000);
   };
 
   return (
     <View style={styles.area}>
-      {logHelper(areaFree, "--------freeCell------------------------")}
-
-      <Pressable
-        style={{
-          backgroundColor: "green",
-          padding: 10,
-          color: "white",
-          borderRadius: 2,
-        }}
-        onPress={() => fillArrea()}
-      >
-        <Text>Create{meddium}</Text>
-      </Pressable>
+      {logHelper(words)}
       <View>{preFillArrea()}</View>
     </View>
   );
