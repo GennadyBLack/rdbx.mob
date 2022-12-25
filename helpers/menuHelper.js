@@ -101,6 +101,7 @@ export const availableLinks = [
     icon: "home",
     title: "Главная страница",
   },
+
   {
     name: "Test",
     component: Test,

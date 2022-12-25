@@ -2,10 +2,12 @@ import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import s, { getStyle } from "../helpers/styleHelper";
 import { getIcon } from "../helpers/iconHelper";
+import GameFillword from "./game/GameFillword";
 // import Cam from "../components/base/Cam";
 const Test = () => {
   return (
     <ScrollView style={[]}>
+      <GameFillword />
       <View {...getStyle("lpink_bg.j_c_center.a_i_center")}>
         <Text>persons{getIcon("persons")}</Text>
       </View>
