@@ -5,7 +5,6 @@ const testD = {
   ],
   2: [
     [
-      { idx: "", name: "" },
       { idx: "if", name: "if" },
       { idx: "in", name: "in" },
       { idx: "is", name: "is" },
@@ -65,7 +64,6 @@ const testD = {
       { idx: "ye", name: "ye" },
       { idx: "yo", name: "yo" },
       { idx: "za", name: "za" },
-      { idx: "", name: "" },
     ],
   ],
   3: [
@@ -1031,7 +1029,6 @@ const testD = {
     { idx: "your", name: "your" },
     { idx: "zero", name: "zero" },
     { idx: "zone", name: "zone" },
-    { idx: "", name: "" },
   ],
   5: [
     { idx: "about", name: "about" },
@@ -1533,7 +1530,6 @@ const testD = {
     { idx: "yield", name: "yield" },
     { idx: "young", name: "young" },
     { idx: "youth", name: "youth" },
-    { idx: "", name: "" },
   ],
   6: [
     { idx: "attend", name: "attend" },

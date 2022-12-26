@@ -1,22 +1,35 @@
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
+
 import React, { useEffect, useState, useMemo } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, PanResponder } from "react-native";
 import logHelper from "../../helpers/logHelper";
 import testD from "./testD";
 import getRandomInt from "../../helpers/random";
+import CellItem from "./CellItem";
 
 const minHW = 60;
 
 const GameFillword = () => {
+  const [position, setPosition] = useState({});
   const [words, setWords] = useState([]);
   const [ready, setReady] = useState(false);
-  const [rowLength, setRowLength] = useState(5);
-  const [colLength, setColLength] = useState(5);
+  const [rowLength, setRowLength] = useState(6);
+  const [colLength, setColLength] = useState(6);
   const [areaFree, setAreaFree] = useState(() => []);
   const [area, setArea] = useState(() => []);
   const [startSelect, setStartSelect] = useState(false);
   const [selectedLetter, setSellectedLetter] = useState([]);
+  const startMedium = (rowLength + colLength) / 2;
+  const [meddium, setMeddium] = useState(startMedium);
 
-  const [meddium, setMeddium] = useState((rowLength + colLength) / 2);
   const freeCell = useMemo(() => {
     try {
       let l = 0;
@@ -58,23 +71,6 @@ const GameFillword = () => {
     setAreaFree(JSON.parse(JSON.stringify(preArea)));
   };
 
-  const preFillArrea = () => {
-    return area.map((item, inx) => {
-      return (
-        <View key={inx} style={styles.area_row}>
-          {item.length &&
-            item.map((letter, index) => {
-              return (
-                <Pressable style={styles.letter} key={index}>
-                  <Text key={index}>{letter.letter ?? ""}</Text>
-                </Pressable>
-              );
-            })}
-        </View>
-      );
-    });
-  };
-
   useEffect(() => {
     createArea();
   }, []);
@@ -113,17 +109,16 @@ const GameFillword = () => {
           ? false
           : cloneArea[current_cell?.x][current_cell?.y + 1];
 
-      const next =
-        right && !right?.init
-          ? right
-          : left && !left?.init
-          ? left
-          : bottom && !bottom?.init
-          ? bottom
-          : top && !top?.init
-          ? top
-          : null;
-
+      let next = false;
+      if (right && !right?.init) {
+        next = right;
+      } else if (left && !left?.init) {
+        next = left;
+      } else if (bottom && !bottom?.init) {
+        next = bottom;
+      } else if (top && !top?.init) {
+        next = top;
+      }
       return next;
     } catch (error) {
       console.error(error);
@@ -148,7 +143,6 @@ const GameFillword = () => {
   };
 
   const fillArrea = () => {
-    console.log("init");
     try {
       //если есть свободные ячейки то идем заполнять
       if (freeCell > 0) {
@@ -176,6 +170,7 @@ const GameFillword = () => {
       } else {
         return;
       }
+      setMeddium(startMedium);
     } catch (error) {
       setMeddium(meddium - 1);
       console.error(error);
@@ -193,11 +188,37 @@ const GameFillword = () => {
     }, 1000);
   };
 
+  const gesture = Gesture?.Pan()
+    ?.onBegin((e) => {})
+    ?.onUpdate((e) => {
+      // console.log(e);
+      setPosition(e);
+    })
+    .onEnd(() => {});
+
   return (
-    <View style={styles.area}>
-      {logHelper(words)}
-      <View>{preFillArrea()}</View>
-    </View>
+    <GestureDetector gesture={gesture} style={styles.area} enabled>
+      <View>
+        {area.map((item, inx) => {
+          return (
+            <View key={inx} style={styles.area_row}>
+              {item.length &&
+                item.map((letter, index) => {
+                  return (
+                    <View key={index}>
+                      <CellItem
+                        letter={letter}
+                        area={area}
+                        position={position}
+                      />
+                    </View>
+                  );
+                })}
+            </View>
+          );
+        })}
+      </View>
+    </GestureDetector>
   );
 };
 
