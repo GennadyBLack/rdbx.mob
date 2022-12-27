@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import logHelper from "../../helpers/logHelper";
 
-const minHW = 60;
+const minHW = 70;
 
 const CellItem = ({
   letter,
@@ -19,11 +19,12 @@ const CellItem = ({
     if (letter.guessed) {
       return;
     }
+    // console.log(layout?.y, layout?.x);
     if (
-      position?.y >= layout?.y - 58 &&
+      position?.y >= layout?.y - 70 &&
       position?.y <= layout?.y &&
       position?.x >= layout?.x &&
-      position?.x <= layout?.x + 58
+      position?.x <= layout?.x + 70
     ) {
       selectLetter(letter.key);
     }
@@ -31,11 +32,21 @@ const CellItem = ({
   return (
     <View
       onLayout={(e) => {
-        const pre = {
-          y: e.nativeEvent.layout.top,
-          x: e.nativeEvent.layout.left,
-        };
-        setLayout(pre);
+        if (Platform.OS === "web") {
+          const pre = {
+            y: e.nativeEvent.layout.top,
+            x: e.nativeEvent.layout.left,
+          };
+          setLayout(pre);
+        } else {
+          e?.target?.measure((...rest) => {
+            const pre = {
+              y: rest[5],
+              x: rest[4],
+            };
+            setLayout(pre);
+          });
+        }
       }}
     >
       <View

@@ -158,8 +158,8 @@ const GameFillword = () => {
   const fillArrea = () => {
     try {
       if (freeCell > 0) {
-        const free = JSON.parse(JSON.stringify(areaFree));
-        let cloneArea = JSON.parse(JSON.stringify(area));
+        const free = deepClone(areaFree);
+        let cloneArea = deepClone(area);
         const rPosition = free[0][getRandomInt(free[0].length)];
         let wordKeysString = "";
         const word = getWord().name;
@@ -222,7 +222,8 @@ const GameFillword = () => {
       setStartSelect(true);
     })
     ?.onUpdate((e) => {
-      setPosition(e);
+      let pre = { x: Math.floor(e.x), y: Math.floor(e.y) };
+      if (pre.x !== position.x || pre.y !== position.y) setPosition(pre);
     })
     .onEnd(() => {
       setStartSelect(false);
@@ -231,7 +232,7 @@ const GameFillword = () => {
 
   return (
     <View style={{ flex: 1 }} nativeID="fillword">
-      <GestureDetector gesture={gesture} style={styles.area}>
+      <GestureDetector runOnJS gesture={gesture} style={styles.area}>
         <View style={{ flex: 1 }}>
           {area.map((item, inx) => {
             return (
@@ -255,9 +256,6 @@ const GameFillword = () => {
           })}
         </View>
       </GestureDetector>
-      <Text>x:{position?.x}</Text>
-      <Text>y:{position?.y}</Text>
-      {/* {logHelper(selectedLetters)} */}
     </View>
   );
 };
