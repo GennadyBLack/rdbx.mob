@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import logHelper from "../../helpers/logHelper";
+
 const minHW = 60;
 
-const CellItem = ({ letter, area, position, color }) => {
+const CellItem = ({ letter, area, position, color, selectLetter }) => {
   useEffect(() => {}, [letter]);
   const [layout, setLayout] = useState(null);
 
@@ -14,6 +15,7 @@ const CellItem = ({ letter, area, position, color }) => {
       position?.x >= layout?.x &&
       position?.x <= layout?.x + 58
     ) {
+      selectLetter(letter.key);
     }
   }, [position]);
   return (
@@ -26,7 +28,12 @@ const CellItem = ({ letter, area, position, color }) => {
         setLayout(pre);
       }}
     >
-      <View style={styles.letter}>
+      <View
+        style={[
+          styles.letter,
+          { backgroundColor: `${letter?.selected ? "green" : "white"}` },
+        ]}
+      >
         <Text>{letter.letter}</Text>
       </View>
     </View>

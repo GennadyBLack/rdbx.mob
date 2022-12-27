@@ -10,10 +10,11 @@ import Animated, {
 
 import React, { useEffect, useState, useMemo } from "react";
 import { View, Text, Pressable, StyleSheet, PanResponder } from "react-native";
-import logHelper from "../../helpers/logHelper";
 import testD from "./testD";
 import getRandomInt from "../../helpers/random";
 import CellItem from "./CellItem";
+import logHelper from "../../helpers/logHelper";
+import deepClone from "../../helpers/deepClone";
 
 const minHW = 60;
 
@@ -22,13 +23,18 @@ const GameFillword = () => {
   const [words, setWords] = useState([]);
   const [ready, setReady] = useState(false);
   const [rowLength, setRowLength] = useState(6);
-  const [colLength, setColLength] = useState(6);
+
   const [areaFree, setAreaFree] = useState(() => []);
   const [area, setArea] = useState(() => []);
-  const [startSelect, setStartSelect] = useState(false);
-  const [selectedLetter, setSellectedLetter] = useState([]);
-  const startMedium = (rowLength + colLength) / 2;
+
+  const startMedium = (rowLength + rowLength) / 2;
   const [meddium, setMeddium] = useState(startMedium);
+
+  const [startSelect, setStartSelect] = useState(false);
+
+  const [lastSelectedLetter, setLastSelectedLetter] = useState(null);
+
+  const [selectedLetters, setSellectedLetters] = useState([]);
 
   const freeCell = useMemo(() => {
     try {
@@ -55,7 +61,7 @@ const GameFillword = () => {
     const preArea = [];
     for (let i = 0; i < rowLength; i++) {
       let preRow = [];
-      for (let e = 0; e < colLength; e++) {
+      for (let e = 0; e < rowLength; e++) {
         preRow.push({
           busy: false,
           selected: false,
@@ -73,6 +79,18 @@ const GameFillword = () => {
     setAreaFree(JSON.parse(JSON.stringify(preArea)));
   };
 
+  const selectLetter = (key) => {
+    if (lastSelectedLetter !== key && !selectedLetters?.includes(key)) {
+      const cloneArr = deepClone(area);
+      const keys = key.split("");
+      setSellectedLetters([...selectedLetters, key]);
+      setLastSelectedLetter(key);
+      cloneArr[keys[0]][keys[1]].selected = true;
+      setArea(cloneArr);
+    } else {
+      return;
+    }
+  };
   useEffect(() => {
     createArea();
   }, []);
@@ -97,7 +115,7 @@ const GameFillword = () => {
           : cloneArea[current_cell.x - 1][current_cell.y];
 
       let bottom =
-        current_cell?.x === colLength - 1
+        current_cell?.x === rowLength - 1
           ? false
           : cloneArea[current_cell?.x + 1][current_cell?.y];
 
@@ -132,7 +150,6 @@ const GameFillword = () => {
       for (let e = 0; e < free[i]?.length; e++) {
         if (free[i][e].key === cell.key) {
           if (free[i]?.length === 1) {
-            console.log(free[i], i);
             free.splice(i, 1);
             return;
           } else {
@@ -190,13 +207,21 @@ const GameFillword = () => {
     }, 1000);
   };
 
+  const checkWord = () => {
+    console.log("checkWord");
+  };
+
   const gesture = Gesture?.Pan()
-    ?.onBegin((e) => {})
+    ?.onBegin((e) => {
+      setStartSelect(true);
+    })
     ?.onUpdate((e) => {
-      console.log(e);
       setPosition(e);
     })
-    .onEnd(() => {});
+    .onEnd(() => {
+      setStartSelect(false);
+      checkWord();
+    });
 
   return (
     <View style={{ flex: 1 }} nativeID="fillword">
@@ -210,6 +235,7 @@ const GameFillword = () => {
                     return (
                       <View key={index}>
                         <CellItem
+                          selectLetter={selectLetter}
                           letter={letter}
                           area={area}
                           position={position}
@@ -224,6 +250,7 @@ const GameFillword = () => {
       </GestureDetector>
       <Text>x:{position?.x}</Text>
       <Text>y:{position?.y}</Text>
+      {/* {logHelper(selectedLetters)} */}
     </View>
   );
 };
