@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import logHelper from "../../helpers/logHelper";
+import s, { getStyle } from "../../helpers/styleHelper";
 
 const minHW = 70;
 
@@ -19,7 +20,6 @@ const CellItem = ({
     if (letter.guessed) {
       return;
     }
-    // console.log(layout?.y, layout?.x);
     if (
       position?.y >= layout?.y - 70 &&
       position?.y <= layout?.y &&
@@ -55,7 +55,7 @@ const CellItem = ({
           {
             backgroundColor: `${
               selectedLetters.includes(letter.key)
-                ? "green"
+                ? color
                 : letter.guessed
                 ? "grey"
                 : "white"
@@ -63,7 +63,9 @@ const CellItem = ({
           },
         ]}
       >
-        <Text>{letter.letter}</Text>
+        <Text {...getStyle("green_c", { fontSize: 20, fontWeight: "800" })}>
+          {letter.letter}
+        </Text>
       </View>
     </View>
   );
@@ -71,19 +73,14 @@ const CellItem = ({
 export default CellItem;
 
 const styles = StyleSheet.create({
-  area: {
-    width: "90%",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  area_row: { flexDirection: "row" },
   letter: {
     minWidth: minHW,
     minHeight: minHW,
-    borderColor: "black",
+    // borderColor: "black",// borderWidth: 1,
+    textTransform: "uppercase",
     justifyContent: "center",
-    borderWidth: 1,
+    borderRadius: 4,
+    margin: 2,
     alignItems: "center",
     backgroundColor: "#eee",
     overflow: "hidden",

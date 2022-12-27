@@ -59,6 +59,7 @@ const mainStyles = {
   dark_c: { color: DARK },
   grey_c: { color: GRAY },
   ruby_c: { color: RUBY },
+  green_c: { color: GREEN },
 
   flex: { flex: 1 },
   j_c_center: { justifyContent: "center" },
@@ -467,4 +468,5 @@ export const getStyle = (names = "", styles) => {
   });
   return { style };
 };
+
 export default s;

@@ -1,5 +1,5 @@
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-
+import Words from "./Words";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -9,11 +9,10 @@ import Animated, {
 } from "react-native-reanimated";
 
 import React, { useEffect, useState, useMemo } from "react";
-import { View, Text, Pressable, StyleSheet, PanResponder } from "react-native";
+import { View, StyleSheet } from "react-native";
 import testD from "./testD";
-import getRandomInt from "../../helpers/random";
+import getRandomInt, { getRandomColor } from "../../helpers/random";
 import CellItem from "./CellItem";
-import logHelper from "../../helpers/logHelper";
 import deepClone from "../../helpers/deepClone";
 
 const minHW = 60;
@@ -24,13 +23,17 @@ const GameFillword = () => {
   const [ready, setReady] = useState(false);
   const [rowLength, setRowLength] = useState(6);
 
+  const [color, setColor] = useState(() => {
+    return getRandomColor();
+  });
   const [areaFree, setAreaFree] = useState(() => []);
   const [area, setArea] = useState(() => []);
 
   const startMedium = (rowLength + rowLength) / 2;
+
   const [meddium, setMeddium] = useState(startMedium);
 
-  const [startSelect, setStartSelect] = useState(false);
+  // const [startSelect, setStartSelect] = useState(false);
 
   const [lastSelectedLetter, setLastSelectedLetter] = useState(null);
 
@@ -73,8 +76,8 @@ const GameFillword = () => {
       }
       preArea.push(preRow);
     }
-    setArea(JSON.parse(JSON.stringify(preArea)));
-    setAreaFree(JSON.parse(JSON.stringify(preArea)));
+    setArea(preArea);
+    setAreaFree(preArea);
   };
 
   const selectLetter = (key) => {
@@ -181,7 +184,10 @@ const GameFillword = () => {
 
         setArea(cloneArea);
         setAreaFree(free);
-        setWords({ ...words, [wordKeysString]: word });
+        setWords({
+          ...words,
+          [wordKeysString]: { name: word, guessed: false },
+        });
       } else {
         return;
       }
@@ -219,20 +225,21 @@ const GameFillword = () => {
 
   const gesture = Gesture?.Pan()
     ?.onBegin((e) => {
-      setStartSelect(true);
+      // setStartSelect(true);
+      setColor(getRandomColor());
     })
     ?.onUpdate((e) => {
       let pre = { x: Math.floor(e.x), y: Math.floor(e.y) };
       if (pre.x !== position.x || pre.y !== position.y) setPosition(pre);
     })
     .onEnd(() => {
-      setStartSelect(false);
+      // setStartSelect(false);
       checkWord();
     });
 
   return (
     <View style={{ flex: 1 }} nativeID="fillword">
-      <GestureDetector runOnJS gesture={gesture} style={styles.area}>
+      <GestureDetector gesture={gesture} style={styles.area}>
         <View style={{ flex: 1 }}>
           {area.map((item, inx) => {
             return (
@@ -242,6 +249,7 @@ const GameFillword = () => {
                     return (
                       <View key={index}>
                         <CellItem
+                          color={color}
                           selectLetter={selectLetter}
                           letter={letter}
                           area={area}
@@ -256,6 +264,7 @@ const GameFillword = () => {
           })}
         </View>
       </GestureDetector>
+      <Words words={words} />
     </View>
   );
 };
