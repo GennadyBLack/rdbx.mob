@@ -20,7 +20,7 @@ const minHW = 60;
 
 const GameFillword = () => {
   const [position, setPosition] = useState({});
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState({});
   const [ready, setReady] = useState(false);
   const [rowLength, setRowLength] = useState(6);
 
@@ -63,8 +63,6 @@ const GameFillword = () => {
       let preRow = [];
       for (let e = 0; e < rowLength; e++) {
         preRow.push({
-          busy: false,
-          selected: false,
           guessed: false,
           letter: null,
           key: `${i}${e}`,
@@ -81,12 +79,8 @@ const GameFillword = () => {
 
   const selectLetter = (key) => {
     if (lastSelectedLetter !== key && !selectedLetters?.includes(key)) {
-      const cloneArr = deepClone(area);
-      const keys = key.split("");
       setSellectedLetters([...selectedLetters, key]);
       setLastSelectedLetter(key);
-      cloneArr[keys[0]][keys[1]].selected = true;
-      setArea(cloneArr);
     } else {
       return;
     }
@@ -163,11 +157,11 @@ const GameFillword = () => {
 
   const fillArrea = () => {
     try {
-      //если есть свободные ячейки то идем заполнять
       if (freeCell > 0) {
         const free = JSON.parse(JSON.stringify(areaFree));
         let cloneArea = JSON.parse(JSON.stringify(area));
         const rPosition = free[0][getRandomInt(free[0].length)];
+        let wordKeysString = "";
         const word = getWord().name;
         let currentPosition = rPosition;
 
@@ -181,15 +175,18 @@ const GameFillword = () => {
             cloneArea[nextLetter.x][nextLetter.y].letter = word[i];
             currentPosition = nextLetter;
           }
+          wordKeysString += `${currentPosition.x}${currentPosition.y}`;
           deleteSelectedCellFromFreeArea(currentPosition, free);
         }
+
         setArea(cloneArea);
         setAreaFree(free);
-        setWords([...words, word]);
+        setWords({ ...words, [wordKeysString]: word });
       } else {
         return;
       }
       setMeddium(startMedium);
+      console.log(words);
     } catch (error) {
       setMeddium(meddium - 1);
       console.error(error);
@@ -208,7 +205,16 @@ const GameFillword = () => {
   };
 
   const checkWord = () => {
-    console.log("checkWord");
+    const keys = selectedLetters.join("");
+    if (words.hasOwnProperty(keys)) {
+      const cloneArr = deepClone(area);
+      selectedLetters.forEach((item) => {
+        let letterKeys = item.split("");
+        cloneArr[letterKeys[0]][letterKeys[1]].guessed = true;
+      });
+      setArea(cloneArr);
+    }
+    setSellectedLetters([]);
   };
 
   const gesture = Gesture?.Pan()
@@ -239,6 +245,7 @@ const GameFillword = () => {
                           letter={letter}
                           area={area}
                           position={position}
+                          selectedLetters={selectedLetters}
                         />
                       </View>
                     );

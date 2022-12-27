@@ -4,11 +4,21 @@ import logHelper from "../../helpers/logHelper";
 
 const minHW = 60;
 
-const CellItem = ({ letter, area, position, color, selectLetter }) => {
+const CellItem = ({
+  letter,
+  area,
+  position,
+  color,
+  selectLetter,
+  selectedLetters,
+}) => {
   useEffect(() => {}, [letter]);
   const [layout, setLayout] = useState(null);
 
   useEffect(() => {
+    if (letter.guessed) {
+      return;
+    }
     if (
       position?.y >= layout?.y - 58 &&
       position?.y <= layout?.y &&
@@ -31,7 +41,15 @@ const CellItem = ({ letter, area, position, color, selectLetter }) => {
       <View
         style={[
           styles.letter,
-          { backgroundColor: `${letter?.selected ? "green" : "white"}` },
+          {
+            backgroundColor: `${
+              selectedLetters.includes(letter.key)
+                ? "green"
+                : letter.guessed
+                ? "grey"
+                : "white"
+            }`,
+          },
         ]}
       >
         <Text>{letter.letter}</Text>
