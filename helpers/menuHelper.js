@@ -11,6 +11,7 @@ import NotificationList from "../screens/NotificationList";
 import { Badge } from "react-native-paper";
 import ScanHistory from "../screens/ScanHistory";
 import ActiviesForm from "../screens/activies/ActiviesForm";
+import GameFillword from "../screens/game/GameFillword";
 
 export const availableLinks = [
   {
@@ -100,6 +101,21 @@ export const availableLinks = [
     layout: "public",
     icon: "home",
     title: "Главная страница",
+  },
+
+  {
+    name: "Game",
+    component: GameFillword,
+    type: "public",
+    options: {
+      headerShown: false,
+      tabBarLabel: "",
+      tabBarIcon: ({ color, size }) => getIcon("user", color, size),
+    },
+    leftMenu: true,
+    layout: "public",
+    icon: "home",
+    title: "FillWord",
   },
 
   {

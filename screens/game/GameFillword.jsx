@@ -58,6 +58,8 @@ const GameFillword = () => {
       for (let e = 0; e < colLength; e++) {
         preRow.push({
           busy: false,
+          selected: false,
+          guessed: false,
           letter: null,
           key: `${i}${e}`,
           x: i,
@@ -191,34 +193,38 @@ const GameFillword = () => {
   const gesture = Gesture?.Pan()
     ?.onBegin((e) => {})
     ?.onUpdate((e) => {
-      // console.log(e);
+      console.log(e);
       setPosition(e);
     })
     .onEnd(() => {});
 
   return (
-    <GestureDetector gesture={gesture} style={styles.area} enabled>
-      <View>
-        {area.map((item, inx) => {
-          return (
-            <View key={inx} style={styles.area_row}>
-              {item.length &&
-                item.map((letter, index) => {
-                  return (
-                    <View key={index}>
-                      <CellItem
-                        letter={letter}
-                        area={area}
-                        position={position}
-                      />
-                    </View>
-                  );
-                })}
-            </View>
-          );
-        })}
-      </View>
-    </GestureDetector>
+    <View style={{ flex: 1 }} nativeID="fillword">
+      <GestureDetector gesture={gesture} style={styles.area}>
+        <View style={{ flex: 1 }}>
+          {area.map((item, inx) => {
+            return (
+              <View key={inx} style={styles.area_row}>
+                {item.length &&
+                  item.map((letter, index) => {
+                    return (
+                      <View key={index}>
+                        <CellItem
+                          letter={letter}
+                          area={area}
+                          position={position}
+                        />
+                      </View>
+                    );
+                  })}
+              </View>
+            );
+          })}
+        </View>
+      </GestureDetector>
+      <Text>x:{position?.x}</Text>
+      <Text>y:{position?.y}</Text>
+    </View>
   );
 };
 

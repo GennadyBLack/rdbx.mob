@@ -1,39 +1,33 @@
-import React, { useRef, useEffect, useState } from "react";
-import { View, Text, PanResponder, StyleSheet } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import logHelper from "../../helpers/logHelper";
 const minHW = 60;
 
-const CellItem = ({ letter, area, position }) => {
+const CellItem = ({ letter, area, position, color }) => {
   useEffect(() => {}, [letter]);
   const [layout, setLayout] = useState(null);
 
-  const gesture = Gesture.Pan()
-    .onBegin((e) => {})
-    ?.onUpdate((e) => {
-      //   console.log(e);
-    })
-    .onEnd(() => {});
-
   useEffect(() => {
-    console.log(position, "position");
-    console.log(layout, "layout");
+    if (
+      position?.y >= layout?.y - 58 &&
+      position?.y <= layout?.y &&
+      position?.x >= layout?.x &&
+      position?.x <= layout?.x + 58
+    ) {
+    }
   }, [position]);
   return (
     <View
       onLayout={(e) => {
         const pre = {
-          y: e.nativeEvent.layout.left,
-          x: e.nativeEvent.layout.top,
+          y: e.nativeEvent.layout.top,
+          x: e.nativeEvent.layout.left,
         };
         setLayout(pre);
       }}
     >
       <View style={styles.letter}>
-        <Text>
-          {letter.letter ?? ""}
-          {position?.y > layout?.y && position?.x >= layout?.x ? "()" : ""}
-        </Text>
+        <Text>{letter.letter}</Text>
       </View>
     </View>
   );
@@ -56,5 +50,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     backgroundColor: "#eee",
+    overflow: "hidden",
   },
 });
