@@ -19,7 +19,6 @@ const CellItem = ({
       x: letter.y ? letter.y * minHW + 4 : 0,
     };
 
-    console.log(pre, "preee", letter.key);
     setLayout(pre);
   }, []);
 

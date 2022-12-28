@@ -120,8 +120,8 @@ const GameFillword = () => {
         current_cell?.y === rowLength - 1
           ? false
           : cloneArea[current_cell?.x][current_cell?.y + 1];
-
       let next = false;
+
       if (right && !right?.init) {
         next = right;
       } else if (left && !left?.init) {
@@ -156,19 +156,21 @@ const GameFillword = () => {
   const fillArrea = () => {
     try {
       if (freeCell > 0) {
+        setMeddium(startMedium);
         const free = deepClone(areaFree);
         let cloneArea = deepClone(area);
-        const rPosition = free[0][getRandomInt(free[0].length)];
         let wordKeysString = "";
         const word = getWord().name;
-        let currentPosition = rPosition;
+        let currentPosition =
+          free[free.length - 1][getRandomInt(free[free.length - 1].length)];
 
         for (let i = 0; i < word.length; i++) {
           if (i === 0) {
             cloneArea[currentPosition.x][currentPosition.y].init = true;
             cloneArea[currentPosition.x][currentPosition.y].letter = word[i];
           } else {
-            const nextLetter = getNearCell(currentPosition, cloneArea);
+            let nextLetter = getNearCell(currentPosition, cloneArea);
+
             cloneArea[nextLetter.x][nextLetter.y].init = true;
             cloneArea[nextLetter.x][nextLetter.y].letter = word[i];
             currentPosition = nextLetter;
@@ -189,18 +191,8 @@ const GameFillword = () => {
       setMeddium(startMedium);
     } catch (error) {
       setMeddium(meddium - 1);
-      // console.error(error);
       setReady(!ready);
     }
-  };
-
-  const initData = async () => {
-    var interval = setInterval(function () {
-      if (freeCell === 0) {
-        clearInterval(interval);
-      }
-      fillArrea();
-    }, 1000);
   };
 
   const checkWord = () => {
@@ -243,7 +235,7 @@ const GameFillword = () => {
             return (
               <View key={inx} style={styles.area_row}>
                 {item.length &&
-                  item.map((letter, index) => {
+                  item.map((letter) => {
                     return (
                       <View key={letter?.key}>
                         <CellItem
