@@ -1,15 +1,8 @@
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Words from "./Words";
-import Animated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
-
+import s, { getStyle } from "../../helpers/styleHelper";
 import React, { useEffect, useState, useMemo } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import testD from "./testD";
 import getRandomInt, { getRandomColor } from "../../helpers/random";
 import CellItem from "./CellItem";
@@ -61,6 +54,7 @@ const GameFillword = () => {
   }, [areaFree, ready]);
 
   const createArea = () => {
+    setWords([]);
     const preArea = [];
     for (let i = 0; i < rowLength; i++) {
       let preRow = [];
@@ -88,6 +82,7 @@ const GameFillword = () => {
       return;
     }
   };
+
   useEffect(() => {
     createArea();
   }, []);
@@ -192,10 +187,9 @@ const GameFillword = () => {
         return;
       }
       setMeddium(startMedium);
-      console.log(words);
     } catch (error) {
       setMeddium(meddium - 1);
-      console.error(error);
+      // console.error(error);
       setReady(!ready);
     }
   };
@@ -205,7 +199,6 @@ const GameFillword = () => {
       if (freeCell === 0) {
         clearInterval(interval);
       }
-      console.log("iniit", freeCell);
       fillArrea();
     }, 1000);
   };
@@ -213,6 +206,10 @@ const GameFillword = () => {
   const checkWord = () => {
     const keys = selectedLetters.join("");
     if (words.hasOwnProperty(keys)) {
+      const cloneWords = deepClone(words);
+      cloneWords[keys].guessed = true;
+      setWords(cloneWords);
+
       const cloneArr = deepClone(area);
       selectedLetters.forEach((item) => {
         let letterKeys = item.split("");
@@ -225,7 +222,6 @@ const GameFillword = () => {
 
   const gesture = Gesture?.Pan()
     ?.onBegin((e) => {
-      // setStartSelect(true);
       setColor(getRandomColor());
     })
     ?.onUpdate((e) => {
@@ -233,12 +229,14 @@ const GameFillword = () => {
       if (pre.x !== position.x || pre.y !== position.y) setPosition(pre);
     })
     .onEnd(() => {
-      // setStartSelect(false);
       checkWord();
     });
 
   return (
-    <View style={{ flex: 1 }} nativeID="fillword">
+    <View
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      nativeID="fillword"
+    >
       <GestureDetector gesture={gesture} style={styles.area}>
         <View style={{ flex: 1 }}>
           {area.map((item, inx) => {
@@ -264,6 +262,9 @@ const GameFillword = () => {
           })}
         </View>
       </GestureDetector>
+      <Pressable onPress={createArea} style={[s.button, s.m_2]}>
+        <Text>Start over</Text>
+      </Pressable>
       <Words words={words} />
     </View>
   );

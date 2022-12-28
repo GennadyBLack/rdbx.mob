@@ -13,6 +13,16 @@ const CellItem = ({
   selectLetter,
   selectedLetters,
 }) => {
+  useEffect(() => {
+    const pre = {
+      y: letter.x ? (letter.x + 1) * minHW - 1.5 : minHW - 1.5,
+      x: letter.y ? letter.y * minHW + 4 : 0,
+    };
+
+    console.log(pre, "preee", letter.key);
+    setLayout(pre);
+  }, []);
+
   useEffect(() => {}, [letter]);
   const [layout, setLayout] = useState(null);
 
@@ -28,28 +38,28 @@ const CellItem = ({
     ) {
       selectLetter(letter.key, layout);
     }
-    console.log(position, layout);
+    // console.log(position, layout);
   }, [position]);
   return (
     <View
-      onLayout={(e) => {
-        if (Platform.OS === "web") {
-          console.log(e.nativeEvent, "nativeEvent");
-          const pre = {
-            y: e.nativeEvent.layout.top,
-            x: e.nativeEvent.layout.left,
-          };
-          setLayout(pre);
-        } else {
-          e?.target?.measure((...rest) => {
-            const pre = {
-              y: rest[5],
-              x: rest[4],
-            };
-            setLayout(pre);
-          });
-        }
-      }}
+    // onLayout={(e) => {
+    //   if (Platform.OS === "web") {
+    //     const pre = {
+    //       y: e.nativeEvent.layout.top,
+    //       x: e.nativeEvent.layout.left,
+    //     };
+    //     console.log(pre, "nativeEvent", letter.key);
+    //     setLayout(pre);
+    //   } else {
+    //     e?.target?.measure((...rest) => {
+    //       const pre = {
+    //         y: rest[5],
+    //         x: rest[4],
+    //       };
+    //       setLayout(pre);
+    //     });
+    //   }
+    // }}
     >
       <View
         style={[
