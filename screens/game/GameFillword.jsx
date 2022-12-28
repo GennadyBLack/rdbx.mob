@@ -247,7 +247,7 @@ const GameFillword = () => {
                 {item.length &&
                   item.map((letter, index) => {
                     return (
-                      <View key={index}>
+                      <View key={letter?.key}>
                         <CellItem
                           color={color}
                           selectLetter={selectLetter}

@@ -3,11 +3,17 @@ import { View, Text, StyleSheet } from "react-native";
 
 const Words = ({ words }) => {
   return (
-    <View style={{ flexDirection: "row", backgroundColor: "#eee" }}>
+    <View
+      style={{
+        flexDirection: "row",
+        backgroundColor: "#eee",
+        flexWrap: "wrap",
+      }}
+    >
       <Text>All words</Text>
-      {Object.values(words).map((item) => {
+      {Object.values(words).map((item, idx) => {
         return (
-          <View style={{ padding: 10 }}>
+          <View style={{ padding: 10 }} key={idx}>
             <Text>{item.name}</Text>
           </View>
         );

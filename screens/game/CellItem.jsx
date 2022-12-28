@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 import logHelper from "../../helpers/logHelper";
 import s, { getStyle } from "../../helpers/styleHelper";
 
-const minHW = 70;
+const minHW = 60;
 
 const CellItem = ({
   letter,
@@ -21,18 +21,20 @@ const CellItem = ({
       return;
     }
     if (
-      position?.y >= layout?.y - 70 &&
+      position?.y >= layout?.y - minHW &&
       position?.y <= layout?.y &&
       position?.x >= layout?.x &&
-      position?.x <= layout?.x + 70
+      position?.x <= layout?.x + minHW
     ) {
-      selectLetter(letter.key);
+      selectLetter(letter.key, layout);
     }
+    console.log(position, layout);
   }, [position]);
   return (
     <View
       onLayout={(e) => {
         if (Platform.OS === "web") {
+          console.log(e.nativeEvent, "nativeEvent");
           const pre = {
             y: e.nativeEvent.layout.top,
             x: e.nativeEvent.layout.left,
